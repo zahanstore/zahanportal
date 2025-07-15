@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zahan Store - Fashion, Lifestyle & Art</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" href="favicon.png" type="image/png">
+    <style>
+        :root {
+            --accent-color: #0096FF;
+            --background-color: #F0FFFF;
+            --text-color: #333;
+            --light-text: #777;
+            --white: #fff;
+            --black: #000;
+            --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --nav-bg: #F0FFFF;
+            --button-shadow: 0 4px 8px rgba(0, 150, 255, 0.2);
+            --text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+            --success-color: #4BB543;
+            --error-color: #FF3333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--nav-bg);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo img {
+            height: 30px;
+            display: block;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            margin-left: auto;
+        }
+
+        .nav-links li {
+            margin-left: 25px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 600;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            height: 100%;
+            padding: 8px 12px;
+            border-radius: 5px;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+            background-color: rgba(0, 150, 255, 0.1);
+        }
+
+        .menu-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            margin-left: 15px;
+            background-color: var(--accent-color);
+            border-radius: 5px;
+            box-shadow: var(--button-shadow);
+        }
+
+        .hamburger span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: var(--white);
+            margin: 5px 0;
+            transition: all 0.3s ease;
+        }
+
+        /* Main Content Styles */
+        main {
+            margin-top: 80px;
+        }
+
+        section {
+            padding: 80px 0;
+            background-color: transparent;
+        }
+
+        h1, h2, h3 {
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--text-color);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: var(--black);
+            margin-bottom: 50px;
+            font-size: 1.2rem;
+            text-shadow: var(--text-shadow);
+            font-weight: 500;
+        }
+
+        /* Gateway Section */
+        .gateway-section {
+            background: url('hero.jpg') center/cover no-repeat;
+            color: white;
+            text-align: center;
+            padding: 120px 0;
+            position: relative;
+        }
+
+        .gateway-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.7);
+        }
+
+        .gateway-section h1 {
+            color: var(--black);
+            text-shadow: var(--text-shadow);
+            position: relative;
+        }
+
+        .gateway-section .subtitle {
+            color: var(--black);
+            position: relative;
+        }
+
+        .gateway-section .gateway-card {
+            color: var(--black);
+            background-color: rgba(255, 255, 255, 0.85);
+            position: relative;
+        }
+
+        .gateway-options {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .gateway-card {
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            padding: 30px;
+            width: 100%;
+            max-width: 450px;
+            box-shadow: var(--box-shadow);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .gateway-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .gateway-card h2 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: var(--black);
+        }
+
+        .gateway-card p {
+            color: var(--black);
+            text-shadow: var(--text-shadow);
+        }
+
+        .region {
+            color: var(--accent-color);
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .emoji {
+            font-size: 1.5rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--white);
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 20px;
+            transition: background-color 0.3s, transform 0.3s;
+            border: none;
+            cursor: pointer;
+            box-shadow: var(--button-shadow);
+        }
+
+        .cta-button:hover {
+            background-color: #007acc;
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 150, 255, 0.3);
+        }
+
+        /* About Section */
+        .about-content {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .about-text ul {
+            margin: 20px 0 30px;
+            padding-left: 20px;
+        }
+
+        .about-text li {
+            margin-bottom: 10px;
+        }
+
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: var(--box-shadow);
+        }
+
+        /* Contact Section */
+        .contact-form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: var(--box-shadow);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .form-message {
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .form-message.success {
+            background-color: rgba(75, 181, 67, 0.2);
+            color: var(--success-color);
+            border: 1px solid var(--success-color);
+        }
+
+        .form-message.error {
+            background-color: rgba(255, 51, 51, 0.2);
+            color: var(--error-color);
+            border: 1px solid var(--error-color);
+        }
+
+        /* Footer Styles */
+        footer {
+            padding: 50px 0 20px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo img {
+            height: 30px;
+            margin-bottom: 20px;
+        }
+
+        .footer-links h3, .footer-social h3 {
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            text-decoration: none;
+            color: var(--light-text);
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: #f5f5f5;
+            border-radius: 50%;
+            color: var(--text-color);
+            transition: all 0.3s;
+        }
+
+        .social-icons a:hover {
+            background-color: var(--accent-color);
+            color: var(--white);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            color: var(--light-text);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background-color: var(--white);
+                flex-direction: column;
+                align-items: center;
+                padding: 40px 0;
+                transition: left 0.3s;
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+            
+            .nav-links li {
+                margin: 15px 0;
+                margin-left: 0;
+            }
+            
+            .nav-links a {
+                padding: 12px 20px;
+            }
+            
+            .hamburger {
+                display: block;
+            }
+            
+            .hamburger.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+            
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+            
+            .hamburger.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(7px, -6px);
+            }
+            
+            .gateway-options {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .gateway-card {
+                width: 100%;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .about-text, .about-image {
+                min-width: 100%;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            section {
+                padding: 60px 0;
+            }
+            
+            .gateway-section {
+                padding: 80px 0;
+            }
+            
+            .nav-links {
+                top: 70px;
+                height: calc(100vh - 70px);
+            }
+            
+            .contact-form-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="nav-container">
+                <a href="#" class="logo">
+                    <img src="logo.png" alt="Zahan Store">
+                </a>
+                <div class="menu-container">
+                    <nav>
+                        <ul class="nav-links">
+                            <li><a href="#gateway">Home</a></li>
+                            <li><a href="#about">About Us</a></li>
+                            <li><a href="#contact">Contact</a></li>
+                        </ul>
+                    </nav>
+                    <button class="hamburger" aria-label="Menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="gateway" class="gateway-section">
+            <div class="container">
+                <h1>Welcome to Zahan Store®</h1>
+                <p class="subtitle">Your destination for fashion, lifestyle, art, and digital products</p>
+                
+                <div class="gateway-options">
+                    <div class="gateway-card">
+                        <h2>India <span class="emoji">🌏</span></h2>
+                        <p class="region">South Asia</p>
+                        <p>Explore our curated collection of fashion, lifestyle products, and art tailored for the Indian market.</p>
+                        <a href="#" class="cta-button">Shop Now</a>
+                    </div>
+                    
+                    <div class="gateway-card">
+                        <h2>International <span class="emoji">🌎</span></h2>
+                        <p class="region">US, Canada, Europe, Australia, New Zealand, Malaysia, Singapore, Japan,</p>
+                        <p>Discover our global collection with worldwide shipping options for all our premium products.</p>
+                        <a href="#" class="cta-button">Shop Now</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about-section">
+            <div class="container">
+                <h2>About Zahan Store®</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>Zahan Store® is a premier e-commerce brand offering carefully curated value chains across multiple categories:</p>
+                        <ul>
+                            <li><strong>Fashion & Apparel:</strong> Trendsetting clothing for all occasions</li>
+                            <li><strong>Lifestyle Products:</strong> Items that elevate your everyday living</li>
+                            <li><strong>Paintings & Art:</strong> Unique pieces from talented artists worldwide</li>
+                            <li><strong>Digital Products:</strong> Courses to enhance your skills and knowledge</li>
+                        </ul>
+                        <p>Our mission is to bring quality, style, and creativity to your doorstep, no matter where you are in the world.</p>
+                    </div>
+                    <div class="about-image">
+                        <img src="https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Zahan Store Products">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact-section">
+            <div class="container">
+                <h2>Contact Us</h2>
+                <div class="contact-form-container">
+                    <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="contact-form">
+                        <p class="hidden">
+                            <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+                        </p>
+                        <div id="form-message" class="form-message hidden"></div>
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" name="subject" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        <div data-netlify-recaptcha="true"></div>
+                        <button type="submit" class="cta-button">Send Message</button>
+                    </form>
+                    <div id="thank-you-message" class="hidden" style="text-align: center; padding: 30px;">
+                        <h3 style="color: var(--success-color); margin-bottom: 20px;">Thank You for Contacting Us!</h3>
+                        <p>Your message has been successfully submitted. We'll get back to you soon.</p>
+                        <button onclick="resetForm()" class="cta-button" style="margin-top: 20px;">Send Another Message</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="logo.png" alt="Zahan Store">
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#gateway">Home</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h3>Connect With Us</h3>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Zahan Store®. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+            
+            hamburger.addEventListener('click', function() {
+                this.classList.toggle('active');
+                navLinks.classList.toggle('active');
+            });
+            
+            // Close mobile menu when clicking a link
+            const navItems = document.querySelectorAll('.nav-links a');
+            navItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    if (navLinks.classList.contains('active')) {
+                        hamburger.classList.remove('active');
+                        navLinks.classList.remove('active');
+                    }
+                });
+            });
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        const headerHeight = document.querySelector('header').offsetHeight;
+                        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+                        
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Contact form handling
+            const contactForm = document.getElementById('contact-form');
+            if (contactForm) {
+                contactForm.addEventListener('submit', handleFormSubmit);
+            }
+        });
+        
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            
+            const form = event.target;
+            const formMessage = document.getElementById('form-message');
+            const thankYouMessage = document.getElementById('thank-you-message');
+            
+            // Show loading state
+            const submitButton = form.querySelector('button[type="submit"]');
+            const originalButtonText = submitButton.textContent;
+            submitButton.textContent = 'Sending...';
+            submitButton.disabled = true;
+            
+            // Simple form validation
+            const name = form.elements['name'].value.trim();
+            const email = form.elements['email'].value.trim();
+            const subject = form.elements['subject'].value.trim();
+            const message = form.elements['message'].value.trim();
+            
+            if (!name || !email || !subject || !message) {
+                formMessage.textContent = 'Please fill in all required fields.';
+                formMessage.classList.add('error');
+                formMessage.classList.remove('hidden');
+                submitButton.textContent = originalButtonText;
+                submitButton.disabled = false;
+                return;
+            }
+            
+            // Submit form to Netlify
+            fetch('/', {
+                method: 'POST',
+                body: new FormData(form),
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Show success message
+                    form.classList.add('hidden');
+                    thankYouMessage.classList.remove('hidden');
+                } else {
+                    throw new Error('Form submission failed');
+                }
+            })
+            .catch(error => {
+                formMessage.textContent = 'There was a problem submitting your form. Please try again later.';
+                formMessage.classList.add('error');
+                formMessage.classList.remove('hidden');
+            })
+            .finally(() => {
+                submitButton.textContent = originalButtonText;
+                submitButton.disabled = false;
+            });
+        }
+        
+        function resetForm() {
+            const form = document.getElementById('contact-form');
+            const thankYouMessage = document.getElementById('thank-you-message');
+            const formMessage = document.getElementById('form-message');
+            
+            form.reset();
+            form.classList.remove('hidden');
+            thankYouMessage.classList.add('hidden');
+            formMessage.classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
