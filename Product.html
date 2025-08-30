@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - Zahan Store</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" href="assets/favicon.png" type="image/png">
+    <style>
+        :root {
+            --accent-color: #0096FF;
+            --background-color: #F0FFFF;
+            --text-color: #333;
+            --light-text: #777;
+            --white: #fff;
+            --black: #000;
+            --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --nav-bg: #F0FFFF;
+            --button-shadow: 0 4px 8px rgba(0, 150, 255, 0.2);
+            --text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+            --success-color: #4BB543;
+            --error-color: #FF3333;
+            --light-gray: #f8f9fa;
+            --medium-gray: #e9ecef;
+            --dark-gray: #6c757d;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--nav-bg);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo img {
+            height: 30px;
+            display: block;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            margin-left: auto;
+        }
+
+        .nav-links li {
+            margin-left: 25px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 600;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            height: 100%;
+            padding: 8px 12px;
+            border-radius: 5px;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+            background-color: rgba(0, 150, 255, 0.1);
+        }
+
+        .menu-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            margin-left: 15px;
+            background-color: var(--accent-color);
+            border-radius: 5px;
+            box-shadow: var(--button-shadow);
+        }
+
+        .hamburger span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: var(--white);
+            margin: 5px 0;
+            transition: all 0.3s ease;
+        }
+
+        /* Main Content Styles */
+        main {
+            margin-top: 80px;
+            padding: 40px 0;
+        }
+
+        .breadcrumb {
+            margin-bottom: 30px;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        .breadcrumb span {
+            color: var(--light-text);
+        }
+
+        .product-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .product-gallery {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .main-image {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 20px;
+        }
+
+        .thumbnail-container {
+            display: flex;
+            gap: 10px;
+        }
+
+        .thumbnail {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .thumbnail:hover {
+            transform: scale(1.05);
+            border-color: var(--accent-color);
+        }
+
+        .product-details {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .product-title {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .product-price {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .current-price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent-color);
+        }
+
+        .original-price {
+            font-size: 1.2rem;
+            color: var(--light-text);
+            text-decoration: line-through;
+        }
+
+        .product-badge {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--white);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .product-description {
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+
+        .product-features {
+            margin-bottom: 30px;
+        }
+
+        .product-features ul {
+            padding-left: 20px;
+        }
+
+        .product-features li {
+            margin-bottom: 10px;
+        }
+
+        .size-selector {
+            margin-bottom: 30px;
+        }
+
+        .size-selector h3 {
+            margin-bottom: 15px;
+        }
+
+        .size-options {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .size-option {
+            padding: 10px 15px;
+            border: 1px solid var(--medium-gray);
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .size-option:hover {
+            border-color: var(--accent-color);
+        }
+
+        .size-option.selected {
+            background-color: var(--accent-color);
+            color: var(--white);
+            border-color: var(--accent-color);
+        }
+
+        .quantity-selector {
+            margin-bottom: 30px;
+        }
+
+        .quantity-selector h3 {
+            margin-bottom: 15px;
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            width: fit-content;
+            border: 1px solid var(--medium-gray);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .quantity-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            padding: 5px 15px;
+            cursor: pointer;
+            background-color: var(--light-gray);
+        }
+
+        .quantity-input {
+            width: 50px;
+            text-align: center;
+            border: none;
+            padding: 10px 5px;
+            font-size: 1.1rem;
+        }
+
+        .add-to-cart-btn {
+            display: block;
+            width: 100%;
+            background-color: var(--accent-color);
+            color: var(--white);
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-bottom: 20px;
+            box-shadow: var(--button-shadow);
+        }
+
+        .add-to-cart-btn:hover {
+            background-color: #007acc;
+        }
+
+        .buy-now-btn {
+            display: block;
+            width: 100%;
+            background-color: var(--black);
+            color: var(--white);
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            box-shadow: var(--button-shadow);
+        }
+
+        .buy-now-btn:hover {
+            background-color: #333;
+        }
+
+        .product-info-tabs {
+            margin-top: 60px;
+        }
+
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid var(--medium-gray);
+            margin-bottom: 30px;
+        }
+
+        .tab {
+            padding: 15px 30px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: color 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+
+        .tab.active {
+            color: var(--accent-color);
+            border-bottom-color: var(--accent-color);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .specs-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .specs-table tr {
+            border-bottom: 1px solid var(--medium-gray);
+        }
+
+        .specs-table td {
+            padding: 15px 10px;
+        }
+
+        .specs-table td:first-child {
+            font-weight: 600;
+            width: 30%;
+        }
+
+        .related-products {
+            margin-top: 80px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            margin-bottom: 15px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-card-image {
+            position: relative;
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .product-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover .product-card-image img {
+            transform: scale(1.05);
+        }
+
+        .product-card-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: var(--accent-color);
+            color: var(--white);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .product-card-info {
+            padding: 20px;
+        }
+
+        .product-card-title {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .product-card-price {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .product-card-current {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--accent-color);
+        }
+
+        .product-card-original {
+            font-size: 0.9rem;
+            color: var(--light-text);
+            text-decoration: line-through;
+        }
+
+        .product-card-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .product-card-btn {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+
+        .product-card-cart {
+            background-color: var(--accent-color);
+            color: var(--white);
+        }
+
+        .product-card-cart:hover {
+            background-color: #007acc;
+        }
+
+        .product-card-view {
+            background-color: var(--medium-gray);
+            color: var(--text-color);
+        }
+
+        .product-card-view:hover {
+            background-color: var(--dark-gray);
+            color: var(--white);
+        }
+
+        /* Footer Styles */
+        footer {
+            padding: 50px 0 20px;
+            background-color: var(--white);
+            margin-top: 80px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo img {
+            height: 30px;
+            margin-bottom: 20px;
+        }
+
+        .footer-links h3, .footer-social h3 {
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            text-decoration: none;
+            color: var(--light-text);
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: #f5f5f5;
+            border-radius: 50%;
+            color: var(--text-color);
+            transition: all 0.3s;
+        }
+
+        .social-icons a:hover {
+            background-color: var(--accent-color);
+            color: var(--white);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            color: var(--light-text);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background-color: var(--white);
+                flex-direction: column;
+                align-items: center;
+                padding: 40px 0;
+                transition: left 0.3s;
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+            
+            .nav-links li {
+                margin: 15px 0;
+                margin-left: 0;
+            }
+            
+            .nav-links a {
+                padding: 12px 20px;
+            }
+            
+            .hamburger {
+                display: block;
+            }
+            
+            .hamburger.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+            
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+            
+            .hamburger.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(7px, -6px);
+            }
+            
+            .product-container {
+                flex-direction: column;
+            }
+            
+            .tabs {
+                flex-direction: column;
+            }
+            
+            .tab {
+                border-bottom: 1px solid var(--medium-gray);
+            }
+            
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .product-title {
+                font-size: 1.5rem;
+            }
+            
+            .current-price {
+                font-size: 1.5rem;
+            }
+            
+            .thumbnail {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .size-options {
+                justify-content: center;
+            }
+            
+            .tab {
+                padding: 10px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="nav-container">
+                <a href="index.html" class="logo">
+                    <img src="assets/logo.png" alt="Zahan Store">
+                </a>
+                <div class="menu-container">
+                    <nav>
+                        <ul class="nav-links">
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="index.html#about">About Us</a></li>
+                            <li><a href="index.html#products">Products</a></li>
+                            <li><a href="index.html#contact">Contact</a></li>
+                        </ul>
+                    </nav>
+                    <button class="hamburger" aria-label="Menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="index.html">Home</a> > <a href="index.html#products">Products</a> > <span>Classic White Tee</span>
+            </div>
+
+            <div class="product-container">
+                <div class="product-gallery">
+                    <img src="products/classic-white-tee/1.jpg" alt="Classic White Tee" class="main-image" id="main-image">
+                    <div class="thumbnail-container">
+                        <img src="products/classic-white-tee/1.jpg" alt="Classic White Tee Thumbnail 1" class="thumbnail" onclick="changeImage(this)">
+                        <img src="products/classic-white-tee/2.jpg" alt="Classic White Tee Thumbnail 2" class="thumbnail" onclick="changeImage(this)">
+                        <img src="products/classic-white-tee/3.jpg" alt="Classic White Tee Thumbnail 3" class="thumbnail" onclick="changeImage(this)">
+                    </div>
+                </div>
+
+                <div class="product-details">
+                    <h1 class="product-title">Classic White Tee</h1>
+                    <div class="product-price">
+                        <span class="current-price">$29.99</span>
+                        <span class="original-price">$39.99</span>
+                    </div>
+                    <div class="product-badge">Bestseller</div>
+                    
+                    <p class="product-description">
+                        Our Classic White Tee is the perfect essential for any wardrobe. Made from 100% premium organic cotton, this t-shirt offers exceptional comfort and durability. The classic fit and versatile white color make it perfect for layering or wearing on its own.
+                    </p>
+                    
+                    <div class="product-features">
+                        <h3>Features:</h3>
+                        <ul>
+                            <li>100% organic cotton</li>
+                            <li>Premium quality fabric</li>
+                            <li>Classic regular fit</li>
+                            <li>Reinforced neckline</li>
+                            <li>Double-stitched sleeves and hem</li>
+                            <li>Eco-friendly production</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="size-selector">
+                        <h3>Select Size:</h3>
+                        <div class="size-options">
+                            <div class="size-option" onclick="selectSize(this)">S</div>
+                            <div class="size-option" onclick="selectSize(this)">M</div>
+                            <div class="size-option selected" onclick="selectSize(this)">L</div>
+                            <div class="size-option" onclick="selectSize(this)">XL</div>
+                            <div class="size-option" onclick="selectSize(this)">XXL</div>
+                        </div>
+                    </div>
+                    
+                    <div class="quantity-selector">
+                        <h3>Quantity:</h3>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn" onclick="decreaseQuantity()">-</button>
+                            <input type="number" class="quantity-input" id="quantity" value="1" min="1" max="10">
+                            <button class="quantity-btn" onclick="increaseQuantity()">+</button>
+                        </div>
+                    </div>
+                    
+                    <button class="add-to-cart-btn" onclick="addToCart()">Add to Cart</button>
+                    <button class="buy-now-btn" onclick="buyNow()">Buy Now with Razorpay</button>
+                </div>
+            </div>
+
+            <div class="product-info-tabs">
+                <div class="tabs">
+                    <div class="tab active" onclick="changeTab(0)">Description</div>
+                    <div class="tab" onclick="changeTab(1)">Specifications</div>
+                    <div class="tab" onclick="changeTab(2)">Shipping & Returns</div>
+                </div>
+                
+                <div class="tab-content active">
+                    <p>The Classic White Tee is crafted from the finest organic cotton, ensuring both comfort and sustainability. Designed with a classic fit that flatters all body types, this t-shirt features a reinforced neckline and double-stitched seams for enhanced durability.</p>
+                    <p>Perfect for everyday wear, it can be dressed up or down depending on the occasion. The fabric is pre-shrunk to maintain its shape wash after wash, and the quality construction ensures it will remain a wardrobe staple for years to come.</p>
+                </div>
+                
+                <div class="tab-content">
+                    <table class="specs-table">
+                        <tr>
+                            <td>Material</td>
+                            <td>100% Organic Cotton</td>
+                        </tr>
+                        <tr>
+                            <td>Fit</td>
+                            <td>Classic Regular Fit</td>
+                        </tr>
+                        <tr>
+                            <td>Care Instructions</td>
+                            <td>Machine wash cold, tumble dry low</td>
+                        </tr>
+                        <tr>
+                            <td>Origin</td>
+                            <td>Made in India</td>
+                        </tr>
+                        <tr>
+                            <td>Weight</td>
+                            <td>180 GSM</td>
+                        </tr>
+                        <tr>
+                            <td>Neckline</td>
+                            <td>Ribbed Crew Neck</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="tab-content">
+                    <h3>Shipping Information</h3>
+                    <p>We offer worldwide shipping. Orders are processed within 1-2 business days. Shipping times vary by location:</p>
+                    <ul>
+                        <li>India: 3-5 business days</li>
+                        <li>USA/Canada: 5-10 business days</li>
+                        <li>Europe: 7-14 business days</li>
+                        <li>Other countries: 10-20 business days</li>
+                    </ul>
+                    
+                    <h3>Return Policy</h3>
+                    <p>We offer a 30-day return policy. Items must be unworn, unwashed, and with original tags attached. Return shipping is free for customers in India.</p>
+                </div>
+            </div>
+
+            <div class="related-products">
+                <div class="section-title">
+                    <h2>You Might Also Like</h2>
+                    <p>Discover more products from our collection</p>
+                </div>
+                
+                <div class="product-grid">
+                    <div class="product-card">
+                        <div class="product-card-image">
+                            <img src="products/black-oversized-tee/1.jpg" alt="Black Oversized Tee">
+                        </div>
+                        <div class="product-card-info">
+                            <h3 class="product-card-title">Black Oversized Tee</h3>
+                            <div class="product-card-price">
+                                <span class="product-card-current">$34.99</span>
+                            </div>
+                            <div class="product-card-actions">
+                                <button class="product-card-btn product-card-cart">Add to Cart</button>
+                                <button class="product-card-btn product-card-view">View</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-card-image">
+                            <img src="products/graphic-print-tee/1.jpg" alt="Graphic Print Tee">
+                            <div class="product-card-badge">Bestseller</div>
+                        </div>
+                        <div class="product-card-info">
+                            <h3 class="product-card-title">Graphic Print Tee</h3>
+                            <div class="product-card-price">
+                                <span class="product-card-current">$39.99</span>
+                            </div>
+                            <div class="product-card-actions">
+                                <button class="product-card-btn product-card-cart">Add to Cart</button>
+                                <button class="product-card-btn product-card-view">View</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-card-image">
+                            <img src="products/limited-edition-tee/1.jpg" alt="Limited Edition Tee">
+                            <div class="product-card-badge">New</div>
+                        </div>
+                        <div class="product-card-info">
+                            <h3 class="product-card-title">Limited Edition Tee</h3>
+                            <div class="product-card-price">
+                                <span class="product-card-current">$44.99</span>
+                                <span class="product-card-original">$59.99</span>
+                            </div>
+                            <div class="product-card-actions">
+                                <button class="product-card-btn product-card-cart">Add to Cart</button>
+                                <button class="product-card-btn product-card-view">View</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+  <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="assets/logo.png" alt="Zahan Store">
+                    <p>Your destination for fashion, lifestyle, art, and digital products</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#about">About Us</a></li>
+                        <li><a href="index.html#products">Products</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="terms-and-conditions.html">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h3>Connect With Us</h3>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Zahan Store®. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        
+        if (hamburger) {
+            hamburger.addEventListener('click', function() {
+                this.classList.toggle('active');
+                navLinks.classList.toggle('active');
+            });
+        }
+        
+        // Close mobile menu when clicking a link
+        const navItems = document.querySelectorAll('.nav-links a');
+        navItems.forEach(item => {
+            item.addEventListener('click', function() {
+                if (navLinks.classList.contains('active')) {
+                    hamburger.classList.remove('active');
+                    navLinks.classList.remove('active');
+                }
+            });
+        });
+        
+        // Product gallery image change
+        function changeImage(thumb) {
+            document.getElementById('main-image').src = thumb.src;
+        }
+        
+        // Size selection
+        function selectSize(element) {
+            document.querySelectorAll('.size-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            element.classList.add('selected');
+        }
+        
+        // Quantity controls
+        function increaseQuantity() {
+            const quantityInput = document.getElementById('quantity');
+            if (parseInt(quantityInput.value) < 10) {
+                quantityInput.value = parseInt(quantityInput.value) + 1;
+            }
+        }
+        
+        function decreaseQuantity() {
+            const quantityInput = document.getElementById('quantity');
+            if (parseInt(quantityInput.value) > 1) {
+                quantityInput.value = parseInt(quantityInput.value) - 1;
+            }
+        }
+        
+        // Tab switching
+        function changeTab(index) {
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            document.querySelectorAll('.tab')[index].classList.add('active');
+            document.querySelectorAll('.tab-content')[index].classList.add('active');
+        }
+        
+        // Add to cart functionality
+        function addToCart() {
+            const size = document.querySelector('.size-option.selected').textContent;
+            const quantity = document.getElementById('quantity').value;
+            alert(`Added ${quantity} Classic White Tee (Size: ${size}) to your cart!`);
+        }
+        
+        // Razorpay payment integration
+        function buyNow() {
+            const size = document.querySelector('.size-option.selected').textContent;
+            const quantity = document.getElementById('quantity').value;
+            
+            // In a real implementation, this would connect to your Razorpay account
+            alert(`Redirecting to Razorpay checkout for ${quantity} Classic White Tee (Size: ${size})...`);
+            
+            // Example Razorpay integration (replace with your actual Razorpay code)
+            /*
+            var options = {
+                "key": "YOUR_RAZORPAY_KEY_ID",
+                "amount": 2999 * quantity, // amount in paise
+                "currency": "INR",
+                "name": "Zahan Store",
+                "description": "Classic White Tee",
+                "image": "assets/logo.png",
+                "handler": function (response){
+                    alert("Payment successful! Payment ID: " + response.razorpay_payment_id);
+                },
+                "prefill": {
+                    "name": "Customer Name",
+                    "email": "customer@example.com",
+                    "contact": "9999999999"
+                },
+                "notes": {
+                    "address": "Customer Address",
+                    "size": size,
+                    "quantity": quantity
+                },
+                "theme": {
+                    "color": "#0096FF"
+                }
+            };
+            var rzp1 = new Razorpay(options);
+            rzp1.open();
+            */
+        }
+    </script>
+</body>
+</html>
+  
