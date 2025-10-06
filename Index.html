@@ -616,8 +616,8 @@
             color: var(--accent-color);
         }
         
-        /* Option 2 - Target specific footer structure */
-        footer > div > hr:last-child {
+        /* Option 3 - Remove all horizontal rules in footer except the first one */
+        footer hr:not(:first-of-type) {
         display: none;
         }
         
