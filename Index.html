@@ -615,12 +615,12 @@
         .footer-links a:hover {
             color: var(--accent-color);
         }
-
-        /* Remove the line above "Crafted with ♥️ by Zahan Labs" */
-        footer hr:last-of-type {
-        display: none !important;
+        
+        /* Option 2 - Target specific footer structure */
+        footer > div > hr:last-child {
+        display: none;
         }
-
+        
         .social-icons {
             display: flex;
             gap: 15px;
