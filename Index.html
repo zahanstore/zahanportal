@@ -616,9 +616,16 @@
             color: var(--accent-color);
         }
         
-        /* Option 3 - Remove all horizontal rules in footer except the first one */
-        footer hr:not(:first-of-type) {
-        display: none;
+        /* Remove the line above "Crafted with ♥️ by Zahan Labs" */
+        footer .copyright + .copyright {
+        border-top: none !important;
+        padding-top: 0 !important;
+        margin-top: 0 !important;
+        }
+
+        /* Alternative - remove borders from all copyright elements */
+        footer .copyright {
+        border: none !important;
         }
         
         .social-icons {
