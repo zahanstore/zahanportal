@@ -1228,6 +1228,44 @@
             thankYouMessage.classList.add('hidden');
             formMessage.classList.add('hidden');
         }
+          async function populateProducts() {
+    const productGrid = document.querySelector('.product-grid');
+    if (!productGrid) return;
+
+    try {
+        const response = await fetch('/.netlify/functions/get-products');
+        const products = await response.json();
+
+        // Clear any hardcoded loading text
+        productGrid.innerHTML = '';
+
+        products.forEach(product => {
+            productGrid.innerHTML += `
+                <div class="product-card">
+                    <div class="product-card-image">
+                        <img src="${product.image_url}" alt="${product.name}">
+                    </div>
+                    <div class="product-card-info">
+                        <h3 class="product-card-title">${product.name}</h3>
+                        <div class="product-card-price">
+                            <span class="product-card-current">₹${product.price}</span>
+                        </div>
+                        <div class="product-card-actions">
+                            <button class="product-card-btn product-card-cart" onclick="addToCart('${product.sku}')">Add to Cart</button>
+                            <button class="product-card-btn product-card-view" onclick="viewProduct('${product.sku}')">View</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+    } catch (error) {
+        console.error("Error populating products:", error);
+    }
+}
+
+// Run this when the page loads
+document.addEventListener('DOMContentLoaded', populateProducts);
+          
     </script>
 </body>
 </html>
