@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - Zahan Store</title>
+    <meta name="description" content="Browse our collection of fashion, lifestyle, and art products at Zahan Store.">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" href="favicon.png" type="image/png">
+    <style>
+        :root {
+            --accent-color: #0096FF;
+            --background-color: #D9D9D9;
+            --text-color: #333;
+            --light-text: #777;
+            --white: #fff;
+            --black: #000;
+            --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --nav-bg: #D9D9D9;
+            --button-shadow: 0 4px 8px rgba(0, 150, 255, 0.2);
+            --text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+            --success-color: #4BB543;
+            --error-color: #FF3333;
+            --light-gray: #f8f9fa;
+            --medium-gray: #e9ecef;
+            --dark-gray: #6c757d;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--nav-bg);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo img {
+            height: 30px;
+            display: block;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            margin-left: auto;
+        }
+
+        .nav-links li {
+            margin-left: 25px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 600;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            height: 100%;
+            padding: 8px 12px;
+            border-radius: 5px;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+            background-color: rgba(0, 150, 255, 0.1);
+        }
+
+        .menu-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            margin-left: 15px;
+            background-color: var(--accent-color);
+            border-radius: 5px;
+            box-shadow: var(--button-shadow);
+        }
+
+        .hamburger span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: var(--white);
+            margin: 5px 0;
+            transition: all 0.3s ease;
+        }
+
+        /* Main Content Styles */
+        main {
+            margin-top: 80px;
+            padding: 40px 0;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .page-header p {
+            color: var(--light-text);
+            font-size: 1.1rem;
+        }
+
+        /* Filter and Sort Section */
+        .filter-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 40px;
+            padding: 20px;
+            background-color: var(--white);
+            border-radius: 10px;
+            box-shadow: var(--box-shadow);
+        }
+
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            border: 1px solid var(--medium-gray);
+            background-color: var(--white);
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-family: 'Quicksand', sans-serif;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background-color: var(--accent-color);
+            color: var(--white);
+            border-color: var(--accent-color);
+        }
+
+        .sort-select {
+            padding: 10px 15px;
+            border: 1px solid var(--medium-gray);
+            border-radius: 5px;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* Products Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-card-image {
+            position: relative;
+            height: 280px;
+            overflow: hidden;
+        }
+
+        .product-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover .product-card-image img {
+            transform: scale(1.05);
+        }
+
+        .product-card-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: var(--accent-color);
+            color: var(--white);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .product-card-badge.sale {
+            background-color: var(--error-color);
+        }
+
+        .product-card-badge.new {
+            background-color: var(--success-color);
+        }
+
+        .product-card-info {
+            padding: 20px;
+        }
+
+        .product-card-category {
+            font-size: 0.85rem;
+            color: var(--light-text);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .product-card-title {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .product-card-price {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .product-card-current {
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: var(--accent-color);
+        }
+
+        .product-card-original {
+            font-size: 0.95rem;
+            color: var(--light-text);
+            text-decoration: line-through;
+        }
+
+        .product-card-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .product-card-btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-family: 'Quicksand', sans-serif;
+        }
+
+        .product-card-cart {
+            background-color: var(--accent-color);
+            color: var(--white);
+        }
+
+        .product-card-cart:hover {
+            background-color: #007acc;
+        }
+
+        .product-card-view {
+            background-color: var(--medium-gray);
+            color: var(--text-color);
+        }
+
+        .product-card-view:hover {
+            background-color: var(--dark-gray);
+            color: var(--white);
+        }
+
+        /* No Products Message */
+        .no-products {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 60px 20px;
+            background-color: var(--white);
+            border-radius: 10px;
+        }
+
+        .no-products i {
+            font-size: 4rem;
+            color: var(--medium-gray);
+            margin-bottom: 20px;
+        }
+
+        .no-products h3 {
+            margin-bottom: 10px;
+        }
+
+        .no-products p {
+            color: var(--light-text);
+        }
+
+        /* Loading Spinner */
+        .loading {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid var(--medium-gray);
+            border-top-color: var(--accent-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Footer Styles */
+        footer {
+            padding: 50px 0 20px;
+            background-color: var(--white);
+            margin-top: 80px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo img {
+            height: 30px;
+            margin-bottom: 20px;
+        }
+
+        .footer-links h3, .footer-social h3 {
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            text-decoration: none;
+            color: var(--light-text);
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: #f5f5f5;
+            border-radius: 50%;
+            color: var(--text-color);
+            transition: all 0.3s;
+        }
+
+        .social-icons a:hover {
+            background-color: var(--accent-color);
+            color: var(--white);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            color: var(--light-text);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background-color: var(--white);
+                flex-direction: column;
+                align-items: center;
+                padding: 40px 0;
+                transition: left 0.3s;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-links li {
+                margin: 15px 0;
+                margin-left: 0;
+            }
+
+            .nav-links a {
+                padding: 12px 20px;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .hamburger.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(7px, -6px);
+            }
+
+            .filter-section {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .filter-group {
+                justify-content: center;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 20px;
+            }
+
+            .footer-content {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-btn {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="nav-container">
+                <a href="Index.html" class="logo">
+                    <img src="logo.png" alt="Zahan Store">
+                </a>
+                <div class="menu-container">
+                    <nav>
+                        <ul class="nav-links">
+                            <li><a href="Index.html#gateway">Home</a></li>
+                            <li><a href="products.html">Products</a></li>
+                            <li><a href="Index.html#about">About Us</a></li>
+                            <li><a href="Index.html#features">Features</a></li>
+                            <li><a href="Contact.html">Contact</a></li>
+                        </ul>
+                    </nav>
+                    <button class="hamburger" aria-label="Menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="page-header">
+                <h1>Our Products</h1>
+                <p>Discover our curated collection of fashion, lifestyle, and art products</p>
+            </div>
+
+            <div class="filter-section">
+                <div class="filter-group">
+                    <button class="filter-btn active" data-category="all">All Products</button>
+                    <button class="filter-btn" data-category="apparel">Apparel</button>
+                    <button class="filter-btn" data-category="accessories">Accessories</button>
+                    <button class="filter-btn" data-category="art">Art</button>
+                </div>
+                <div class="filter-group">
+                    <select class="sort-select" id="sort-select">
+                        <option value="featured">Featured</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="newest">Newest First</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="products-grid" id="products-grid">
+                <!-- Product Card 1 -->
+                <div class="product-card" data-category="apparel">
+                    <div class="product-card-image">
+                        <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400" alt="Classic White Tee">
+                        <div class="product-card-badge">Bestseller</div>
+                    </div>
+                    <div class="product-card-info">
+                        <p class="product-card-category">Apparel</p>
+                        <h3 class="product-card-title">Classic White Tee</h3>
+                        <div class="product-card-price">
+                            <span class="product-card-current">$29.99</span>
+                            <span class="product-card-original">$39.99</span>
+                        </div>
+                        <div class="product-card-actions">
+                            <button class="product-card-btn product-card-cart" onclick="addToCart('Classic White Tee', 29.99)">Add to Cart</button>
+                            <a href="Product.html" class="product-card-btn product-card-view">View</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 2 -->
+                <div class="product-card" data-category="apparel">
+                    <div class="product-card-image">
+                        <img src="https://images.unsplash.com/photo-1503341504253-dff4815485f1?w=400" alt="Black Oversized Tee">
+                    </div>
+                    <div class="product-card-info">
+                        <p class="product-card-category">Apparel</p>
+                        <h3 class="product-card-title">Black Oversized Tee</h3>
+                        <div class="product-card-price">
+                            <span class="product-card-current">$34.99</span>
+                        </div>
+                        <div class="product-card-actions">
+                            <button class="product-card-btn product-card-cart" onclick="addToCart('Black Oversized Tee', 34.99)">Add to Cart</button>
+                            <button class="product-card-btn product-card-view" onclick="viewProduct('black-oversized-tee')">View</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 3 -->
+                <div class="product-card" data-category="apparel">
+                    <div class="product-card-image">
+                        <img src="https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=400" alt="Graphic Print Tee">
+                        <div class="product-card-badge">Bestseller</div>
+                    </div>
+                    <div class="product-card-info">
+                        <p class="product-card-category">Apparel</p>
+                        <h3 class="product-card-title">Graphic Print Tee</h3>
+                        <div class="product-card-price">
+                            <span class="product-card-current">$39.99</span>
+                        </div>
+                        <div class="product-card-actions">
+                            <button class="product-card-btn product-card-cart" onclick="addToCart('Graphic Print Tee', 39.99)">Add to Cart</button>
+                            <button class="product-card-btn product-card-view" onclick="viewProduct('graphic-print-tee')">View</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 4 -->
+                <div class="product-card" data-category="apparel">
+                    <div class="product-card-image">
+                        <img src="https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=400" alt="Limited Edition Tee">
+                        <div class="product-card-badge new">New</div>
+                    </div>
+                    <div class="product-card-info">
+                        <p class="product-card-category">Apparel</p>
+                        <h3 class="product-card-title">Limited Edition Tee</h3>
+                        <div class="product-card-price">
+                            <span class="product-card-current">$44.99</span>
+                            <span class="product-card-original">$59.99</span>
+                        </div>
+                        <div class="product-card-actions">
+                            <button class="product-card-btn product-card-cart" onclick="addToCart('Limited Edition Tee', 44.99)">Add to Cart</button>
+                            <button class="product-card-btn product-card-view" onclick="viewProduct('limited-edition-tee')">View</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 5 -->
+                <div class="product-card" data-category="accessories">
+                    <div class="product-card-image">
+                        <img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400" alt="Canvas Backpack">
+                    </div>
+                    <div class="product-card-info">
+                        <p class="product-card-category">Accessories</p>
+                        <h3 class="product-card-title">Canvas Backpack</h3>
+                        <div class="product-card-price">
+                            <span class="product-card-current">$79.99</span>
+                        </div>
+                        <div class="product-card-actions">
+                            <button class="product-card-btn product-card-cart" onclick="addToCart('Canvas Backpack', 79.99)">Add to Cart</button>
+                            <button class="product-card-btn product-card-view" onclick="viewProduct('canvas-backpack')">View</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 6 -->
+                <div class="product-card" data-category="accessories">
+                    <div class="product-card-image">
+                        <img src="https://images.unsplash.com/photo-1523170335258-f5ed11844a49?w=400" alt="Minimalist Watch">
+                        <div class="product-card-badge sale">Sale</div>
+                    </div>
+                    <div class="product-card-info">
+                        <p class="product-card-category">Accessories</p>
+                        <h3 class="product-card-title">Minimalist Watch</h3>
+                        <div class="product-card-price">
+                            <span class="product-card-current">$149.99</span>
+                            <span class="product-card-original">$199.99</span>
+                        </div>
+                        <div class="product-card-actions">
+                            <button class="product-card-btn product-card-cart" onclick="addToCart('Minimalist Watch', 149.99)">Add to Cart</button>
+                            <button class="product-card-btn product-card-view" onclick="viewProduct('minimalist-watch')">View</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 7 -->
+                <div class="product-card" data-category="art">
+                    <div class="product-card-image">
+                        <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=400" alt="Abstract Canvas Print">
+                        <div class="product-card-badge new">New</div>
+                    </div>
+                    <div class="product-card-info">
+                        <p class="product-card-category">Art</p>
+                        <h3 class="product-card-title">Abstract Canvas Print</h3>
+                        <div class="product-card-price">
+                            <span class="product-card-current">$89.99</span>
+                        </div>
+                        <div class="product-card-actions">
+                            <button class="product-card-btn product-card-cart" onclick="addToCart('Abstract Canvas Print', 89.99)">Add to Cart</button>
+                            <button class="product-card-btn product-card-view" onclick="viewProduct('abstract-canvas-print')">View</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 8 -->
+                <div class="product-card" data-category="art">
+                    <div class="product-card-image">
+                        <img src="https://images.unsplash.com/photo-1513519245088-0e12902e35ca?w=400" alt="Modern Art Poster">
+                    </div>
+                    <div class="product-card-info">
+                        <p class="product-card-category">Art</p>
+                        <h3 class="product-card-title">Modern Art Poster</h3>
+                        <div class="product-card-price">
+                            <span class="product-card-current">$29.99</span>
+                        </div>
+                        <div class="product-card-actions">
+                            <button class="product-card-btn product-card-cart" onclick="addToCart('Modern Art Poster', 29.99)">Add to Cart</button>
+                            <button class="product-card-btn product-card-view" onclick="viewProduct('modern-art-poster')">View</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="logo.png" alt="Zahan Store">
+                    <p>Your destination for fashion, lifestyle, art, and digital products</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="Index.html">Home</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="Index.html#about">About Us</a></li>
+                        <li><a href="Contact.html">Contact</a></li>
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="terms-and-conditions.html">Terms of Service</a></li>
+                        <li><a href="Return-and-Refund.html">Return and Refund</a></li>
+                        <li><a href="Shipping-and-Delivery.html">Shipping and Delivery</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h3>Connect With Us</h3>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2026 Zahan Store. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+
+        if (hamburger) {
+            hamburger.addEventListener('click', function() {
+                this.classList.toggle('active');
+                navLinks.classList.toggle('active');
+            });
+        }
+
+        // Close mobile menu when clicking a link
+        const navItems = document.querySelectorAll('.nav-links a');
+        navItems.forEach(item => {
+            item.addEventListener('click', function() {
+                if (navLinks.classList.contains('active')) {
+                    hamburger.classList.remove('active');
+                    navLinks.classList.remove('active');
+                }
+            });
+        });
+
+        // Category filter functionality
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const productCards = document.querySelectorAll('.product-card');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                this.classList.add('active');
+
+                const category = this.getAttribute('data-category');
+
+                productCards.forEach(card => {
+                    if (category === 'all' || card.getAttribute('data-category') === category) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Sort functionality
+        const sortSelect = document.getElementById('sort-select');
+        const productsGrid = document.getElementById('products-grid');
+
+        sortSelect.addEventListener('change', function() {
+            const sortValue = this.value;
+            const cardsArray = Array.from(productCards);
+
+            cardsArray.sort((a, b) => {
+                const priceA = parseFloat(a.querySelector('.product-card-current').textContent.replace('$', ''));
+                const priceB = parseFloat(b.querySelector('.product-card-current').textContent.replace('$', ''));
+
+                if (sortValue === 'price-low') {
+                    return priceA - priceB;
+                } else if (sortValue === 'price-high') {
+                    return priceB - priceA;
+                }
+                return 0;
+            });
+
+            // Re-append sorted cards
+            cardsArray.forEach(card => productsGrid.appendChild(card));
+        });
+
+        // Add to cart function
+        function addToCart(productName, price) {
+            alert(`Added "${productName}" ($${price.toFixed(2)}) to cart!`);
+        }
+
+        // View product function
+        function viewProduct(slug) {
+            window.location.href = `Product.html?product=${slug}`;
+        }
+    </script>
+</body>
+</html>
