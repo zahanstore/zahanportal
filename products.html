@@ -74,84 +74,98 @@
     <footer><p>&copy; 2026 Zahan Store. Premium Print on Demand.</p></footer>
 
     <script>
-    
-    // 1. Global variable to store products for filtering
+    // 1. Global state
     let allProducts = [];
 
-    // 2. The ONE and ONLY fetch function
+    // 2. Fetch products from your Vercel API
     async function fetchProducts() {
         const grid = document.getElementById('products-grid');
+        
         try {
-            // Fetch from your Vercel API
             const res = await fetch('/api/qikink-products');
             
-            if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+            if (!res.ok) {
+                const errorData = await res.json();
+                throw new Error(errorData.details?.message || errorData.error || "Failed to sync");
+            }
             
             const data = await res.json();
             
-            // Handle different Qikink API response formats (Array vs Object)
+            // Qikink Sandbox data can be in data.products or just data
             allProducts = Array.isArray(data) ? data : (data.products || data.data || []); 
 
             if (allProducts.length === 0) {
                 grid.innerHTML = `
-                    <div style="text-align:center; grid-column: 1/-1; padding: 50px;">
-                        <p>No products found in Sandbox.</p>
-                        <small>Make sure you have added products to your Qikink Sandbox account.</small>
+                    <div style="text-align:center; grid-column: 1/-1; padding: 60px 20px;">
+                        <i class="fas fa-box-open" style="font-size: 3rem; color: #ccc; margin-bottom: 15px;"></i>
+                        <h3>No Products Found</h3>
+                        <p>Your Sandbox catalog is currently empty. Add products in Qikink to see them here.</p>
                     </div>`;
                 return;
             }
             
-            // Initial render
             renderProducts(allProducts);
 
         } catch (e) {
-            console.error("Fetch error:", e);
+            console.error("Storefront Error:", e);
             grid.innerHTML = `
-                <div style="text-align:center; grid-column: 1/-1; padding: 50px;">
-                    <p style="color:red;">Unable to load products.</p>
-                    <small>Error: ${e.message}</small><br>
-                    <button onclick="fetchProducts()" style="margin-top:10px; padding:5px 15px; cursor:pointer;">Retry</button>
+                <div style="text-align:center; grid-column: 1/-1; padding: 60px 20px;">
+                    <i class="fas fa-exclamation-triangle" style="font-size: 3rem; color: #ff4d4d; margin-bottom: 15px;"></i>
+                    <h3>Connection Error</h3>
+                    <p>${e.message}</p>
+                    <button onclick="location.reload()" style="margin-top:20px; padding:10px 25px; background:var(--accent); color:white; border:none; border-radius:5px; cursor:pointer;">Try Again</button>
                 </div>`;
         }
     }
 
-    // 3. Render function to build the HTML cards
+    // 3. Render HTML Cards
     function renderProducts(productsToDisplay) {
         const grid = document.getElementById('products-grid');
-        grid.innerHTML = productsToDisplay.map(p => `
-            <div class="product-card" data-category="${p.category || 'General'}">
-                <img src="${p.image_url || 'https://via.placeholder.com/400'}" class="product-img" onerror="this.src='https://via.placeholder.com/400'">
-                <div class="product-info">
-                    <small style="color:#888; text-transform:uppercase;">${p.category || 'General'}</small>
-                    <h3 style="font-size:1.1rem; margin:5px 0;">${p.name}</h3>
-                    <div class="price">₹${p.price}</div>
-                    <div class="btn-group">
-                        <button class="btn btn-cart" onclick="addToCart('${p.name.replace(/'/g, "\\'")}', ${p.price}, '${p.image_url}')">Add</button>
-                        <a href="product.html?id=${p.id}" class="btn btn-view">View</a>
+        grid.innerHTML = productsToDisplay.map(p => {
+            // Ensure we have a valid image and price
+            const img = p.image_url || 'https://via.placeholder.com/400?text=No+Image';
+            const price = p.price || '0.00';
+            const name = p.name || 'Untitled Product';
+            const category = p.category || 'Lifestyle';
+            const id = p.id || Math.random();
+
+            return `
+                <div class="product-card">
+                    <div style="position:relative; overflow:hidden;">
+                        <img src="${img}" class="product-img" onerror="this.src='https://via.placeholder.com/400?text=Image+Not+Found'">
+                    </div>
+                    <div class="product-info">
+                        <small style="color:#0096FF; font-weight:700; text-transform:uppercase; letter-spacing:1px;">${category}</small>
+                        <h3 style="font-size:1.1rem; margin:8px 0; color:#222; height:2.4em; overflow:hidden;">${name}</h3>
+                        <div class="price">₹${price}</div>
+                        <div class="btn-group">
+                            <button class="btn btn-cart" onclick="addToCart('${name.replace(/'/g, "\\'")}', ${price}, '${img}')">
+                                <i class="fas fa-shopping-cart"></i> Add
+                            </button>
+                            <a href="product.html?id=${id}" class="btn btn-view">Details</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-        `).join('');
+            `;
+        }).join('');
     }
 
-    // 4. Filter Logic
+    // 4. Filter logic
     document.querySelectorAll('.filter-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
-            // UI Update
             document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
             e.target.classList.add('active');
             
-            // Filtering
-            const cat = e.target.dataset.cat;
+            const cat = e.target.dataset.cat.toLowerCase();
             const filtered = (cat === 'all') 
                 ? allProducts 
-                : allProducts.filter(p => p.category && p.category.toLowerCase() === cat.toLowerCase());
+                : allProducts.filter(p => p.category && p.category.toLowerCase() === cat);
             
             renderProducts(filtered);
         });
     });
 
-    // 5. Cart Logic
+    // 5. Cart Logic with visual feedback
     function addToCart(name, price, image) {
         let cart = JSON.parse(localStorage.getItem('zahanCart')) || [];
         const existing = cart.find(i => i.name === name);
@@ -164,20 +178,30 @@
         
         localStorage.setItem('zahanCart', JSON.stringify(cart));
         
-        // Visual feedback
-        const btn = event.target;
-        const originalText = btn.innerText;
-        btn.innerText = "✓";
-        btn.style.backgroundColor = "#4BB543";
-        setTimeout(() => {
-            btn.innerText = originalText;
-            btn.style.backgroundColor = "";
-        }, 1500);
+        // Notify user without annoying alerts
+        showToast(`Added ${name} to cart!`);
     }
 
-    // Start fetching when page loads
-    window.onload = fetchProducts;
-        
+    function showToast(msg) {
+        const toast = document.createElement('div');
+        toast.style = "position:fixed; bottom:20px; right:20px; background:#333; color:white; padding:12px 25px; border-radius:30px; z-index:9999; box-shadow:0 5px 15px rgba(0,0,0,0.3); font-weight:600; animation: slideIn 0.3s ease-out;";
+        toast.innerHTML = `<i class="fas fa-check-circle" style="color:#4BB543; margin-right:10px;"></i> ${msg}`;
+        document.body.appendChild(toast);
+        setTimeout(() => {
+            toast.style.animation = "slideOut 0.3s ease-in";
+            setTimeout(() => toast.remove(), 300);
+        }, 3000);
+    }
+
+    // Style for toast animations
+    const style = document.createElement('style');
+    style.innerHTML = `
+        @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        @keyframes slideOut { from { transform: translateX(0); opacity: 1; } to { transform: translateX(100%); opacity: 0; } }
+    `;
+    document.head.appendChild(style);
+
+    window.onload = fetchProducts; 
     </script>
 </body>
 </html>
