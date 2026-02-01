@@ -846,6 +846,33 @@
         function viewProduct(slug) {
             window.location.href = `Product.html?product=${slug}`;
         }
+        function addToCart(name, price, image) {
+    let cart = JSON.parse(localStorage.getItem('zahanCart')) || [];
+    const existing = cart.find(item => item.name === name);
+    
+    if (existing) {
+        existing.quantity += 1;
+    } else {
+        cart.push({ name, price, image, quantity: 1 });
+    }
+    
+    localStorage.setItem('zahanCart', JSON.stringify(cart));
+    
+    // Smooth toast notification instead of annoying alert
+    const btn = event.target;
+    const originalText = btn.innerText;
+    btn.innerText = "Added! ✓";
+    btn.style.backgroundColor = "#4BB543";
+    setTimeout(() => {
+        btn.innerText = originalText;
+        btn.style.backgroundColor = "";
+    }, 2000);
+}
+
+function viewProduct(slug) {
+    window.location.href = `Product.html?product=${slug}`;
+}
+        
     </script>
 </body>
 </html>
