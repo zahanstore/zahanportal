@@ -74,58 +74,110 @@
     <footer><p>&copy; 2026 Zahan Store. Premium Print on Demand.</p></footer>
 
     <script>
-        let allProducts = [];
+    
+    // 1. Global variable to store products for filtering
+    let allProducts = [];
 
-        async function fetchProducts() {
-            try {
-                const res = await fetch('/api/qikink-products');
-                const data = await res.json();
-                allProducts = data.products || data; 
-                renderProducts(allProducts);
-            } catch (e) {
-                document.getElementById('products-grid').innerHTML = "<p>Unable to load products. Check Sandbox API.</p>";
+    // 2. The ONE and ONLY fetch function
+    async function fetchProducts() {
+        const grid = document.getElementById('products-grid');
+        try {
+            // Fetch from your Vercel API
+            const res = await fetch('/api/qikink-products');
+            
+            if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+            
+            const data = await res.json();
+            
+            // Handle different Qikink API response formats (Array vs Object)
+            allProducts = Array.isArray(data) ? data : (data.products || data.data || []); 
+
+            if (allProducts.length === 0) {
+                grid.innerHTML = `
+                    <div style="text-align:center; grid-column: 1/-1; padding: 50px;">
+                        <p>No products found in Sandbox.</p>
+                        <small>Make sure you have added products to your Qikink Sandbox account.</small>
+                    </div>`;
+                return;
             }
-        }
+            
+            // Initial render
+            renderProducts(allProducts);
 
-        function renderProducts(products) {
-            const grid = document.getElementById('products-grid');
-            grid.innerHTML = products.map(p => `
-                <div class="product-card" data-category="${p.category}">
-                    <img src="${p.image_url}" class="product-img">
-                    <div class="product-info">
-                        <small style="color:#888; text-transform:uppercase;">${p.category || 'General'}</small>
-                        <h3 style="font-size:1.1rem; margin:5px 0;">${p.name}</h3>
-                        <div class="price">₹${p.price}</div>
-                        <div class="btn-group">
-                            <button class="btn btn-cart" onclick="addToCart('${p.name}', ${p.price}, '${p.image_url}')">Add</button>
-                            <a href="product.html?id=${p.id}" class="btn btn-view">View</a>
-                        </div>
+        } catch (e) {
+            console.error("Fetch error:", e);
+            grid.innerHTML = `
+                <div style="text-align:center; grid-column: 1/-1; padding: 50px;">
+                    <p style="color:red;">Unable to load products.</p>
+                    <small>Error: ${e.message}</small><br>
+                    <button onclick="fetchProducts()" style="margin-top:10px; padding:5px 15px; cursor:pointer;">Retry</button>
+                </div>`;
+        }
+    }
+
+    // 3. Render function to build the HTML cards
+    function renderProducts(productsToDisplay) {
+        const grid = document.getElementById('products-grid');
+        grid.innerHTML = productsToDisplay.map(p => `
+            <div class="product-card" data-category="${p.category || 'General'}">
+                <img src="${p.image_url || 'https://via.placeholder.com/400'}" class="product-img" onerror="this.src='https://via.placeholder.com/400'">
+                <div class="product-info">
+                    <small style="color:#888; text-transform:uppercase;">${p.category || 'General'}</small>
+                    <h3 style="font-size:1.1rem; margin:5px 0;">${p.name}</h3>
+                    <div class="price">₹${p.price}</div>
+                    <div class="btn-group">
+                        <button class="btn btn-cart" onclick="addToCart('${p.name.replace(/'/g, "\\'")}', ${p.price}, '${p.image_url}')">Add</button>
+                        <a href="product.html?id=${p.id}" class="btn btn-view">View</a>
                     </div>
                 </div>
-            `).join('');
-        }
+            </div>
+        `).join('');
+    }
 
-        // Filter Logic
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                e.target.classList.add('active');
-                const cat = e.target.dataset.cat;
-                const filtered = cat === 'all' ? allProducts : allProducts.filter(p => p.category === cat);
-                renderProducts(filtered);
-            });
+    // 4. Filter Logic
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            // UI Update
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            e.target.classList.add('active');
+            
+            // Filtering
+            const cat = e.target.dataset.cat;
+            const filtered = (cat === 'all') 
+                ? allProducts 
+                : allProducts.filter(p => p.category && p.category.toLowerCase() === cat.toLowerCase());
+            
+            renderProducts(filtered);
         });
+    });
 
-        function addToCart(name, price, image) {
-            let cart = JSON.parse(localStorage.getItem('zahanCart')) || [];
-            const existing = cart.find(i => i.name === name);
-            if (existing) { existing.quantity++; } 
-            else { cart.push({ name, price, image, quantity: 1 }); }
-            localStorage.setItem('zahanCart', JSON.stringify(cart));
-            alert("Added to cart!");
+    // 5. Cart Logic
+    function addToCart(name, price, image) {
+        let cart = JSON.parse(localStorage.getItem('zahanCart')) || [];
+        const existing = cart.find(i => i.name === name);
+        
+        if (existing) { 
+            existing.quantity++; 
+        } else { 
+            cart.push({ name, price, image, quantity: 1 }); 
         }
+        
+        localStorage.setItem('zahanCart', JSON.stringify(cart));
+        
+        // Visual feedback
+        const btn = event.target;
+        const originalText = btn.innerText;
+        btn.innerText = "✓";
+        btn.style.backgroundColor = "#4BB543";
+        setTimeout(() => {
+            btn.innerText = originalText;
+            btn.style.backgroundColor = "";
+        }, 1500);
+    }
 
-        window.onload = fetchProducts;
+    // Start fetching when page loads
+    window.onload = fetchProducts;
+        
     </script>
 </body>
 </html>
