@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details - Zahan Store</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --accent: #0096FF; --bg: #D9D9D9; }
+        body { font-family: 'Quicksand', sans-serif; background: var(--bg); margin: 0; padding-top: 100px; }
+        header { background: var(--bg); padding: 15px 0; position: fixed; width: 100%; top: 0; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .container { width: 90%; max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
+        .product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; background: white; padding: 40px; border-radius: 20px; }
+        .img-box img { width: 100%; border-radius: 10px; }
+        .btn-buy { background: var(--accent); color: white; border: none; padding: 18px; width: 100%; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 1.1rem; }
+        @media (max-width: 768px) { .product-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <header><div class="container" style="padding:0;"><a href="index.html"><img src="logo.png" style="height:30px;"></a></div></header>
+
+    <div class="container">
+        <div class="product-grid">
+            <div class="img-box"><img id="p-img" src="" alt="Product Image"></div>
+            <div class="content-box">
+                <h1 id="p-title">Loading...</h1>
+                <h2 id="p-price" style="color: var(--accent); margin: 20px 0;"></h2>
+                <p style="color: #666; margin-bottom: 30px;">Experience premium quality with Zahan Store's curated collection. This item is designed with style and durability in mind.</p>
+                <button class="btn-buy" id="add-btn" onclick="addToCartFromDetail()">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const products = {
+            "classic-white-tee": { name: "Classic White Tee", price: 29.99, img: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=800" },
+            "minimalist-watch": { name: "Minimalist Watch", price: 149.99, img: "https://images.unsplash.com/photo-1523170335258-f5ed11844a49?w=800" }
+            // Add all other 6 products here...
+        };
+
+        const slug = new URLSearchParams(window.location.search).get('product');
+        const p = products[slug];
+
+        if(p) {
+            document.getElementById('p-title').innerText = p.name;
+            document.getElementById('p-price').innerText = "₹" + p.price;
+            document.getElementById('p-img').src = p.img;
+        }
+
+        function addToCartFromDetail() {
+            let cart = JSON.parse(localStorage.getItem('zahanCart')) || [];
+            cart.push({ name: p.name, price: p.price, image: p.img, quantity: 1 });
+            localStorage.setItem('zahanCart', JSON.stringify(cart));
+            window.location.href = "cart.html";
+        }
+    </script>
+</body>
+</html>
