@@ -76,12 +76,72 @@
         }
 
         async function securePay() {
-            const cart = JSON.parse(localStorage.getItem('zahanCart'));
-            if(!cart || cart.length === 0) return;
-            
-            const totalAmount = cart.reduce((s, i) => s + (i.price * i.quantity), 0);
+    const cart = JSON.parse(localStorage.getItem('zahanCart'));
+    if (!cart || cart.length === 0) {
+        alert("Your cart is empty!");
+        return;
+    }
 
-            try {
+    const totalAmount = cart.reduce((s, i) => s + (i.price * i.quantity), 0);
+    const checkoutBtn = document.querySelector('.checkout-btn');
+    
+    // UI Feedback: Disable button while loading
+    checkoutBtn.innerText = "Processing...";
+    checkoutBtn.disabled = true;
+
+    try {
+        const res = await fetch('/api/create-order', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ amount: totalAmount })
+        });
+
+        if (!res.ok) throw new Error("Could not create Razorpay Order");
+
+        const order = await res.json();
+
+        const options = {
+            "key": "rzp_live_SAq711xB58uR33", 
+            "amount": order.amount,
+            "currency": "INR",
+            "name": "Zahan Store",
+            "description": "Purchase from Zahan Store",
+            "order_id": order.id,
+            "handler": function (response) {
+                // Success Logic
+                const orderData = {
+                    id: response.razorpay_payment_id,
+                    date: new Date().toLocaleString(),
+                    amount: totalAmount.toFixed(2),
+                    items: cart.length
+                };
+                
+                let history = JSON.parse(localStorage.getItem('orderHistory')) || [];
+                history.push(orderData);
+                localStorage.setItem('orderHistory', JSON.stringify(history));
+                
+                localStorage.removeItem('zahanCart');
+                window.location.href = "success.html";
+            },
+            "prefill": {
+                "name": "Customer Name",
+                "email": "customer@example.com"
+            },
+            "theme": { "color": "#0096FF" }
+        };
+
+        const rzp = new Razorpay(options);
+        rzp.open();
+
+    } catch (err) {
+        alert("Payment Error: " + err.message);
+        console.error(err);
+    } finally {
+        checkoutBtn.innerText = "Secure Checkout";
+        checkoutBtn.disabled = false;
+    }
+        }
+        
                 // Fetch Order from your backend
                 const res = await fetch('/api/create-order', { 
                     method: 'POST', 
