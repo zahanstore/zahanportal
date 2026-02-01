@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard - Zahan Store</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --accent: #0096FF; --bg: #D9D9D9; }
+        body { font-family: 'Quicksand', sans-serif; background: var(--bg); margin: 0; padding-top: 100px; }
+        .container { width: 90%; max-width: 800px; margin: 0 auto; }
+        .card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .order-row { display: flex; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid #eee; }
+        .status { color: #4BB543; font-weight: 700; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h1>My Orders</h1>
+            <div id="order-list">
+                <p>Loading your orders...</p>
+            </div>
+            <br>
+            <a href="products.html" style="color: var(--accent); text-decoration: none;">← Continue Shopping</a>
+        </div>
+    </div>
+
+    <script>
+        const history = JSON.parse(localStorage.getItem('orderHistory')) || [];
+        const list = document.getElementById('order-list');
+
+        if(history.length === 0) {
+            list.innerHTML = "<p>You haven't placed any orders yet.</p>";
+        } else {
+            list.innerHTML = history.map(order => `
+                <div class="order-row">
+                    <div>
+                        <strong>Order #${order.id.substring(0,8)}</strong><br>
+                        <small>${order.date}</small>
+                    </div>
+                    <div style="text-align: right;">
+                        <span class="status">Paid</span><br>
+                        <strong>₹${order.amount}</strong>
+                    </div>
+                </div>
+            `).join('');
+        }
+    </script>
+</body>
+</html>
+
