@@ -1,3 +1,6 @@
+console.log("ID exists:", !!process.env.QIKINK_CLIENT_ID);
+console.log("Secret exists:", !!process.env.QIKINK_CLIENT_SECRET);
+
 // Global variables for caching (staying under the 30-req limit)
 let cachedToken = null;
 let tokenExpiry = 0;
