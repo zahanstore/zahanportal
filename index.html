@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zahan Store – Fashion, Lifestyle & Art</title>
+    <!-- Fonts: Quicksand + fallback for FF Unit Rounded -->
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" href="favicon.png" type="image/png">
+    <style>
+        /* ===== RESET & VARIABLES ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* colors */
+            --accent: #0096FF;
+            --bg: #D9D9D9;
+            --text: #333;
+            --light-text: #555;
+            --white: #fff;
+            --black: #000;
+            --nav-bg: #D9D9D9;
+            --shadow: 0 5px 15px rgba(0,0,0,0.1);
+            --button-shadow: 0 4px 8px rgba(0,150,255,0.2);
+
+            /* fonts */
+            --font-heading: 'FF Unit Rounded', 'Quicksand', 'Arial Rounded', sans-serif;
+            --font-button: 'Quicksand', sans-serif;
+            --font-paragraph: 'Quicksand', sans-serif;
+            --font-misc: 'FF Unit Rounded', 'Quicksand', 'Arial Rounded', sans-serif;
+
+            /* button specific */
+            --primary-btn-bg: var(--black);
+            --primary-btn-text: var(--white);
+            --secondary-btn-bg: var(--white);
+            --secondary-btn-text: var(--black);
+            --secondary-btn-border: 2px solid var(--black);
+        }
+
+        /* dark mode variables */
+        body.dark-mode {
+            --bg: #1a1a1a;
+            --text: #f0f0f0;
+            --light-text: #bbb;
+            --nav-bg: #222;
+            --white: #2a2a2a;
+            --black: #ddd;
+            --shadow: 0 5px 15px rgba(0,0,0,0.5);
+            --button-shadow: 0 4px 8px rgba(0,150,255,0.4);
+        }
+
+        body {
+            font-family: var(--font-paragraph);
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* ===== TYPOGRAPHY ===== */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+            font-weight: 500; /* medium */
+            color: var(--text);
+            margin-bottom: 1rem;
+        }
+
+        p, li, .subtitle, .feature p, .trust-item p {
+            font-family: var(--font-paragraph);
+            font-weight: 500;
+        }
+
+        button, .cta-button, .btn-secondary, .hamburger, .nav-links a, .dropdown-content a {
+            font-family: var(--font-button);
+            font-weight: 700; /* bold */
+        }
+
+        /* misc small items (footer headings, etc) */
+        .footer-links h3, .footer-col h3, .language-select, .mode-toggle {
+            font-family: var(--font-misc);
+            font-weight: 500;
+        }
+
+        /* ===== LAYOUT ===== */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ===== HEADER & NAV ===== */
+        header {
+            background-color: var(--nav-bg);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            padding: 15px 0;
+            box-shadow: var(--shadow);
+            transition: background-color 0.3s;
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .logo img {
+            height: 30px;
+            display: block;
+        }
+
+        .menu-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        /* right side tools (day/night + language) */
+        .nav-tools {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .mode-toggle {
+            background: none;
+            border: none;
+            color: var(--text);
+            font-size: 1.3rem;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(0,0,0,0.05);
+            transition: 0.2s;
+        }
+        .mode-toggle:hover {
+            background-color: var(--accent);
+            color: white;
+        }
+
+        .language-select {
+            padding: 8px 12px;
+            border-radius: 30px;
+            border: 1px solid var(--light-text);
+            background: transparent;
+            color: var(--text);
+            font-weight: 600;
+            cursor: pointer;
+            outline: none;
+        }
+        .language-select option {
+            background: var(--bg);
+            color: var(--text);
+        }
+
+        /* navigation list */
+        .nav-links {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            margin: 0;
+        }
+
+        .nav-links li {
+            margin-left: 25px;
+            position: relative;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 700;
+            padding: 8px 12px;
+            border-radius: 5px;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+            background-color: rgba(0,150,255,0.1);
+        }
+
+        /* DROPDOWN */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: var(--nav-bg);
+            min-width: 160px;
+            box-shadow: var(--shadow);
+            border-radius: 8px;
+            list-style: none;
+            padding: 10px 0;
+            z-index: 10;
+        }
+        .dropdown-content li {
+            margin: 0;
+        }
+        .dropdown-content a {
+            padding: 10px 20px;
+            border-radius: 0;
+            white-space: nowrap;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* hamburger */
+        .hamburger {
+            display: none;
+            background: var(--accent);
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 5px;
+            box-shadow: var(--button-shadow);
+        }
+        .hamburger span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            margin: 5px 0;
+            transition: 0.3s;
+        }
+
+        /* main content */
+        main {
+            margin-top: 80px;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        /* ===== BUTTONS ===== */
+        .cta-button {
+            display: inline-block;
+            background-color: var(--primary-btn-bg);
+            color: var(--primary-btn-text);
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            box-shadow: var(--button-shadow);
+            transition: 0.3s;
+        }
+        .cta-button:hover {
+            opacity: 0.9;
+            transform: scale(1.02);
+        }
+
+        .btn-secondary {
+            display: inline-block;
+            background-color: var(--secondary-btn-bg);
+            color: var(--secondary-btn-text);
+            border: var(--secondary-btn-border);
+            padding: 10px 28px;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        .btn-secondary:hover {
+            background-color: var(--black);
+            color: var(--white);
+        }
+
+        /* ===== HERO CARD FIXES ===== */
+        .gateway-card,
+        .gateway-card h2,
+        .gateway-card p,
+        .gateway-card .region {
+            color: var(--text) !important; /* ensures readability in all modes */
+        }
+        .gateway-card {
+            background-color: rgba(255, 255, 255, 0.95) !important;
+        }
+
+        /* ===== ABOUT SECTION CARDS ===== */
+        .about-content, .brand-story {
+            background-color: var(--white);
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .about-content:hover, .brand-story:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+        }
+        .about-content {
+            margin-bottom: 2rem;
+        }
+
+        /* ===== FEATURES SECTION CARDS ===== */
+        .feature {
+            background-color: var(--white);
+            padding: 2rem 1.5rem;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0,150,255,0.1);
+            border: 1px solid rgba(0,150,255,0.1);
+            transition: all 0.2s ease;
+        }
+        .feature:hover {
+            box-shadow: 0 15px 30px rgba(0,150,255,0.2);
+            border-color: var(--accent);
+        }
+        .feature i {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+        }
+
+        /* ===== TESTIMONIALS CARDS ===== */
+        .testimonial-card {
+            background-color: var(--white);
+            padding: 2rem;
+            border-radius: 24px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+            border: 1px solid rgba(0,0,0,0.03);
+        }
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+            color: var(--text);
+        }
+        .testimonial-author {
+            border-top: 1px dashed var(--accent);
+            padding-top: 1.5rem;
+        }
+
+        /* ===== CONTACT FORM ENHANCEMENTS ===== */
+        .contact-form-container {
+            background-color: var(--white);
+            padding: 2.5rem;
+            border-radius: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+        }
+        .form-group input,
+        .form-group textarea {
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 14px 18px;
+            font-size: 1rem;
+            font-family: var(--font-paragraph);
+            transition: border 0.2s, box-shadow 0.2s;
+            width: 100%;
+            background-color: var(--bg);
+            color: var(--text);
+        }
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 4px rgba(0,150,255,0.1);
+            outline: none;
+        }
+        .cta-button[type="submit"] {
+            width: 100%;
+            padding: 16px;
+            font-size: 1.1rem;
+            border-radius: 40px;
+            background-color: var(--black);
+            color: white;
+            border: none;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.1s;
+        }
+        .cta-button[type="submit"]:hover {
+            background-color: var(--accent);
+            transform: scale(1.02);
+        }
+
+        /* ===== FOOTER (4 columns) ===== */
+        footer {
+            background-color: var(--nav-bg);
+            padding: 50px 0 20px;
+            transition: background-color 0.3s;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+        .footer-col li {
+            margin-bottom: 10px;
+        }
+        .footer-col a {
+            text-decoration: none;
+            color: var(--light-text);
+            font-family: var(--font-paragraph);
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .footer-col a:hover {
+            color: var(--accent);
+        }
+
+        /* social icons as inline list */
+        .social-list {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+        .social-list a {
+            font-size: 1.5rem;
+            color: var(--text);
+        }
+        .social-list a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(0,0,0,0.1);
+            font-size: 0.95rem;
+            color: var(--light-text);
+        }
+        .payment-icons {
+            margin: 15px 0 10px;
+            font-size: 2rem;
+            word-spacing: 10px;
+        }
+        .payment-icons i {
+            margin: 0 5px;
+        }
+        .heart {
+            color: #e25555;
+        }
+
+        /* ===== ORIGINAL SECTION STYLES (kept intact) ===== */
+        .gateway-section {
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('hero.jpg') center/cover no-repeat;
+            color: white;
+            text-align: center;
+            padding: 120px 0;
+        }
+        .gateway-section h1 {
+            color: var(--black);
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+        }
+        .gateway-section .subtitle {
+            color: var(--black);
+        }
+        .gateway-options {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 40px;
+        }
+        .gateway-card {
+            border-radius: 10px;
+            padding: 30px;
+            width: 100%;
+            max-width: 450px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+            text-align: center;
+        }
+        .gateway-card:hover {
+            transform: translateY(-10px);
+        }
+        body.dark-mode .gateway-card {
+            background-color: rgba(30,30,30,0.9);
+        }
+
+        /* about section base */
+        .about-section {
+            background-color: transparent;
+        }
+        .about-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        /* features container */
+        .features-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        /* trust grid */
+        .trust-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        .trust-item {
+            background-color: var(--white);
+            padding: 30px 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        /* testimonials grid */
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        /* newsletter */
+        .newsletter {
+            background-color: var(--accent);
+            color: white;
+        }
+        .newsletter-content h2 {
+            color: white;
+        }
+        .newsletter-form input {
+            padding: 15px;
+            border: none;
+            border-radius: 50px;
+            font-family: var(--font-paragraph);
+        }
+        .newsletter-form button {
+            background-color: var(--black);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        /* hidden thank you messages */
+        .hidden {
+            display: none;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 992px) {
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-tools {
+                gap: 8px;
+            }
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background-color: var(--nav-bg);
+                flex-direction: column;
+                align-items: center;
+                padding: 40px 0;
+                transition: left 0.3s;
+                z-index: 999;
+            }
+            .nav-links.active {
+                left: 0;
+            }
+            .nav-links li {
+                margin: 15px 0;
+            }
+            .dropdown-content {
+                position: static;
+                box-shadow: none;
+                background: transparent;
+                padding-left: 20px;
+            }
+            .hamburger {
+                display: block;
+            }
+            .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
+            .hamburger.active span:nth-child(2) { opacity: 0; }
+            .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px,-6px); }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .social-list {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="nav-container">
+                <a href="#" class="logo">
+                    <img src="logo.png" alt="Zahan Store">
+                </a>
+
+                <!-- Right side tools (day/night + language) -->
+                <div class="nav-tools">
+                    <button class="mode-toggle" id="darkModeToggle" aria-label="Toggle dark mode">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <select class="language-select" id="langSelect">
+                        <option value="en">English</option>
+                        <option value="ar">UAE العربية</option>
+                    </select>
+                </div>
+
+                <div class="menu-container">
+                    <nav>
+                        <ul class="nav-links">
+                            <li><a href="#gateway">Home</a></li>
+                            <!-- Shop Now with dropdown -->
+                            <li class="dropdown">
+                                <a href="#" class="dropbtn">Shop Now <i class="fas fa-chevron-down"></i></a>
+                                <ul class="dropdown-content">
+                                    <li><a href="https://shop.zahan.one" target="_blank">India</a></li>
+                                    <li><a href="https://store.zahan.one" target="_blank">International</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#about">About Us</a></li>
+                            <li><a href="#features">Features</a></li>
+                            <li><a href="#contact">Contact</a></li>
+                        </ul>
+                    </nav>
+                    <button class="hamburger" aria-label="Menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+         <!-- Gateway Section -->
+        <section id="gateway" class="gateway-section">
+            <div class="container">
+                <h1>Welcome to Zahan Store®</h1>
+                <p class="subtitle">Your destination for fashion, lifestyle, art, and digital products</p>
+
+                <div class="gateway-options">
+                    <div class="gateway-card">
+                        <h2>India <span class="emoji">🌏</span></h2>
+                        <p class="region">South Asia</p>
+                        <p>Explore our curated collection of fashion, lifestyle products, and art tailored for the Indian market.</p>
+                        <a href="https://shop.zahan.one" class="cta-button">Shop Now</a>
+                    </div>
+                    <div class="gateway-card">
+                        <h2>International <span class="emoji">🌎</span></h2>
+                        <p class="region">US, Brazil, Mexico, Canada, UK, Norway, Europe, Sweden, Denmark, China, Malaysia, Singapore, Japan, NewZealand & Australia.</p>
+                        <p>Discover our global collection with worldwide shipping options for all our premium products.</p>
+                        <a href="https://store.zahan.one/" class="cta-button">Shop Now</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Unified About Section -->
+        <section id="about" class="about-section">
+            <div class="container">
+                <h2>About Zahan Store®</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>Zahan Store® is a premier e-commerce brand offering carefully curated value chains across multiple categories:</p>
+                        <ul>
+                            <li><strong>Fashion & Apparel:</strong> Trendsetting clothing for all occasions</li>
+                            <li><strong>Lifestyle Products:</strong> Items that elevate your everyday living</li>
+                            <li><strong>Paintings & Art:</strong> Unique pieces from talented artists worldwide</li>
+                            <li><strong>Digital Products:</strong> Courses to enhance your skills and knowledge</li>
+                        </ul>
+                        <p>Our mission is to bring quality, style, and creativity to your doorstep, no matter where you are in the world.</p>
+                    </div>
+                    <div class="about-image">
+                        <img src="https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Zahan Store Products">
+                    </div>
+                </div>
+                <div class="brand-story">
+                    <h3>Our Story</h3>
+                    <p>Zahan was born from a passion for quality streetwear and sustainable fashion. Founded in 1996, we set out to create premium products that not only look great but also stand the test of time.</p>
+                    <p>Every garment in our collection is crafted from high-quality materials, ethically sourced and produced in facilities that prioritize worker welfare and environmental sustainability.</p>
+                    <p>We believe that what you wear should express your individuality while making a positive impact on the world. That's why for every item sold, we donate a portion of profits to environmental causes.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="features">
+            <div class="container">
+                <div class="features-container">
+                    <div class="feature">
+                        <i class="fas fa-truck"></i>
+                        <h3>Free Shipping</h3>
+                        <p>On all orders over $50</p>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-undo"></i>
+                        <h3>Easy Returns</h3>
+                        <p>30-day return policy</p>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>Secure Payment</h3>
+                        <p>Safe and encrypted</p>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-headset"></i>
+                        <h3>24/7 Support</h3>
+                        <p>Dedicated support</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trust Indicators Section -->
+        <section class="trust-indicators">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Why Shop With Us</h2>
+                    <p>We're committed to providing the best shopping experience</p>
+                </div>
+                <div class="trust-grid">
+                    <div class="trust-item">
+                        <i class="fas fa-star"></i>
+                        <h3>1000+ Happy Customers</h3>
+                        <p>Rated 4.8/5 stars based on customer reviews</p>
+                    </div>
+                    <div class="trust-item">
+                        <i class="fas fa-award"></i>
+                        <h3>Premium Quality</h3>
+                        <p>All products made from highest quality materials</p>
+                    </div>
+                    <div class="trust-item">
+                        <i class="fas fa-lock"></i>
+                        <h3>Secure Checkout</h3>
+                        <p>Your payment information is safe with our encrypted checkout</p>
+                    </div>
+                    <div class="trust-item">
+                        <i class="fas fa-globe"></i>
+                        <h3>Worldwide Shipping</h3>
+                        <p>We ship to over 50 countries worldwide</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+         <!-- Testimonials Section -->
+        <section class="testimonials">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Customer Reviews</h2>
+                    <p>See what our customers are saying about our products</p>
+                </div>
+                <div class="testimonial-grid">
+                    <div class="testimonial-card">
+                        <div class="testimonial-text">
+                            <p>"The quality of these products is amazing! I've bought multiple items and they've all held up perfectly after many uses."</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">
+                                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="John Doe">
+                            </div>
+                            <div class="author-details">
+                                <h4>Smith Andrews</h4>
+                                <p>Verified Customer</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-text">
+                            <p>"Fast shipping and great customer service. The fit was perfect and the fabric is so comfortable. Will definitely order again!"</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">
+                                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Jane Smith">
+                            </div>
+                            <div class="author-details">
+                                <h4>Jane Smith</h4>
+                                <p>Verified Customer</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-text">
+                            <p>"I'm really impressed with the attention to detail on these products. The craftsmanship is perfect and the designs are unique."</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">
+                                <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="Michael Johnson">
+                            </div>
+                            <div class="author-details">
+                                <h4>Michael Johnson</h4>
+                                <p>Verified Customer</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter Section -->
+        <section class="newsletter">
+            <div class="container">
+                <div class="newsletter-content">
+                    <h2>Subscribe to Our Newsletter</h2>
+                    <p>Get updates on new collections, exclusive offers, and fashion tips</p>
+                    <form class="newsletter-form" name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="newsletter-form">
+                        <p class="hidden">
+                            <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+                        </p>
+                        <input type="email" name="email" placeholder="Enter your email address" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                    <div id="newsletter-thankyou" class="hidden" style="text-align: center; margin-top: 20px;">
+                        <h3 style="color: white; margin-bottom: 10px;">Thank You for Subscribing!</h3>
+                        <p>You've been added to our newsletter list. Look out for our updates in your inbox.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact-section">
+            <div class="container">
+                <h2>Contact Us</h2>
+                <p>At Zahan Store® We know you are a Real Human and have questions, Feel free to send us a 😃 Message! We will reply you within 2-3 business days.</p>
+                <div class="contact-form-container">
+                    <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="contact-form">
+                        <p class="hidden">
+                            <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+                        </p>
+                        <div id="form-message" class="form-message hidden"></div>
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" name="subject" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        <div data-netlify-recaptcha="true"></div>
+                        <button type="submit" class="cta-button">Send Message</button>
+                    </form>
+                    <div id="thank-you-message" class="hidden" style="text-align: center; padding: 30px;">
+                        <h3 style="color: var(--success-color); margin-bottom: 20px;">Thank You for Contacting Us!</h3>
+                        <p>Your message has been successfully submitted. We'll get back to you soon.</p>
+                        <button onclick="resetForm()" class="cta-button" style="margin-top: 20px;">Send Another Message</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ===== NEW FOOTER (4 columns) ===== -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <!-- Column 1: Online Stores -->
+                <div class="footer-col">
+                    <h3>Online Stores</h3>
+                    <ul>
+                        <li><a href="https://shop.zahan.one">India</a></li>
+                        <li><a href="https://store.zahan.one">International</a></li>
+                        <li><a href="#">World Portal</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 2: More from us -->
+                <div class="footer-col">
+                    <h3>More from us</h3>
+                    <ul>
+                        <li><a href="#">Genx</a></li>
+                        <li><a href="#">Signature</a></li>
+                        <li><a href="#">Heritage</a></li>
+                        <li><a href="#">Accessories</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: More for you -->
+                <div class="footer-col">
+                    <h3>More for you</h3>
+                    <ul>
+                        <li><a href="#">Zahan Universe</a></li>
+                        <li><a href="#">Features</a></li>
+                        <li><a href="#">FAQ's</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Return & Refund</a></li>
+                        <li><a href="#">Shipping & Delivery</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 4: Social media -->
+                <div class="footer-col">
+                    <h3>Social Media</h3>
+                    <ul>
+                        <li><a href="#"><i class="fab fa-youtube" style="margin-right:8px;"></i> YouTube</a></li>
+                        <li><a href="#"><i class="fab fa-instagram" style="margin-right:8px;"></i> Instagram</a></li>
+                        <li><a href="#"><i class="fab fa-pinterest" style="margin-right:8px;"></i> Pinterest</a></li>
+                    </ul>
+                    <div class="social-list">
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer bottom: center text + card icons -->
+            <div class="footer-bottom">
+                <div class="payment-icons">
+                    <i class="fab fa-cc-visa"></i>
+                    <i class="fab fa-cc-mastercard"></i>
+                    <i class="fab fa-cc-amex"></i>
+                    <i class="fab fa-cc-paypal"></i>
+                    <i class="fab fa-cc-discover"></i>
+                </div>
+                <p>© ZahanStore. All Rights Reserved.</p>
+                <p>Made with <span class="heart">♥</span> in Abu Dhabi, UAE</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
