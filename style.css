@@ -466,11 +466,11 @@ body.light-mode .gateway-section {
   letter-spacing: 0.08em;
 }
 
-/* Light mode card badges: dark text on tinted bg */
+/* Light mode card badges: same as dark mode — card is dark glass */
 body.light-mode .gateway-card .platform-badge {
-  background: rgba(91,141,238,0.14);
-  border-color: rgba(91,141,238,0.40);
-  color: #2255bb;
+  background: rgba(91,141,238,0.18);
+  border-color: rgba(91,141,238,0.45);
+  color: #a8c8ff;
 }
 
 .gateway-options {
@@ -505,24 +505,19 @@ body.light-mode .gateway-card .platform-badge {
 }
 
 /* Light mode: hero-text-block matches light gateway-card */
+/* Light mode hero block: stays dark glass — hero is always photo-first */
 body.light-mode .gateway-section .hero-text-block {
-  background: rgba(232,236,250,0.92);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-color: rgba(255,255,255,0.70);
-  box-shadow: 0 8px 40px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.80);
-}
-body.light-mode .gateway-section .hero-text-block::before {
-  opacity: 0.4;
+  background: rgba(6, 8, 20, 0.68);
+  border-color: rgba(255,255,255,0.18);
 }
 
-/* Light mode: solid cool-gray — fully readable */
+/* Light mode gateway cards: stay dark — they live on a photo, not a page */
 body.light-mode .gateway-card {
-  background: rgba(232,236,250,0.92);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-color: rgba(255,255,255,0.70);
-  box-shadow: 0 8px 40px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.80);
+  background: rgba(6, 8, 20, 0.68);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-color: rgba(255,255,255,0.18);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.35);
 }
 
 .gateway-card::before {
@@ -551,10 +546,10 @@ body.light-mode .gateway-card {
 }
 .gateway-card p { font-size: 0.9rem; margin-bottom: 1.5rem; color: rgba(255,255,255,0.72); }
 
-/* Light mode cards: strong dark text on solid gray card */
-body.light-mode .gateway-card h2    { color: #1a1e2e; text-shadow: none; }
-body.light-mode .gateway-card .region { color: #5a6280; }
-body.light-mode .gateway-card p     { color: #3d4560; }
+/* Light mode cards: white text — cards are dark glass on a photo */
+body.light-mode .gateway-card h2    { color: #ffffff; }
+body.light-mode .gateway-card .region { color: rgba(255,255,255,0.55); }
+body.light-mode .gateway-card p     { color: rgba(255,255,255,0.75); }
 .platform-badge {
   display: inline-block;
   padding: 4px 12px;
