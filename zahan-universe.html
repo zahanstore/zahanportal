@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zahan Universe™ | Zahan Store®</title>
+  <link rel="icon" href="favicon.png" type="image/png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ── ZAHAN UNIVERSE PAGE STYLES ── */
+
+    /* Hero */
+    .universe-hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+      background: #060814;
+    }
+
+    /* Starfield canvas bg */
+    .universe-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(91,141,238,0.18) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 80% 80%, rgba(167,139,250,0.12) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 50% at 20% 70%, rgba(232,121,249,0.08) 0%, transparent 55%),
+        #060814;
+    }
+
+    /* Animated star dots */
+    .stars {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .stars span {
+      position: absolute;
+      border-radius: 50%;
+      background: #fff;
+      animation: twinkle var(--d,3s) var(--delay,0s) infinite alternate ease-in-out;
+    }
+
+    @keyframes twinkle {
+      from { opacity: 0.1; transform: scale(0.8); }
+      to   { opacity: 0.9; transform: scale(1.2); }
+    }
+
+    .universe-hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 2rem 1.5rem;
+      max-width: 720px;
+    }
+
+    .universe-eyebrow {
+      display: inline-block;
+      font-family: var(--font-head);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+      border: 1px solid rgba(255,255,255,0.18);
+      padding: 6px 18px;
+      border-radius: 100px;
+      backdrop-filter: blur(8px);
+      margin-bottom: 2rem;
+    }
+
+    .universe-hero h1 {
+      font-family: var(--font-head);
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.1;
+      margin-bottom: 1.25rem;
+      text-shadow: 0 2px 40px rgba(0,0,0,0.6);
+    }
+
+    .universe-hero h1 .grad-text {
+      background: linear-gradient(135deg, #60c0ff 0%, #a78bfa 50%, #e879f9 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: none;
+    }
+
+    .universe-hero .subtitle {
+      font-size: 1.2rem;
+      color: rgba(255,255,255,0.72);
+      letter-spacing: 0.06em;
+      margin-bottom: 2.5rem;
+    }
+
+    .btn-universe {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 36px;
+      border-radius: 100px;
+      background: linear-gradient(135deg, #5b8dee, #a78bfa);
+      color: #fff;
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.06em;
+      text-decoration: none;
+      transition: transform 0.25s, box-shadow 0.25s;
+      box-shadow: 0 8px 32px rgba(91,141,238,0.4);
+    }
+    .btn-universe:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 48px rgba(91,141,238,0.55);
+    }
+
+    /* Scroll hint */
+    .scroll-hint {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255,255,255,0.35);
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+    .scroll-hint i {
+      animation: bounce 2s infinite;
+    }
+    @keyframes bounce {
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(6px); }
+    }
+
+    /* ── ETHOS SECTION ── */
+    .universe-ethos {
+      padding: 7rem 0;
+      position: relative;
+    }
+
+    .ethos-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .ethos-text .section-eyebrow {
+      display: inline-block;
+      font-family: var(--font-head);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.25rem;
+    }
+
+    .ethos-text h2 {
+      font-family: var(--font-head);
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.2;
+      margin-bottom: 1.25rem;
+    }
+
+    .ethos-quote {
+      font-size: 1.05rem;
+      font-style: italic;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      padding-left: 1.25rem;
+      border-left: 3px solid var(--accent);
+    }
+
+    .ethos-text p {
+      color: var(--text-muted);
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+
+    .ethos-image {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      position: relative;
+    }
+    .ethos-image-placeholder {
+      aspect-ratio: 4/5;
+      background: linear-gradient(145deg, var(--card) 0%, var(--surface) 100%);
+      border-radius: var(--radius-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--border);
+    }
+    .ethos-image-placeholder i {
+      font-size: 3rem;
+      opacity: 0.15;
+      color: var(--accent);
+    }
+
+    /* ── COLLECTION CHAPTER ── */
+    .chapter {
+      padding: 6rem 0;
+      position: relative;
+    }
+
+    .chapter:nth-child(even) {
+      background: var(--surface);
+    }
+
+    .chapter-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      align-items: stretch;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      margin-bottom: 4rem;
+      min-height: 340px;
+    }
+
+    .chapter-header-text {
+      background: #0b0d14;
+      padding: 3rem 3.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .chapter-number {
+      font-family: var(--font-head);
+      font-size: 0.68rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 1.25rem;
+    }
+
+    .chapter-header-text h2 {
+      font-family: var(--font-head);
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 1rem;
+      line-height: 1.1;
+    }
+
+    .chapter-tagline {
+      font-size: 1rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 0.5rem;
+    }
+
+    .chapter-vibe {
+      font-size: 0.88rem;
+      font-style: italic;
+      color: rgba(255,255,255,0.45);
+    }
+
+    .chapter-header-img {
+      background: var(--card);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 320px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Gradient accent per chapter */
+    .chapter--genx      .chapter-header { border: 1px solid rgba(96,192,255,0.2); }
+    .chapter--genx      .chapter-header-img { background: linear-gradient(135deg, #0f1a2e 0%, #1a2a4a 100%); }
+    .chapter--genx      .chapter-accent { color: #60c0ff; }
+    .chapter--genx      .chapter-line  { background: #60c0ff; }
+
+    .chapter--signature .chapter-header { border: 1px solid rgba(167,139,250,0.2); }
+    .chapter--signature .chapter-header-img { background: linear-gradient(135deg, #12101e 0%, #1e1535 100%); }
+    .chapter--signature .chapter-accent { color: #a78bfa; }
+    .chapter--signature .chapter-line  { background: #a78bfa; }
+
+    .chapter--heritage  .chapter-header { border: 1px solid rgba(232,121,249,0.2); }
+    .chapter--heritage  .chapter-header-img { background: linear-gradient(135deg, #1a0f1e 0%, #2d1535 100%); }
+    .chapter--heritage  .chapter-accent { color: #e879f9; }
+    .chapter--heritage  .chapter-line  { background: #e879f9; }
+
+    .chapter-img-icon {
+      font-size: 4rem;
+      opacity: 0.12;
+    }
+
+    /* Story block */
+    .chapter-body {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 4rem;
+      align-items: start;
+      margin-bottom: 3rem;
+    }
+
+    .chapter-body-label {
+      font-family: var(--font-head);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text);
+      padding-top: 0.25rem;
+    }
+
+    .chapter-story-quote {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      line-height: 1.85;
+      position: relative;
+      padding-left: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .chapter-story-quote::before {
+      content: '"';
+      position: absolute;
+      left: 0;
+      top: -0.1em;
+      font-size: 2rem;
+      line-height: 1;
+      font-family: Georgia, serif;
+      opacity: 0.35;
+    }
+
+    .chapter-line-accent {
+      height: 3px;
+      width: 60px;
+      border-radius: 3px;
+      margin-bottom: 2rem;
+    }
+
+    .btn-chapter {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
+      border-radius: 8px;
+      background: #0b0d14;
+      color: #fff;
+      font-family: var(--font-head);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.12);
+      transition: all 0.25s;
+    }
+    .btn-chapter:hover {
+      background: #161b2e;
+      border-color: rgba(255,255,255,0.25);
+      transform: translateY(-2px);
+    }
+
+    /* Secondary quote band */
+    .chapter-band {
+      background: var(--card);
+      border-radius: var(--radius-lg);
+      padding: 3.5rem 3rem;
+      text-align: center;
+      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .chapter-band::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0.04;
+      background: repeating-linear-gradient(
+        45deg,
+        var(--accent) 0px,
+        var(--accent) 1px,
+        transparent 1px,
+        transparent 24px
+      );
+    }
+
+    .chapter-band h3 {
+      font-family: var(--font-head);
+      font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+
+    .chapter-band blockquote {
+      max-width: 740px;
+      margin: 0 auto;
+      font-size: 1rem;
+      color: var(--text-muted);
+      line-height: 1.85;
+      font-style: italic;
+      position: relative;
+    }
+
+    /* ── CLOSING CTA ── */
+    .universe-cta {
+      padding: 8rem 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .universe-cta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 60% at 50% 100%, rgba(91,141,238,0.12) 0%, transparent 60%),
+        var(--bg);
+    }
+
+    .universe-cta h2 {
+      font-family: var(--font-head);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 1rem;
+      position: relative;
+    }
+
+    .universe-cta p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      max-width: 520px;
+      margin: 0 auto 2.5rem;
+      position: relative;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      position: relative;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .ethos-inner         { grid-template-columns: 1fr; }
+      .ethos-image         { display: none; }
+      .chapter-header      { grid-template-columns: 1fr; }
+      .chapter-header-img  { display: none; }
+      .chapter-body        { grid-template-columns: 1fr; gap: 1.5rem; }
+      .chapter-header-text { padding: 2rem 1.75rem; }
+      .chapter-band        { padding: 2.5rem 1.75rem; }
+    }
+
+    /* Light mode overrides */
+    body.light-mode .universe-hero { background: #1a1e35; }
+    body.light-mode .chapter-header-text { background: #0f1120; }
+    body.light-mode .btn-chapter { background: #0f1120; }
+    body.light-mode .btn-chapter:hover { background: #1a1e35; }
+  </style>
+</head>
+<body>
+
+  <!-- ── HEADER — identical to all pages ── -->
+  <header>
+    <div class="container">
+      <div class="nav-container">
+        <a href="index.html" class="logo"><img src="logo.png" alt="Zahan Store"></a>
+        <div class="nav-tools">
+          <button class="mode-toggle" aria-label="Toggle theme"><i class="fas fa-sun"></i></button>
+        </div>
+        <div class="menu-container">
+          <nav>
+            <ul class="nav-links">
+              <li><a href="index.html">Home</a></li>
+              <li class="dropdown">
+                <a href="#" class="dropbtn">Shop Now <i class="fas fa-chevron-down" style="font-size:0.7rem;"></i></a>
+                <ul class="dropdown-content">
+                  <li><a href="https://shop.zahan.one" target="_blank"><i class="fas fa-store" style="width:16px;"></i> India</a></li>
+                  <li><a href="https://store.zahan.one" target="_blank"><i class="fas fa-globe" style="width:16px;"></i> International</a></li>
+                </ul>
+              </li>
+              <li><a href="index.html#about">About Us</a></li>
+              <li><a href="index.html#manifesto">Manifesto</a></li>
+              <li><a href="index.html#features">Features</a></li>
+              <li><a href="index.html#contact">Contact</a></li>
+              <li class="mobile-tools">
+                <button class="mode-toggle" aria-label="Toggle theme"><i class="fas fa-sun"></i></button>
+              </li>
+            </ul>
+          </nav>
+          <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ── HERO ── -->
+    <section class="universe-hero">
+      <!-- Animated stars -->
+      <div class="stars" id="stars"></div>
+
+      <div class="universe-hero-content fade-up">
+        <span class="universe-eyebrow">✦ Est. 1996 · Abu Dhabi, UAE</span>
+        <h1>The Zahan® <span class="grad-text">Universe™</span></h1>
+        <p class="subtitle">One Brand. Three Expressions. Three Stories.</p>
+        <a href="#ethos" class="btn-universe">
+          Explore Zahan® Universe™ <i class="fas fa-arrow-down"></i>
+        </a>
+      </div>
+
+      <div class="scroll-hint">
+        <span>Scroll</span>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+    </section>
+
+    <!-- ── MASTER BRAND ETHOS ── -->
+    <section id="ethos" class="universe-ethos">
+      <div class="container">
+        <div class="ethos-inner fade-up">
+          <div class="ethos-text">
+            <span class="section-eyebrow">The Master Brand Ethos</span>
+            <h2>One Brand. Three Expressions. Three Unique Stories. The Zahan® Universe™</h2>
+            <p class="ethos-quote">"Designed in the desert, made for the world."</p>
+            <p>Zahan is a tribute to the earth. From the silent expanses of the desert to the bustling global stage, we create fashion that respects the hands that make it and the land that provides for it. Ethical, sustainable, and uncompromising.</p>
+            <p>To meet the world where it is, we have curated our vision into three distinct chapters 🌱</p>
+          </div>
+          <div class="ethos-image">
+            <div class="ethos-image-placeholder">
+              <i class="fas fa-globe-americas"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── CHAPTER 1: GENX ── -->
+    <section class="chapter chapter--genx" id="genx">
+      <div class="container">
+
+        <div class="chapter-header fade-up">
+          <div class="chapter-header-text">
+            <span class="chapter-number">Chapter 01</span>
+            <h2>Zahan® GenX™</h2>
+            <p class="chapter-tagline">Bold has a new feeling, style without limits.</p>
+            <p class="chapter-vibe">Vibe : Conscious, energetic &amp; Accessible.</p>
+          </div>
+          <div class="chapter-header-img">
+            <i class="fas fa-bolt chapter-img-icon" style="color:#60c0ff;"></i>
+          </div>
+        </div>
+
+        <div class="chapter-body fade-up">
+          <div>
+            <p class="chapter-body-label">GenX™<br>Brand Story</p>
+          </div>
+          <div>
+            <div class="chapter-line-accent chapter-line"></div>
+            <p class="chapter-story-quote">
+              Built for the movers, the shakers, and the rule-breakers. Zahan® GenX™ is where style meets the street. We've stripped away the fuss to give you bold, effortless fashion that keeps up with your pace. You don't follow trends; you create them.
+            </p>
+            <a href="https://shop.zahan.one" target="_blank" class="btn-chapter">
+              Explore Zahan® GenX™ <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="chapter-band fade-up">
+          <h3>Accessibility has a new name — Zahan® GenX™</h3>
+          <blockquote>
+            High-speed life shouldn't come at a high cost to the planet. GenX is designed for the new generation of global citizens who demand ethics with their aesthetics. Desert-inspired durability meets modern street style — responsibly made, bio-friendly, and ready for anything.
+          </blockquote>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── CHAPTER 2: SIGNATURE ── -->
+    <section class="chapter chapter--signature" id="signature">
+      <div class="container">
+
+        <div class="chapter-header fade-up">
+          <div class="chapter-header-text">
+            <span class="chapter-number">Chapter 02</span>
+            <h2>Zahan® Signature™</h2>
+            <p class="chapter-tagline">Calm Cut, Sharp Presence.</p>
+            <p class="chapter-vibe">Vibe : Refined, balanced &amp; Intentional.</p>
+          </div>
+          <div class="chapter-header-img">
+            <i class="fas fa-gem chapter-img-icon" style="color:#a78bfa;"></i>
+          </div>
+        </div>
+
+        <div class="chapter-body fade-up">
+          <div>
+            <p class="chapter-body-label">Signature™<br>Brand Story</p>
+          </div>
+          <div>
+            <div class="chapter-line-accent chapter-line"></div>
+            <p class="chapter-story-quote">
+              The foundation of our craft. Zahan Original represents the perfect balance of comfort and character. These are the pieces that defined us — timeless silhouettes reimagined for the modern day. It's not just clothing; it's the Zahan DNA in every stitch.
+            </p>
+            <a href="https://store.zahan.one" target="_blank" class="btn-chapter">
+              Explore Zahan® Signature™ <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="chapter-band fade-up">
+          <h3>Sharpness has a new name — Zahan® Signature™</h3>
+          <blockquote>
+            Where the stillness of the desert meets the sharpness of the city. Zahan Signature is defined by the "Calm cut, sharp presence." These are elevated essentials crafted with a clean conscience. Using ethically sourced materials and zero-exploitation labor, we've created a wardrobe that speaks volumes through its silence.
+          </blockquote>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── CHAPTER 3: HERITAGE ── -->
+    <section class="chapter chapter--heritage" id="heritage">
+      <div class="container">
+
+        <div class="chapter-header fade-up">
+          <div class="chapter-header-text">
+            <span class="chapter-number">Chapter 03</span>
+            <h2>Zahan® Heritage™</h2>
+            <p class="chapter-tagline">A Heritage in Every Thread — where excellence isn't just a design, it's an emotional feeling.</p>
+            <p class="chapter-vibe">Vibe : Timeless, Artisanal &amp; Craftsmanship.</p>
+          </div>
+          <div class="chapter-header-img">
+            <i class="fas fa-crown chapter-img-icon" style="color:#e879f9;"></i>
+          </div>
+        </div>
+
+        <div class="chapter-body fade-up">
+          <div>
+            <p class="chapter-body-label">Heritage™<br>Brand Story</p>
+          </div>
+          <div>
+            <div class="chapter-line-accent chapter-line"></div>
+            <p class="chapter-story-quote">
+              A tribute to the art of the exceptional. Zahan Heritage is our love letter to craftsmanship and detail. Using only the finest materials and artisanal techniques, this collection is designed for those who appreciate the quiet luxury of a legacy. This isn't just for now — it's for forever.
+            </p>
+            <a href="https://store.zahan.one" target="_blank" class="btn-chapter">
+              Explore Zahan® Heritage™ <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="chapter-band fade-up">
+          <h3>Timeless has a new name — Zahan® Heritage™</h3>
+          <blockquote>
+            The pinnacle of desert-born luxury. Heritage is a celebration of time and tradition. Each piece is a slow-fashion masterpiece, utilizing the most advanced bio-friendly fabrics and artisanal techniques. This is luxury with a soul — a legacy of kindness to the earth and a commitment to the highest level of craftsmanship.
+          </blockquote>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── CLOSING CTA ── -->
+    <section class="universe-cta">
+      <div class="container">
+        <h2>One Universe. <span class="grad-text">Infinite Style.</span></h2>
+        <p>Begin your journey across all three expressions of the Zahan® Universe™ — wherever you are in the world.</p>
+        <div class="cta-buttons">
+          <a href="https://shop.zahan.one" target="_blank" class="btn-primary">
+            Shop India <i class="fas fa-arrow-right"></i>
+          </a>
+          <a href="https://store.zahan.one" target="_blank" class="btn-secondary">
+            Shop Global <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ── FOOTER — identical to all pages ── -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h3>Online Stores</h3>
+          <ul>
+            <li><a href="https://shop.zahan.one">India</a></li>
+            <li><a href="https://store.zahan.one">International</a></li>
+            <li><a href="#">World Portal</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Collections</h3>
+          <ul>
+            <li><a href="#genx">Genx</a></li>
+            <li><a href="#signature">Signature</a></li>
+            <li><a href="#heritage">Heritage</a></li>
+            <li><a href="#">Accessories</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Company</h3>
+          <ul>
+            <li><a href="zahan-universe.html">Zahan Universe</a></li>
+            <li><a href="index.html#features">Features</a></li>
+            <li><a href="#">FAQ&apos;s</a></li>
+            <li><a href="index.html#about">About Us</a></li>
+            <li><a href="index.html#contact">Contact Us</a></li>
+            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="terms-and-conditions.html">Terms of Service</a></li>
+            <li><a href="return-and-refund.html">Return &amp; Refund</a></li>
+            <li><a href="shipping-and-delivery.html">Shipping &amp; Delivery</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Follow Us</h3>
+          <ul>
+            <li><a href="https://youtube.com/@ZahanStore" target="_blank">YouTube</a></li>
+            <li><a href="https://www.instagram.com/storezahan" target="_blank">Instagram</a></li>
+            <li><a href="#">Pinterest</a></li>
+          </ul>
+          <div class="social-list">
+            <a href="https://youtube.com/@ZahanStore" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            <a href="https://www.instagram.com/storezahan" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="payment-icons">
+          <i class="fab fa-cc-visa"></i>
+          <i class="fab fa-cc-mastercard"></i>
+          <i class="fab fa-cc-amex"></i>
+          <i class="fab fa-cc-paypal"></i>
+          <i class="fab fa-cc-discover"></i>
+        </div>
+        <p>&copy; 2026 ZahanStore&reg;. All Rights Reserved.</p>
+        <p>Made with <span class="heart">&hearts;</span> in Abu Dhabi, UAE</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    // ── Generate starfield ──
+    (function () {
+      const container = document.getElementById('stars');
+      if (!container) return;
+      const count = 120;
+      for (let i = 0; i < count; i++) {
+        const s = document.createElement('span');
+        const size = Math.random() * 2.5 + 0.5;
+        s.style.cssText = `
+          width:${size}px; height:${size}px;
+          top:${Math.random()*100}%;
+          left:${Math.random()*100}%;
+          --d:${(Math.random()*3+2).toFixed(1)}s;
+          --delay:-${(Math.random()*5).toFixed(1)}s;
+          opacity:${(Math.random()*0.5+0.1).toFixed(2)};
+        `;
+        container.appendChild(s);
+      }
+    })();
+
+    // ── Smooth scroll for hero CTA ──
+    document.querySelector('.btn-universe').addEventListener('click', function(e) {
+      const target = document.querySelector('#ethos');
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  </script>
+</body>
+</html>
