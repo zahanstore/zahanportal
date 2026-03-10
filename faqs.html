@@ -3,6 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Open Graph / Social sharing -->
+  <meta property="og:type"        content="website">
+  <meta property="og:url"         content="https://www.zahan.one/faqs">
+  <meta property="og:title"       content="FAQ's — Zahan Store® Master FAQ">
+  <meta property="og:description" content="Everything you need to know about shopping, shipping, returns, and privacy at Zahan Store®.">
+  <meta property="og:image"       content="https://www.zahan.one/images/og/og-cover.jpg">
+  <meta property="og:site_name"   content="Zahan Store®">
+  <!-- Twitter Card -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:title"       content="FAQ's — Zahan Store® Master FAQ">
+  <meta name="twitter:description" content="Everything you need to know about shopping, shipping, returns, and privacy at Zahan Store®.">
+  <meta name="twitter:image"       content="https://www.zahan.one/images/og/og-cover.jpg">
+  <!-- SEO -->
+  <meta name="description" content="Everything you need to know about shopping, shipping, returns, and privacy at Zahan Store®.">
   <title>FAQ's | Zahan Store®</title>
   <link rel="icon" href="favicon.png" type="image/png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -489,7 +503,7 @@
             <div class="faq-answer">
               <div class="faq-answer-inner">
                 <p>While we strive for perfection, we are not responsible for delays caused by unforeseen circumstances like customs, weather, or carrier issues.</p>
-                <p>If your package is significantly delayed, please reach out to us at <a href="mailto:support@zahan.store">support@zahan.store</a> and we'll do our best to help.</p>
+                <p>If your package is significantly delayed, please reach out to us at <a href="/cdn-cgi/l/email-protection#50232520203f2224102a3138313e7e23243f2235"><span class="__cf_email__" data-cfemail="23505653534c51576359424b424d0d50574c5146">[email&#160;protected]</span></a> and we'll do our best to help.</p>
               </div>
             </div>
           </div>
@@ -603,7 +617,7 @@
             </button>
             <div class="faq-answer">
               <div class="faq-answer-inner">
-                <p>You have the right to access, correct, or delete your personal data. You can also opt out of marketing at any time by emailing us at <a href="mailto:support@zahan.store">support@zahan.store</a>.</p>
+                <p>You have the right to access, correct, or delete your personal data. You can also opt out of marketing at any time by emailing us at <a href="/cdn-cgi/l/email-protection#92e1e7e2e2fde0e6d2e8f3faf3fcbce1e6fde0f7"><span class="__cf_email__" data-cfemail="4a393f3a3a25383e0a302b222b2464393e25382f">[email&#160;protected]</span></a>.</p>
               </div>
             </div>
           </div>
@@ -678,8 +692,8 @@
       <div class="faq-contact-cta">
         <h3>Still have a question? 💬</h3>
         <p>We're happy to help! Real humans, real replies within 2–3 business days.</p>
-        <a href="mailto:support@zahan.store" class="email-pill">
-          <i class="fas fa-envelope"></i> support@zahan.store
+        <a href="/cdn-cgi/l/email-protection#d2a1a7a2a2bda0a692a8b3bab3bcfca1a6bda0b7" class="email-pill">
+          <i class="fas fa-envelope"></i> <span class="__cf_email__" data-cfemail="a9dadcd9d9c6dbdde9d3c8c1c8c787daddc6dbcc">[email&#160;protected]</span>
         </a>
         <div class="cta-row">
           <a href="index.html#contact" class="btn-primary">Visit Contact Page <i class="fas fa-arrow-right"></i></a>
@@ -705,9 +719,9 @@
         <div class="footer-col">
           <h3>Collections</h3>
           <ul>
-            <li><a href="#">Genx</a></li>
-            <li><a href="#">Signature</a></li>
-            <li><a href="#">Heritage</a></li>
+            <li><a href="collections.html#genx">GenX™</a></li>
+            <li><a href="collections.html#signature">Signature™</a></li>
+            <li><a href="collections.html#heritage">Heritage™</a></li>
             <li><a href="#">Accessories</a></li>
           </ul>
         </div>
@@ -753,7 +767,7 @@
     </div>
   </footer>
 
-  <script src="script.js"></script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="script.js"></script>
   <script>
     // ── Accordion ──
     document.querySelectorAll('.faq-question').forEach(btn => {
@@ -790,21 +804,3 @@
         if (entry.isIntersecting) {
           const id = entry.target.id;
           tabs.forEach(t => {
-            t.classList.toggle('active', t.dataset.target === id);
-          });
-        }
-      });
-    }, { rootMargin: '-120px 0px -60% 0px', threshold: 0 });
-
-    sections.forEach(s => observer.observe(s));
-
-    // ── Tab click → smooth scroll ──
-    tabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        const target = document.getElementById(tab.dataset.target);
-        if (target) target.scrollIntoView({ behavior: 'smooth' });
-      });
-    });
-  </script>
-</body>
-</html>
