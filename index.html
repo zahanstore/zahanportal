@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zahan Store – Fashion, Lifestyle & Art</title>
+    <!-- Fonts: Quicksand + fallback for FF Unit Rounded -->
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" href="favicon.png" type="image/png">
+    <style>
+        /* ===== RESET & VARIABLES ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --accent: #0096FF;
+            --bg: #D9D9D9;
+            --text: #333;
+            --light-text: #555;
+            --white: #fff;
+            --black: #000;
+            --nav-bg: #D9D9D9;
+            --shadow: 0 5px 15px rgba(0,0,0,0.1);
+            --button-shadow: 0 4px 8px rgba(0,150,255,0.2);
+
+            --font-heading: 'FF Unit Rounded', 'Quicksand', 'Arial Rounded', sans-serif;
+            --font-button: 'Quicksand', sans-serif;
+            --font-paragraph: 'Quicksand', sans-serif;
+            --font-misc: 'FF Unit Rounded', 'Quicksand', 'Arial Rounded', sans-serif;
+
+            --primary-btn-bg: var(--black);
+            --primary-btn-text: var(--white);
+            --secondary-btn-bg: var(--white);
+            --secondary-btn-text: var(--black);
+            --secondary-btn-border: 2px solid var(--black);
+        }
+
+        body.dark-mode {
+            --bg: #1a1a1a;
+            --text: #f0f0f0;
+            --light-text: #bbb;
+            --nav-bg: #222;
+            --white: #2a2a2a;
+            --black: #ddd;
+            --shadow: 0 5px 15px rgba(0,0,0,0.5);
+            --button-shadow: 0 4px 8px rgba(0,150,255,0.4);
+        }
+
+        body {
+            font-family: var(--font-paragraph);
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* ===== TYPOGRAPHY ===== */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+            font-weight: 500;
+            color: var(--text);
+            margin-bottom: 1rem;
+        }
+
+        p, li, .subtitle, .feature p, .trust-item p {
+            font-family: var(--font-paragraph);
+            font-weight: 500;
+        }
+
+        button, .cta-button, .btn-secondary, .hamburger, .nav-links a, .dropdown-content a {
+            font-family: var(--font-button);
+            font-weight: 700;
+        }
+
+        .footer-links h3, .footer-col h3, .language-select, .mode-toggle {
+            font-family: var(--font-misc);
+            font-weight: 500;
+        }
+
+        /* ===== LAYOUT ===== */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ===== HEADER & NAV ===== */
+        header {
+            background-color: var(--nav-bg);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            padding: 15px 0;
+            box-shadow: var(--shadow);
+            transition: background-color 0.3s;
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .logo img {
+            height: 30px;
+            display: block;
+        }
+
+        .menu-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        /* desktop nav tools – hidden on mobile */
+        .nav-tools {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .mode-toggle {
+            background: none;
+            border: none;
+            color: var(--text);
+            font-size: 1.3rem;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(0,0,0,0.05);
+            transition: 0.2s;
+        }
+        .mode-toggle:hover {
+            background-color: var(--accent);
+            color: white;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            margin: 0;
+        }
+
+        .nav-links li {
+            margin-left: 25px;
+            position: relative;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 700;
+            padding: 8px 12px;
+            border-radius: 5px;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+            background-color: rgba(0,150,255,0.1);
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: var(--nav-bg);
+            min-width: 160px;
+            box-shadow: var(--shadow);
+            border-radius: 8px;
+            list-style: none;
+            padding: 10px 0;
+            z-index: 10;
+        }
+        .dropdown-content li {
+            margin: 0;
+        }
+        .dropdown-content a {
+            padding: 10px 20px;
+            border-radius: 0;
+            white-space: nowrap;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .hamburger {
+            display: none;
+            background: var(--accent);
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 5px;
+            box-shadow: var(--button-shadow);
+        }
+        .hamburger span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            margin: 5px 0;
+            transition: 0.3s;
+        }
+
+        /* mobile tools inside nav-links */
+        .mobile-tools {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(0,0,0,0.1);
+            width: 100%;
+        }
+        .mobile-tools .mode-toggle {
+            width: auto;
+            min-width: 120px;
+        }
+
+        /* ===== MAIN ===== */
+        main {
+            margin-top: 80px;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        /* ===== BUTTONS ===== */
+        .cta-button {
+            display: inline-block;
+            background-color: var(--primary-btn-bg);
+            color: var(--primary-btn-text);
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            box-shadow: var(--button-shadow);
+            transition: 0.3s;
+        }
+        .cta-button:hover {
+            opacity: 0.9;
+            transform: scale(1.02);
+        }
+
+        /* ===== HERO ===== */
+        .gateway-section {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('hero.jpg') center/cover no-repeat;
+            color: white;
+            text-align: center;
+            padding: 120px 0;
+        }
+        .gateway-section h1 {
+            color: white;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+        }
+        .gateway-section .subtitle {
+            color: white;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+            font-size: 1.3rem;
+        }
+        .gateway-options {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 40px;
+        }
+        .gateway-card {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            padding: 30px;
+            width: 100%;
+            max-width: 450px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+            text-align: center;
+            color: var(--text) !important;
+        }
+        body.dark-mode .gateway-card {
+            background-color: rgba(30, 30, 30, 0.95);
+            color: #f0f0f0 !important;
+        }
+        .gateway-card h2,
+        .gateway-card p,
+        .gateway-card .region {
+            color: inherit !important;
+        }
+        .gateway-card .region {
+            font-weight: 700;
+        }
+        .gateway-card .platform-badge {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 5px 15px;
+            background-color: var(--accent);
+            color: white;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        .gateway-card:hover {
+            transform: translateY(-10px);
+        }
+
+        /* ===== MANIFESTO SECTION ===== */
+        .manifesto-card {
+            background-color: var(--white);
+            border-radius: 24px;
+            padding: 2.5rem;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+        .manifesto-content {
+            max-height: 500px;
+            overflow-y: auto;
+            padding-right: 15px;
+        }
+        .manifesto-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--accent);
+        }
+        .manifesto-content p, .manifesto-content li {
+            margin-bottom: 0.75rem;
+        }
+        .manifesto-content ul {
+            padding-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* ===== ABOUT CARD ===== */
+        .about-card {
+            background-color: var(--white);
+            border-radius: 24px;
+            padding: 2.5rem;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+        .about-content {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 2rem;
+        }
+        .about-text {
+            flex: 1 1 300px;
+        }
+        .about-image {
+            flex: 1 1 300px;
+        }
+        .about-image img {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+        .brand-story {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(0,0,0,0.1);
+        }
+
+        /* ===== FEATURES CARD ===== */
+        .features-card {
+            background-color: var(--white);
+            border-radius: 24px;
+            padding: 2.5rem;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+        .features-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        .feature {
+            background-color: transparent;
+            padding: 1rem;
+            border-radius: 20px;
+            transition: all 0.2s ease;
+            flex: 1 1 200px;
+            text-align: center;
+        }
+        .feature i {
+            font-size: 2.8rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        /* ===== TRUST CARD ===== */
+        .trust-card {
+            background-color: var(--white);
+            border-radius: 24px;
+            padding: 2.5rem;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+        .trust-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 2rem;
+        }
+        .trust-item {
+            text-align: center;
+            padding: 20px;
+            background-color: var(--bg);
+            border-radius: 16px;
+            transition: transform 0.2s;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        /* ===== TESTIMONIALS CARD ===== */
+        .testimonials-card {
+            background-color: var(--white);
+            border-radius: 24px;
+            padding: 2.5rem;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 2rem;
+        }
+        .testimonial-card {
+            background-color: var(--bg);
+            padding: 2rem;
+            border-radius: 20px;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 1rem;
+        }
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        .author-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* ===== CONTACT FORM ===== */
+        .contact-form-container {
+            background-color: var(--white);
+            padding: 2.5rem;
+            border-radius: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+        }
+        .form-group input,
+        .form-group textarea {
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 14px 18px;
+            font-size: 1rem;
+            font-family: var(--font-paragraph);
+            transition: border 0.2s, box-shadow 0.2s;
+            width: 100%;
+            background-color: var(--bg);
+            color: var(--text);
+        }
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 4px rgba(0,150,255,0.1);
+            outline: none;
+        }
+        .cta-button[type="submit"] {
+            width: 100%;
+            padding: 16px;
+            font-size: 1.1rem;
+            border-radius: 40px;
+            background-color: var(--black);
+            color: white;
+            border: none;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.1s;
+        }
+        .cta-button[type="submit"]:hover {
+            background-color: var(--accent);
+            transform: scale(1.02);
+        }
+
+        /* ===== NEWSLETTER ===== */
+        .newsletter {
+            background-color: var(--accent);
+            color: white;
+            text-align: center;
+        }
+        .newsletter h2 {
+            color: white;
+        }
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 30px auto 0;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+        .newsletter-form input {
+            flex: 1 1 250px;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 50px;
+            font-family: var(--font-paragraph);
+        }
+        .newsletter-form button {
+            background-color: var(--black);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background-color: var(--nav-bg);
+            padding: 50px 0 20px;
+            transition: background-color 0.3s;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        .footer-col h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--text);
+            font-weight: 500;
+        }
+        .footer-col ul {
+            list-style: none;
+        }
+        .footer-col li {
+            margin-bottom: 10px;
+        }
+        .footer-col a {
+            text-decoration: none;
+            color: var(--light-text);
+            font-family: var(--font-paragraph);
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .footer-col a:hover {
+            color: var(--accent);
+        }
+        .social-list {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+        .social-list a {
+            font-size: 1.5rem;
+            color: var(--text);
+        }
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(0,0,0,0.1);
+            font-size: 0.95rem;
+            color: var(--light-text);
+        }
+        .payment-icons {
+            margin: 15px 0 10px;
+            font-size: 2rem;
+            word-spacing: 10px;
+        }
+        .heart {
+            color: #e25555;
+        }
+        .hidden {
+            display: none;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 992px) {
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            /* hide desktop nav tools */
+            .nav-tools {
+                display: none;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background-color: var(--nav-bg);
+                flex-direction: column;
+                align-items: center;
+                padding: 40px 20px;
+                transition: left 0.3s;
+                z-index: 999;
+                overflow-y: auto;
+            }
+            .nav-links.active {
+                left: 0;
+            }
+            .nav-links li {
+                margin: 15px 0;
+                width: 100%;
+                text-align: center;
+            }
+            .dropdown-content {
+                position: static;
+                box-shadow: none;
+                background: transparent;
+                padding-left: 0;
+            }
+            .mobile-tools {
+                display: flex;
+            }
+            .hamburger {
+                display: block;
+            }
+            .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
+            .hamburger.active span:nth-child(2) { opacity: 0; }
+            .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px,-6px); }
+
+            /* about section image fix */
+            .about-content {
+                flex-direction: column;
+            }
+            .about-image img {
+                max-width: 100%;
+            }
+
+            /* trust & testimonials card padding */
+            .trust-card, .testimonials-card, .manifesto-card {
+                padding: 1.5rem;
+            }
+            .trust-grid, .testimonial-grid {
+                gap: 15px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .social-list {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="nav-container">
+                <a href="#" class="logo">
+                    <img src="logo.png" alt="Zahan Store">
+                </a>
+
+                  <!-- Desktop nav tools: only dark mode toggle now (language removed) -->
+                <div class="nav-tools">
+                    <button class="mode-toggle" id="darkModeToggle" aria-label="Toggle dark mode">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+
+                <div class="menu-container">
+                    <nav>
+                        <ul class="nav-links">
+                            <li><a href="#gateway">Home</a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropbtn">Shop Now <i class="fas fa-chevron-down"></i></a>
+                                <ul class="dropdown-content">
+                                    <li><a href="https://shop.zahan.one" target="_blank">India</a></li>
+                                    <li><a href="https://store.zahan.one" target="_blank">International</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#about">About Us</a></li>
+                            <li><a href="#manifesto">Manifesto</a></li>
+                            <li><a href="#features">Features</a></li>
+                            <li><a href="#contact">Contact</a></li>
+                            <!-- Mobile tools inside nav-links (language removed) -->
+                            <li class="mobile-tools">
+                                <button class="mode-toggle" id="mobileDarkModeToggle" aria-label="Toggle dark mode">
+                                    <i class="fas fa-moon"></i>
+                                </button>
+                            </li>
+                        </ul>
+                    </nav>
+                    <button class="hamburger" aria-label="Menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+  <main>
+        <!-- Gateway Section -->
+        <section id="gateway" class="gateway-section">
+            <div class="container">
+                <h1>Welcome to Zahan Store®</h1>
+                <p class="subtitle">Your destination for fashion, lifestyle, art, and digital products</p>
+
+                <div class="gateway-options">
+                    <div class="gateway-card">
+                        <h2>India <span class="emoji">🌏</span></h2>
+                        <p class="region">South Asia</p>
+                        <p>Explore our curated collection of fashion, lifestyle products, and art tailored for the Indian market.</p>
+                        <span class="platform-badge">Payhip‑native</span>
+                        <a href="https://shop.zahan.one" class="cta-button">Shop Now!</a>
+                    </div>
+                    <div class="gateway-card">
+                        <h2>International <span class="emoji">🌎</span></h2>
+                        <p class="region">US, Brazil, Mexico, Canada, UK, Norway, Europe, Sweden, Denmark, China, Malaysia, Singapore, Japan, New Zealand, Australia, Bahrain, Jordan, Kuwait, Lebanon, Oman, Qatar, Saudi Arabia, United Arab Emirates, Algeria, Egypt, Libya, Morocco, Tunisia, Turkey.</p>
+                        <p>Discover our global collection with worldwide shipping options for all our premium products.</p>
+                        <span class="platform-badge">Fourthwall‑native</span>
+                        <a href="https://store.zahan.one/" class="cta-button">Shop Now!</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about-section">
+            <div class="container">
+                <div class="about-card">
+                    <h2>About Zahan Store®</h2>
+                    <div class="about-content">
+                        <div class="about-text">
+                            <p>Zahan Store® is a premier e-commerce brand offering carefully curated value chains across multiple categories:</p>
+                            <ul>
+                                <li><strong>Fashion & Apparel:</strong> Trendsetting clothing for all occasions</li>
+                                <li><strong>Lifestyle Products:</strong> Items that elevate your everyday living</li>
+                                <li><strong>Paintings & Art:</strong> Unique pieces from talented artists worldwide</li>
+                                <li><strong>Digital Products:</strong> Courses to enhance your skills and knowledge</li>
+                            </ul>
+                            <p>Our mission is to bring quality, style, and creativity to your doorstep, no matter where you are in the world.</p>
+                        </div>
+                        <div class="about-image">
+                            <img src="https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Zahan Store Products">
+                        </div>
+                    </div>
+                    <div class="brand-story">
+                        <h3>Our Story</h3>
+                        <p>Zahan was born from a passion for quality streetwear and sustainable fashion. Founded in 1996, we set out to create premium products that not only look great but also stand the test of time.</p>
+                        <p>Every garment in our collection is crafted from high-quality materials, ethically sourced and produced in facilities that prioritize worker welfare and environmental sustainability.</p>
+                        <p>We believe that what you wear should express your individuality while making a positive impact on the world. That's why for every item sold, we donate a portion of profits to environmental causes.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- New Manifesto Section -->
+        <section id="manifesto" class="manifesto-section">
+            <div class="container">
+                <div class="manifesto-card">
+                    <h2>Our Manifesto</h2>
+                    <div class="manifesto-content">
+                        <!-- Insert the full manifesto text here -->
+                        <h3>1. Our Values</h3>
+                        <p>1.1. Zahan Store is more than just an e-commerce brand; we are a community built on a passion for quality streetwear, sustainable fashion, and unique creative expression. Our goal is to curate and create products—from apparel and lifestyle goods to art and digital learning—that empower our customers to express their individuality while making a positive impact.</p>
+                        <p>1.2. Since our founding in 1996, we have believed in upholding rigorous standards for our products and our business practices. We see e-commerce not just as a transaction, but as an opportunity to build lasting relationships based on trust, quality, and exceptional experiences. We believe that being a digital-native brand is an opportunity to redefine expectations for customer care and ethical production.</p>
+                        <p>1.3. As such, every member of the Zahan Store team is dedicated to the principles set out in this manifesto. These are not merely guidelines; they are the foundation of our integrity and the reason for your trust.</p>
+                        <p>1.4. If you ever believe that Zahan Store has fallen short of the standards we set for ourselves, we invite you to hold us to account. Please contact us directly at [Your Preferred Contact Email/Address].</p>
+
+                        <h3>2. Brand Ownership & Independence</h3>
+                        <p>2.1. We believe that the independence of a brand determines whose story it gets to tell. In an era of corporate consolidation, we have made the intentional decision to remain independently owned. This independence creates a firewall between our passion for quality and the pressures of mass-market trends or investor demands. Because we answer to our community of customers rather than a corporate boardroom, we are never forced to compromise our values—like sustainable sourcing or unique designs—for the sake of a corporate agenda.</p>
+                        <p>2.2. Zahan Store is and will remain independently owned, guided by its founding vision. Should this ever change, we would:
+                            <br>2.2.1. Update this manifesto to clearly indicate any changes in ownership.
+                            <br>2.2.2. Notify all stakeholders, including our team and our community.
+                            <br>2.2.3. Share a clear announcement on our website and social channels, explaining the change and reaffirming our commitment to our core values.
+                        </p>
+
+                        <h3>3. Product Integrity & Curation</h3>
+                        <p>3.1. We believe that for a product to be trustworthy, its creation and presentation must be free from misleading shortcuts. At Zahan Store, we maintain absolute control over our curation and product standards. To protect this integrity, we uphold four non-negotiable pillars:</p>
+                        <p><strong>3.2. Curation Autonomy</strong><br>
+                        3.2.1. Only our internal team determines the products we design, source, and feature. No outside entity dictates our creative direction or product lineup.<br>
+                        3.2.2. Our team has full independence to seek out unique artists, source high-quality materials, and design products that align with our vision of style and sustainability.<br>
+                        3.2.3. We are transparent about our partnerships with artists and suppliers, ensuring they align with our values.</p>
+                        <p><strong>3.3. The Customer Firewall</strong><br>
+                        3.3.1. While customer feedback is vital, individual requests never compromise our commitment to quality and ethical sourcing. We listen to our community, but we do not sacrifice our principles for trends.<br>
+                        3.3.2. We do not use paid or sponsored placements to influence our curation; every product is featured on its own merit.</p>
+                        <p><strong>3.4. Unfiltered Quality & Design</strong><br>
+                        3.4.1. When we present a product, we do so honestly.<br>
+                        3.4.1.1. We never use misleading imagery or descriptions. Our product photos and details are accurate representations.<br>
+                        3.4.1.2. We do not allow external pressure to inflate claims or hide the true nature of our materials or production processes.</p>
+                        <p><strong>3.5. Ethical Foundation</strong><br>
+                        3.5.1. We require our team to challenge assumptions in our supply chain, seek out the most sustainable materials, and use honest, data-driven language in our product descriptions. We ensure our team:<br>
+                        3.5.1.1. Considers a wide variety of sourcing options, prioritizing ethical and environmental welfare.<br>
+                        3.5.1.2. Guards against greenwashing or making unverified claims.<br>
+                        3.5.1.3. Consults with one another to ensure every product meets our collective standard for quality and ethics before it reaches you.</p>
+                        <p><strong>3.6. Platform-Native, Not Standard-Light</strong><br>
+                        3.6.1. To best serve our global community, we utilize leading platforms tailored to specific regions: we are <strong>Fourthwall‑native for our international audience</strong> and <strong>Payhip‑native for our customers in India</strong>. These platforms provide the robust infrastructure we need to deliver a seamless experience worldwide.<br>
+                        3.6.2. We firmly believe that being "platform-native" is <strong>not an excuse for lower standards.</strong> Instead, we see it as a powerful opportunity to redefine fashion and lifestyle expectations for a new generation. By leveraging the best tools each platform offers, we can focus entirely on what matters most: exceptional product quality, authentic design, and a customer experience that rivals—and often exceeds—traditional retail giants.<br>
+                        3.6.3. The technology powers the storefront; our values and dedication power the brand.</p>
+                        <p>3.7. Ultimately, we know it's not our job to just sell you a product. It's our job to provide you with quality, creativity, and the confidence that your purchase supports a better way of doing business.</p>
+
+                        <h3>4. Quality Control, Corrections, and Feedback</h3>
+                        <p>4.1. As an independent brand, we know that trust is our most valuable asset. However, in a human-centric business, errors can sometimes occur.<br>
+                        4.2. We believe we are defined not by the pursuit of perfection, but by our honesty and willingness to make things right.</p>
+                        <p><strong>4.3. Rigorous Quality Control:</strong><br>
+                        4.3.1. Every product undergoes a multi-stage process before it reaches your doorstep.<br>
+                        4.3.2. This includes:<br>
+                        &nbsp;&nbsp;4.3.2.1. Sourcing from vetted, ethical facilities.<br>
+                        &nbsp;&nbsp;4.3.2.2. In-house or partner review of material samples and prototypes.<br>
+                        &nbsp;&nbsp;4.3.2.3. Final inspection of products before they are shipped to customers.<br>
+                        &nbsp;&nbsp;4.3.2.4. Continuous review of customer feedback to identify and address any recurring quality issues.</p>
+                        <p><strong>4.4. Open Corrections & Issue Resolution:</strong><br>
+                        4.4.1. If a product falls short of our standards, or if an error occurs with your order, we admit it openly. Quietly hoping a customer won't notice an issue is a breach of trust.<br>
+                        4.4.2. If a product is fundamentally flawed, we will immediately stop sales, notify any customers who have purchased it, and offer a full refund or replacement. We will share what we learned from the error on our social channels or in a newsletter.<br>
+                        4.4.3. If the issue is minor (e.g., a slight delay in shipping), we will communicate proactively with the affected customers and offer a good-faith solution, such as a discount on a future purchase.</p>
+                        <p>4.5. Ultimately, our commitment is to your satisfaction and our shared values, not just protecting our public image. By being transparent about our process and receptive to feedback, we aim to earn the trust you place in us with every purchase.</p>
+
+                        <h3>5. Radical Transparency with Our Community</h3>
+                        <p>5.1. We don't just ask for your business; we aim to earn your loyalty through radical transparency.</p>
+                        <p><strong>5.2. Open-Book on Sourcing & Impact</strong><br>
+                        5.2.1. We believe that transparency about our supply chain is the ultimate check on our ethical claims.<br>
+                        5.2.2. As such, we commit to sharing information about our sourcing partners and the positive environmental impact of our donations.</p>
+                        <p><strong>5.3. Active Engagement with Feedback</strong><br>
+                        5.3.1. We know we can't always be perfect, so we actively listen to and engage with our customers. We commit to responding to concerns, correcting our blind spots, and explaining the reasoning behind our product choices.<br>
+                        5.3.1.1. We will regularly respond to a broad range of customer feedback in our social media stories, newsletters, or a dedicated "Community Corner" blog post.<br>
+                        5.3.1.2. Our founder and team will engage directly with customer questions and comments.</p>
+                        <p><strong>5.4. Total Disclosure</strong><br>
+                        5.4.1. If we collaborate with an artist or supplier, we are proud to share that connection with you. We believe in giving credit where it's due and being open about our creative partnerships.</p>
+
+                        <h3>6. Artificial Intelligence & Human Creativity</h3>
+                        <p>6.1. We believe that the best products come from passionate designers, artists, and craftspeople driven by a desire to create beauty and utility. We also believe the best customer service comes from empathetic humans who understand your needs. Both of these tasks require a humanity and understanding beyond the capability of AI systems.<br>
+                        6.2. As such, Zahan Store will not use AI to:<br>
+                        &nbsp;&nbsp;6.2.1. Design our original fashion or art collections.<br>
+                        &nbsp;&nbsp;6.2.2. Generate photos or videos of our products in a way that is misleading.<br>
+                        &nbsp;&nbsp;6.2.3. Generate written descriptions that are impersonal or factually inaccurate.<br>
+                        &nbsp;&nbsp;6.2.4. Provide primary customer service without human oversight and the ability to easily connect with a real person.<br>
+                        6.3. If we ever sell a product that features AI-generated art, it will be clearly and prominently labelled as such.<br>
+                        6.4. We will continue to use AI tools only to improve internal workflows (e.g., inventory management, data analysis) without impacting the human touch of our products and customer relationships.</p>
+
+                        <h3>7. Partnerships and Affiliations</h3>
+                        <p>7.1. We believe that the financial health of our company must never come at the expense of our integrity.<br>
+                        7.2. We view our partners as collaborators towards our broader mission, but they are in no way directors of our values. To ensure that our commercial interests never compromise our principles, we adhere to the following:</p>
+                        <p><strong>7.3. Values-Aligned Partners</strong><br>
+                        7.3.1. We are selective about who we partner with. We only collaborate with suppliers and platforms whose practices align with our values. We would never knowingly work with partners involved in:<br>
+                        &nbsp;&nbsp;7.3.1.1. Unethical labour practices.<br>
+                        &nbsp;&nbsp;7.3.1.2. Environmental exploitation.<br>
+                        &nbsp;&nbsp;7.3.1.3. Industries fundamentally misaligned with our brand, such as those promoting harmful substances or activities.</p>
+                        <p><strong>7.4. The Partner Limit</strong><br>
+                        7.4.1. A partner's influence is strictly confined to their role in our supply chain or a specific collaboration. They have no control over our brand's broader direction or values. Our commitment to quality and sustainability remains independent, regardless of our partnerships.</p>
+                        <p><strong>7.5. Disclosure of Collaborations</strong><br>
+                        7.5.1. If we receive funding, grants, or enter into special arrangements with organizations to create specific projects or collections, these will be clearly and prominently disclosed to our audience.</p>
+
+                        <h3>8. Platforms</h3>
+                        <p>8.1. As a digital brand, we work across a number of external platforms including but not limited to:<br>
+                        &nbsp;&nbsp;8.1.1. Our International Website (powered by Fourthwall)<br>
+                        &nbsp;&nbsp;8.1.2. Our India Website (powered by Payhip)<br>
+                        &nbsp;&nbsp;8.1.3. Instagram<br>
+                        &nbsp;&nbsp;8.1.4. [Other platforms you use, e.g., Pinterest, Facebook]</p>
+                        <p>8.2. All of our brand standards, and all points within this document, apply to all work conducted across all platforms.</p>
+
+                        <h3>9. Employee Standards</h3>
+                        <p>9.1. All team members are expected to be familiar with the Zahan Store Manifesto as well as all of our associated standards.<br>
+                        9.2. Zahan Store team members are expected to uphold our values of quality, creativity, and integrity in all their professional activities related to the brand.</p>
+
+                        <h3>10. Updates</h3>
+                        <p>10.1. This document was last updated [Current Date] and will continue to be updated to reflect our evolving commitment to our community.<br>
+                        10.2. When updates are made, previous versions of this document will be maintained and made available upon request.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+      <!-- Features Section -->
+        <section id="features" class="features">
+            <div class="container">
+                <div class="features-card">
+                    <h2 style="text-align: center;">Our Features</h2>
+                    <div class="features-container">
+                        <div class="feature">
+                            <i class="fas fa-truck"></i>
+                            <h3>Free Shipping</h3>
+                            <p>On all orders over $50</p>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-undo"></i>
+                            <h3>Easy Returns</h3>
+                            <p>30-day return policy</p>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-shield-alt"></i>
+                            <h3>Secure Payment</h3>
+                            <p>Safe and encrypted</p>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-headset"></i>
+                            <h3>24/7 Support</h3>
+                            <p>Dedicated support</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trust Indicators -->
+        <section class="trust-indicators">
+            <div class="container">
+                <div class="trust-card">
+                    <div class="section-title">
+                        <h2>Why Shop With Us</h2>
+                        <p>We're committed to providing the best shopping experience</p>
+                    </div>
+                    <div class="trust-grid">
+                        <div class="trust-item">
+                            <i class="fas fa-star"></i>
+                            <h3>1000+ Happy Customers</h3>
+                            <p>Rated 4.8/5 stars based on customer reviews</p>
+                        </div>
+                        <div class="trust-item">
+                            <i class="fas fa-award"></i>
+                            <h3>Premium Quality</h3>
+                            <p>All products made from highest quality materials</p>
+                        </div>
+                        <div class="trust-item">
+                            <i class="fas fa-lock"></i>
+                            <h3>Secure Checkout</h3>
+                            <p>Your payment information is safe with our encrypted checkout</p>
+                        </div>
+                        <div class="trust-item">
+                            <i class="fas fa-globe"></i>
+                            <h3>Worldwide Shipping</h3>
+                            <p>We ship to over 50 countries worldwide</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section class="testimonials">
+            <div class="container">
+                <div class="testimonials-card">
+                    <div class="section-title">
+                        <h2>Customer Reviews</h2>
+                        <p>See what our customers are saying about our products</p>
+                    </div>
+                    <div class="testimonial-grid">
+                        <div class="testimonial-card">
+                            <div class="testimonial-text">
+                                <p>"The quality of these products is amazing! I've bought multiple items and they've all held up perfectly after many uses."</p>
+                            </div>
+                            <div class="testimonial-author">
+                                <div class="author-avatar">
+                                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="John Doe">
+                                </div>
+                                <div class="author-details">
+                                    <h4>Smith Andrews</h4>
+                                    <p>Verified Customer</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonial-card">
+                            <div class="testimonial-text">
+                                <p>"Fast shipping and great customer service. The fit was perfect and the fabric is so comfortable. Will definitely order again!"</p>
+                            </div>
+                            <div class="testimonial-author">
+                                <div class="author-avatar">
+                                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Jane Smith">
+                                </div>
+                                <div class="author-details">
+                                    <h4>Jane Smith</h4>
+                                    <p>Verified Customer</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonial-card">
+                            <div class="testimonial-text">
+                                <p>"I'm really impressed with the attention to detail on these products. The craftsmanship is perfect and the designs are unique."</p>
+                            </div>
+                            <div class="testimonial-author">
+                                <div class="author-avatar">
+                                    <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="Michael Johnson">
+                                </div>
+                                <div class="author-details">
+                                    <h4>Michael Johnson</h4>
+                                    <p>Verified Customer</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+       <!-- Newsletter Section -->
+        <section class="newsletter">
+            <div class="container">
+                <div class="newsletter-content">
+                    <h2>Subscribe to Our Newsletter</h2>
+                    <p>Get updates on new collections, exclusive offers, and fashion tips</p>
+                    <form class="newsletter-form" name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="newsletter-form">
+                        <p class="hidden">
+                            <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+                        </p>
+                        <input type="email" name="email" placeholder="Enter your email address" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                    <div id="newsletter-thankyou" class="hidden" style="text-align: center; margin-top: 20px;">
+                        <h3 style="color: white; margin-bottom: 10px;">Thank You for Subscribing!</h3>
+                        <p>You've been added to our newsletter list. Look out for our updates in your inbox.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact-section">
+            <div class="container">
+                <h2>Contact Us</h2>
+                <p>At Zahan Store® We know you are a Real Human and have questions, Feel free to send us a 😃 Message! We will reply you within 2-3 business days.</p>
+                <div class="contact-form-container">
+                    <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="contact-form">
+                        <p class="hidden">
+                            <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+                        </p>
+                        <div id="form-message" class="form-message hidden"></div>
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" name="subject" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        <div data-netlify-recaptcha="true"></div>
+                        <button type="submit" class="cta-button">Send Message</button>
+                    </form>
+                    <div id="thank-you-message" class="hidden" style="text-align: center; padding: 30px;">
+                        <h3 style="color: var(--success-color); margin-bottom: 20px;">Thank You for Contacting Us!</h3>
+                        <p>Your message has been successfully submitted. We'll get back to you soon.</p>
+                        <button onclick="resetForm()" class="cta-button" style="margin-top: 20px;">Send Another Message</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+  </main>
+
+      <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <!-- Column 1: Online Stores -->
+                <div class="footer-col">
+                    <h3>Online Stores</h3>
+                    <ul>
+                        <li><a href="https://shop.zahan.one">India</a></li>
+                        <li><a href="https://store.zahan.one">International</a></li>
+                        <li><a href="#">World Portal</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 2: More from us -->
+                <div class="footer-col">
+                    <h3>More from us</h3>
+                    <ul>
+                        <li><a href="#">Genx</a></li>
+                        <li><a href="#">Signature</a></li>
+                        <li><a href="#">Heritage</a></li>
+                        <li><a href="#">Accessories</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: More for you -->
+                <div class="footer-col">
+                    <h3>More for you</h3>
+                    <ul>
+                        <li><a href="#">Zahan Universe</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#">FAQ's</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="terms-and-conditions.html">Terms of Service</a></li>
+                        <li><a href="return-and-refund.html">Return & Refund</a></li>
+                        <li><a href="shipping-and-delivery.html">Shipping & Delivery</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 4: Social media -->
+                <div class="footer-col">
+                    <h3>Social Media</h3>
+                    <ul>
+                        <li><a href="https://youtube.com/@ZahanStore" target="_blank"><i class="fab fa-youtube" style="margin-right:8px;"></i> YouTube</a></li>
+                        <li><a href="https://www.instagram.com/storezahan?igsh=ZjY2dWZlbXI5d3N5" target="_blank"><i class="fab fa-instagram" style="margin-right:8px;"></i> Instagram</a></li>
+                        <li><a href="#"><i class="fab fa-pinterest" style="margin-right:8px;"></i> Pinterest</a></li>
+                    </ul>
+                    <div class="social-list">
+                        <a href="https://youtube.com/@ZahanStore" target="_blank"><i class="fab fa-youtube"></i></a>
+                        <a href="https://www.instagram.com/storezahan?igsh=ZjY2dWZlbXI5d3N5" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer bottom: center text + card icons -->
+            <div class="footer-bottom">
+                <div class="payment-icons">
+                    <i class="fab fa-cc-visa"></i>
+                    <i class="fab fa-cc-mastercard"></i>
+                    <i class="fab fa-cc-amex"></i>
+                    <i class="fab fa-cc-paypal"></i>
+                    <i class="fab fa-cc-discover"></i>
+                </div>
+                <p>© 2026 ZahanStore. All Rights Reserved.</p>
+                <p>Made with <span class="heart">♥</span> in Abu Dhabi, UAE</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+  
+    
+    
