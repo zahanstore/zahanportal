@@ -1,10 +1,10 @@
 /* ============================================================
    ZAHAN STORE — Shared Stylesheet
-   Fonts: Outfit (headings) + DM Sans (body)
+   Fonts: Quicksand Bold (headings) + Inter (body)
    Theme: Sleek dark-first, gradient accents, refined minimal
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
 
 /* ── VARIABLES ── */
 :root {
@@ -31,8 +31,8 @@
   --shadow-lg:    0 20px 60px rgba(0,0,0,0.6);
   --shadow-glow:  0 0 40px rgba(91,141,238,0.15);
 
-  --font-head:    'Outfit', sans-serif;
-  --font-body:    'DM Sans', sans-serif;
+  --font-head:    'Quicksand', sans-serif;
+  --font-body:    'Inter', sans-serif;
 
   --radius-sm:    8px;
   --radius-md:    16px;
@@ -83,10 +83,10 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 0.75rem;
 }
 
-h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800; }
-h2 { font-size: clamp(1.5rem, 3vw, 2.25rem); }
-h3 { font-size: clamp(1.1rem, 2vw, 1.4rem); font-weight: 600; }
-h4 { font-size: 1.1rem; font-weight: 600; }
+h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 700; }
+h2 { font-size: clamp(1.5rem, 3vw, 2.25rem); font-weight: 700; }
+h3 { font-size: clamp(1.1rem, 2vw, 1.4rem); font-weight: 700; }
+h4 { font-size: 1.1rem; font-weight: 700; }
 
 p { color: var(--text-muted); margin-bottom: 0.5rem; }
 
@@ -466,13 +466,18 @@ header {
   flex-shrink: 0;
   margin-top: 8px;
 }
-.about-image { flex: 1 1 300px; }
+.about-image { flex: 1 1 300px; position: relative; }
 .about-image img {
   width: 100%;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-md);
   object-fit: cover;
   max-height: 360px;
+  filter: brightness(0.88) contrast(1.02);
+  transition: var(--transition);
+}
+body.light-mode .about-image img {
+  filter: brightness(1) contrast(1);
 }
 .brand-story {
   padding-top: 2rem;

@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
+  <!-- HEADER — identical to index.html -->
   <header>
     <div class="container">
       <div class="nav-container">
@@ -21,7 +21,16 @@
           <nav>
             <ul class="nav-links">
               <li><a href="index.html">Home</a></li>
+              <li class="dropdown">
+                <a href="#" class="dropbtn">Shop Now <i class="fas fa-chevron-down" style="font-size:0.7rem;"></i></a>
+                <ul class="dropdown-content">
+                  <li><a href="https://shop.zahan.one" target="_blank"><i class="fas fa-store" style="width:16px;"></i> India</a></li>
+                  <li><a href="https://store.zahan.one" target="_blank"><i class="fas fa-globe" style="width:16px;"></i> International</a></li>
+                </ul>
+              </li>
               <li><a href="index.html#about">About Us</a></li>
+              <li><a href="index.html#manifesto">Manifesto</a></li>
+              <li><a href="index.html#features">Features</a></li>
               <li><a href="index.html#contact">Contact</a></li>
               <li class="mobile-tools">
                 <button class="mode-toggle" aria-label="Toggle theme"><i class="fas fa-sun"></i></button>
@@ -33,22 +42,19 @@
       </div>
     </div>
   </header>
-
   <main>
     <div class="page-hero">
       <div class="container">
         <span class="eyebrow">Get In Touch</span>
         <h1>Contact <span class="grad-text">Details</span></h1>
-        <p>We're here to help — real humans, real replies within 2–3 business days 😊</p>
+        <p>We&apos;re here to help &mdash; real humans, real replies within 2&ndash;3 business days &#128522;</p>
       </div>
     </div>
-
-    <section style="padding: 60px 0;">
+    <section style="padding:60px 0;">
       <div class="container">
         <div class="contact-grid">
-          <!-- Contact Info -->
           <div class="contact-info fade-up">
-            <div class="section-title" style="text-align:left; margin-bottom:2rem;">
+            <div class="section-title" style="text-align:left;margin-bottom:2rem;">
               <span class="eyebrow">Reach Us</span>
               <h2>Our <span class="grad-text">Offices</span></h2>
             </div>
@@ -57,7 +63,7 @@
               <div>
                 <h4>Email</h4>
                 <p>Send us a message anytime</p>
-                <p><a href="mailto:hello@zahan.one" style="color: var(--accent);">hello@zahan.one</a></p>
+                <p><a href="mailto:hello@zahan.one" style="color:var(--accent);">hello@zahan.one</a></p>
               </div>
             </div>
             <div class="contact-info-item">
@@ -71,19 +77,18 @@
               <div class="contact-info-icon"><i class="fas fa-city"></i></div>
               <div>
                 <h4>UAE Office</h4>
-                <p>Belhol Building, Al Gharoud,<br>Dubai, UAE — 36050</p>
+                <p>Belhol Building, Al Gharoud,<br>Dubai, UAE &mdash; 36050</p>
               </div>
             </div>
             <div class="contact-info-item">
               <div class="contact-info-icon"><i class="fas fa-clock"></i></div>
               <div>
                 <h4>Response Time</h4>
-                <p>We reply within 2–3 business days</p>
+                <p>We reply within 2&ndash;3 business days</p>
               </div>
             </div>
-
-            <div style="margin-top: 2rem;">
-              <p style="font-size:0.82rem; margin-bottom:1rem; font-family: var(--font-head); font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color: var(--text-muted);">Follow Us</p>
+            <div style="margin-top:2rem;">
+              <p style="font-size:0.82rem;margin-bottom:1rem;font-family:var(--font-head);font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);">Follow Us</p>
               <div class="social-list">
                 <a href="https://youtube.com/@ZahanStore" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
                 <a href="https://www.instagram.com/storezahan" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
@@ -91,17 +96,15 @@
               </div>
             </div>
           </div>
-
-          <!-- Contact Form -->
           <div class="fade-up fade-up-delay-2">
             <div class="contact-form-container" style="margin:0;">
-              <div class="section-title" style="text-align:left; margin-bottom:1.75rem;">
+              <div class="section-title" style="text-align:left;margin-bottom:1.75rem;">
                 <span class="eyebrow">Send a Message</span>
                 <h2>Write to <span class="grad-text">Us</span></h2>
               </div>
               <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="contact-form">
                 <input type="hidden" name="form-name" value="contact">
-                <p style="display:none;"><label>Don't fill this out: <input name="bot-field"></label></p>
+                <p style="display:none;"><label>Do not fill this out: <input name="bot-field"></label></p>
                 <div id="form-message" class="form-message hidden"></div>
                 <div class="form-group">
                   <label for="name">Name</label>
@@ -125,9 +128,9 @@
                 </button>
               </form>
               <div id="thank-you-message" class="hidden" style="text-align:center;padding:3rem 1rem;">
-                <div style="font-size:2.5rem;margin-bottom:1rem;">✉️</div>
+                <div style="font-size:2.5rem;margin-bottom:1rem;">&#9993;&#65039;</div>
                 <h3 style="margin-bottom:0.75rem;">Message Received!</h3>
-                <p>We'll get back to you within 2–3 business days.</p>
+                <p>We&apos;ll get back to you within 2&ndash;3 business days.</p>
                 <button onclick="resetForm()" class="btn-secondary" style="margin-top:1.5rem;">Send Another</button>
               </div>
             </div>
@@ -136,17 +139,65 @@
       </div>
     </section>
   </main>
-
+  <!-- FOOTER — identical to index.html -->
   <footer>
     <div class="container">
-      <div class="footer-grid" style="grid-template-columns: repeat(3, 1fr);">
-        <div class="footer-col"><h3>Quick Links</h3><ul><li><a href="index.html">Home</a></li><li><a href="index.html#about">About Us</a></li><li><a href="index.html#features">Features</a></li><li><a href="index.html#contact">Contact</a></li></ul></div>
-        <div class="footer-col"><h3>Legal</h3><ul><li><a href="privacy-policy.html">Privacy Policy</a></li><li><a href="terms-and-conditions.html">Terms of Service</a></li><li><a href="return-and-refund.html">Return &amp; Refund</a></li><li><a href="shipping-and-delivery.html">Shipping &amp; Delivery</a></li></ul></div>
-        <div class="footer-col"><h3>Follow Us</h3><div class="social-list"><a href="https://youtube.com/@ZahanStore" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a><a href="https://www.instagram.com/storezahan" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a><a href="#" aria-label="Pinterest"><i class="fab fa-pinterest"></i></a></div></div>
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h3>Online Stores</h3>
+          <ul>
+            <li><a href="https://shop.zahan.one">India</a></li>
+            <li><a href="https://store.zahan.one">International</a></li>
+            <li><a href="#">World Portal</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Collections</h3>
+          <ul>
+            <li><a href="#">Genx</a></li>
+            <li><a href="#">Signature</a></li>
+            <li><a href="#">Heritage</a></li>
+            <li><a href="#">Accessories</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Company</h3>
+          <ul>
+            <li><a href="#">Zahan Universe</a></li>
+            <li><a href="index.html#features">Features</a></li>
+            <li><a href="#">FAQ&apos;s</a></li>
+            <li><a href="index.html#about">About Us</a></li>
+            <li><a href="index.html#contact">Contact Us</a></li>
+            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="terms-and-conditions.html">Terms of Service</a></li>
+            <li><a href="return-and-refund.html">Return &amp; Refund</a></li>
+            <li><a href="shipping-and-delivery.html">Shipping &amp; Delivery</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Follow Us</h3>
+          <ul>
+            <li><a href="https://youtube.com/@ZahanStore" target="_blank">YouTube</a></li>
+            <li><a href="https://www.instagram.com/storezahan" target="_blank">Instagram</a></li>
+            <li><a href="#">Pinterest</a></li>
+          </ul>
+          <div class="social-list">
+            <a href="https://youtube.com/@ZahanStore" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            <a href="https://www.instagram.com/storezahan" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest"></i></a>
+          </div>
+        </div>
       </div>
       <div class="footer-bottom">
-        <p>© 2026 ZahanStore®. All Rights Reserved.</p>
-        <p>Made with <span class="heart">♥</span> in Abu Dhabi, UAE</p>
+        <div class="payment-icons">
+          <i class="fab fa-cc-visa"></i>
+          <i class="fab fa-cc-mastercard"></i>
+          <i class="fab fa-cc-amex"></i>
+          <i class="fab fa-cc-paypal"></i>
+          <i class="fab fa-cc-discover"></i>
+        </div>
+        <p>&copy; 2026 ZahanStore&reg;. All Rights Reserved.</p>
+        <p>Made with <span class="heart">&hearts;</span> in Abu Dhabi, UAE</p>
       </div>
     </div>
   </footer>
