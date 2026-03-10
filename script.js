@@ -154,18 +154,25 @@
     });
   }
 
-  /* ── EMAIL LINK ASSEMBLY (bypasses Cloudflare email obfuscation) ── */
-  /* Emails are stored as data-u / data-d attributes, assembled here  */
+  /* ── EMAIL ASSEMBLY (bypasses Cloudflare email obfuscation) ── */
+  /* Anchor tags: data-email — sets href + fills empty text          */
   document.querySelectorAll('[data-email]').forEach(function (el) {
     var u = el.getAttribute('data-u');
     var d = el.getAttribute('data-d');
     if (u && d) {
       var email = u + '@' + d;
       el.href = 'mailto:' + email;
-      // If the element only contains an icon, append the email text
-      if (!el.textContent.trim() || el.textContent.trim() === '') {
+      if (!el.textContent.trim()) {
         el.insertAdjacentText('beforeend', ' ' + email);
       }
+    }
+  });
+  /* Spans: data-email-text — just ensures correct text is rendered  */
+  document.querySelectorAll('[data-email-text]').forEach(function (el) {
+    var u = el.getAttribute('data-u');
+    var d = el.getAttribute('data-d');
+    if (u && d) {
+      el.textContent = u + '@' + d;
     }
   });
 

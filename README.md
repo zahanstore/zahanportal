@@ -90,14 +90,11 @@ background: linear-gradient(135deg, #60c0ff 0%, #a78bfa 55%, #e879f9 100%);
 ```
 zahanstore/zahan-vercel/
 │
-├── index.html
-├── zahan-universe.html
-├── faqs.html
-├── contact.html
-├── privacy-policy.html
-├── terms-and-conditions.html
-├── return-and-refund.html
-├── shipping-and-delivery.html
+├── index.html             ← Homepage
+├── universe.html          ← Zahan® Universe™ + all 3 Collections
+├── legal.html             ← Legal Centre (Privacy · Terms · Returns · Shipping)
+├── faqs.html              ← Master FAQ
+├── contact.html           ← Contact + Supabase form
 │
 ├── style.css              ← single shared stylesheet
 ├── script.js              ← single shared JS
@@ -108,8 +105,16 @@ zahanstore/zahan-vercel/
 │   │   └── favicon.png    ← browser tab icon
 │   ├── hero/
 │   │   └── hero.jpg       ← homepage hero background
-│   └── about/
-│       └── about.jpg      ← about section image
+│   ├── about/
+│   │   └── about.jpg      ← about section image
+│   └── og/
+│       ├── og-cover.jpg   ← default OG share image
+│       └── og-universe.jpg← Universe page OG image
+│
+├── supabase/
+│   └── functions/
+│       └── notify-contact/
+│           └── index.ts   ← Resend email routing edge function
 │
 ├── SUPABASE_SETUP.md      ← Supabase config & SQL guide
 ├── IMAGES_STRUCTURE.md    ← image folder conventions
@@ -125,7 +130,7 @@ zahanstore/zahan-vercel/
 Every page uses **identical** nav and footer. When updating either, update **all** pages.
 
 ### Nav links (in order)
-Home → Shop Now (dropdown: India, International) → About Us → Manifesto → Features → Contact
+Home → Shop Now (dropdown: India, International) → About → Manifesto → Features → Contact
 
 ### Footer columns (in order)
 Online Stores → Collections → Company → Follow Us
@@ -169,7 +174,7 @@ const SUPABASE_ANON = 'YOUR_SUPABASE_ANON_KEY';
 
 ## Zahan® Universe™ — Brand Architecture
 
-Three sub-brands, all housed under `zahan-universe.html`:
+Three sub-brands, all housed under `universe.html`:
 
 | Brand | Tagline | Vibe | Accent |
 |-------|---------|------|--------|
