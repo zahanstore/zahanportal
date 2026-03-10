@@ -361,19 +361,44 @@ body.light-mode .gateway-section {
 
 .gateway-section .container { position: relative; z-index: 1; }
 
-/* Text always light on photo background — both modes */
+/* Text always readable on photo — both modes */
 .gateway-section h1 {
   color: #ffffff;
-  text-shadow: 0 2px 20px rgba(0,0,0,0.4);
+  /* Multi-layer shadow: soft spread + tight dark anchor */
+  text-shadow:
+    0 2px 4px  rgba(0,0,0,0.90),
+    0 4px 24px rgba(0,0,0,0.60),
+    0 0  48px  rgba(0,0,0,0.35);
   margin-bottom: 1rem;
 }
 
 .gateway-section .subtitle {
   font-size: 1.1rem;
-  color: rgba(255,255,255,0.82);
-  text-shadow: 0 1px 10px rgba(0,0,0,0.3);
+  color: #ffffff;
+  text-shadow:
+    0 1px 3px  rgba(0,0,0,0.95),
+    0 3px 16px rgba(0,0,0,0.65);
   max-width: 540px;
   margin: 0 auto 2.5rem;
+}
+
+/* Scrim pill sitting behind the headline block for extra safety */
+.gateway-section .hero-text-block {
+  display: inline-block;
+  padding: 1.5rem 2.5rem 0.5rem;
+  border-radius: var(--radius-xl);
+  background: rgba(0,0,0,0.28);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+/* Grad text on hero: brighter so it pops on any photo tone */
+.gateway-section .grad-text {
+  background: linear-gradient(135deg, #7eb5ff 0%, #c4a8ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5));
 }
 
 /* Badge on hero */
@@ -393,7 +418,7 @@ body.light-mode .gateway-section {
 }
 
 .gateway-card {
-  background: rgba(15, 18, 35, 0.65);
+  background: rgba(10, 13, 28, 0.78);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
   border: 1px solid rgba(255,255,255,0.15);
@@ -408,10 +433,13 @@ body.light-mode .gateway-section {
   overflow: hidden;
 }
 
-/* Light mode: frosted light glass */
+/* Light mode: solid cool-gray — fully readable */
 body.light-mode .gateway-card {
-  background: rgba(255,255,255,0.50);
-  border-color: rgba(255,255,255,0.55);
+  background: rgba(232,236,250,0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-color: rgba(255,255,255,0.70);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.80);
 }
 
 .gateway-card::before {
@@ -440,10 +468,10 @@ body.light-mode .gateway-card {
 }
 .gateway-card p { font-size: 0.9rem; margin-bottom: 1.5rem; color: rgba(255,255,255,0.72); }
 
-/* Light mode cards: darker text on frosted white */
-body.light-mode .gateway-card h2 { color: #1a1e2e; }
-body.light-mode .gateway-card .region { color: var(--text-dim); }
-body.light-mode .gateway-card p { color: var(--text-muted); }
+/* Light mode cards: strong dark text on solid gray card */
+body.light-mode .gateway-card h2    { color: #1a1e2e; text-shadow: none; }
+body.light-mode .gateway-card .region { color: #5a6280; }
+body.light-mode .gateway-card p     { color: #3d4560; }
 .platform-badge {
   display: inline-block;
   padding: 4px 12px;
