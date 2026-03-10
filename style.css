@@ -394,12 +394,29 @@ body.light-mode .gateway-section {
 
 /* Grad text on hero: brighter so it pops on any photo tone */
 .gateway-section .grad-text {
-  background: linear-gradient(135deg, #7eb5ff 0%, #c4a8ff 100%);
+  /* Vivid electric blue → hot violet — rich & punchy on any background */
+  background: linear-gradient(135deg,
+    #60c0ff 0%,
+    #a78bfa 55%,
+    #e879f9 100%
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  /* Must override parent h1 text-shadow — shadow bleeds through transparent fill */
-  text-shadow: none;
+  text-shadow: none; /* never inherit parent shadow — kills clip */
+  position: relative;
+  display: inline-block;
+}
+
+/* Luminous glow behind the gradient text — no filter needed */
+.gateway-section .grad-text::after {
+  content: '';
+  position: absolute;
+  inset: -8px -16px;
+  background: radial-gradient(ellipse, rgba(120,160,255,0.22) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: -1;
 }
 
 /* Badge on hero — only the top "Est. 1996" badge, NOT card badges */
