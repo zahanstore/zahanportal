@@ -406,7 +406,7 @@ body.light-mode .gateway-section {
   box-sizing: border-box;
   padding: 0.6rem 2rem 0.6rem;
   border-radius: var(--radius-lg);
-  background: rgba(10, 13, 28, 0.76);
+  background: rgba(10, 13, 28, 0.52);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
   border: 1px solid rgba(255,255,255,0.15);
@@ -493,12 +493,12 @@ body.light-mode .gateway-card .platform-badge {
 }
 
 .gateway-card {
-  background: rgba(10, 13, 28, 0.78);
+  background: rgba(10, 13, 28, 0.48);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
   border: 1px solid rgba(255,255,255,0.15);
   border-radius: var(--radius-lg);
-  padding: 0.9rem 1.4rem 0.9rem;
+  padding: 1.5rem 1.4rem 0.9rem;
   width: 100%;
   max-width: 420px;
   text-align: center;
@@ -511,13 +511,13 @@ body.light-mode .gateway-card .platform-badge {
 /* Light mode: hero-text-block matches light gateway-card */
 /* Light mode hero block: stays dark glass — hero is always photo-first */
 body.light-mode .gateway-section .hero-text-block {
-  background: rgba(6, 8, 20, 0.68);
-  border-color: rgba(255,255,255,0.18);
+  background: rgba(6, 8, 20, 0.42);
+  border-color: rgba(255,255,255,0.22);
 }
 
 /* Light mode gateway cards: stay dark — they live on a photo, not a page */
 body.light-mode .gateway-card {
-  background: rgba(6, 8, 20, 0.68);
+  background: rgba(6, 8, 20, 0.42);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
   border-color: rgba(255,255,255,0.18);
