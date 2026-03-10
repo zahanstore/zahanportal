@@ -222,6 +222,9 @@ header {
   height: 72px;
 }
 
+/* Logo anchored left, nav+toggle anchored right */
+.nav-container .logo { margin-right: auto; order: 1; }
+
 .logo img {
   height: 32px;
   display: block;
@@ -333,7 +336,7 @@ header {
 .mobile-tools { display: none; }
 
 /* menu container */
-.menu-container { display: flex; align-items: center; gap: 12px; order: 2; }
+.menu-container { display: flex; align-items: center; gap: 12px; order: 2; margin-left: auto; }
 
 /* ── HERO / GATEWAY ── */
 .gateway-section {
