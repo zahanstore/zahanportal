@@ -1,526 +1,147 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy | Zahan Store</title>
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="icon" href="favicon.png" type="image/png">
-    <style>
-        :root {
-            --accent-color: #0096FF;
-            --background-color: #D9D9D9;
-            --text-color: #333;
-            --light-text: #777;
-            --white: #fff;
-            --black: #000;
-            --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            --nav-bg: #D9D9D9;
-            --button-shadow: 0 4px 8px rgba(0, 150, 255, 0.2);
-            --text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Quicksand', sans-serif;
-            color: var(--text-color);
-            background-color: var(--background-color);
-            line-height: 1.6;
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Header Styles */
-        header {
-            background-color: var(--nav-bg);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            padding: 15px 0;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .logo img {
-            height: 30px;
-            display: block;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .nav-container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            width: 100%;
-        }
-
-        .nav-links {
-            list-style: none;
-            display: flex;
-            align-items: center;
-            margin-left: auto;
-        }
-
-        .nav-links li {
-            margin-left: 25px;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-color);
-            font-weight: 600;
-            transition: color 0.3s;
-            display: flex;
-            align-items: center;
-            height: 100%;
-            padding: 8px 12px;
-            border-radius: 5px;
-        }
-
-        .nav-links a:hover {
-            color: var(--accent-color);
-            background-color: rgba(0, 150, 255, 0.1);
-        }
-
-        .menu-container {
-            display: flex;
-            align-items: center;
-        }
-
-        .hamburger {
-            display: none;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 8px;
-            margin-left: 15px;
-            background-color: var(--accent-color);
-            border-radius: 5px;
-            box-shadow: var(--button-shadow);
-        }
-
-        .hamburger span {
-            display: block;
-            width: 25px;
-            height: 3px;
-            background-color: var(--white);
-            margin: 5px 0;
-            transition: all 0.3s ease;
-        }
-
-        /* Main Content Styles */
-        main {
-            margin-top: 80px;
-            padding: 60px 0;
-        }
-
-        h1, h2, h3 {
-            font-weight: 700;
-            color: var(--text-color);
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        h2 {
-            font-size: 1.8rem;
-            margin: 40px 0 20px;
-            color: var(--accent-color);
-        }
-
-        h3 {
-            font-size: 1.4rem;
-            margin: 30px 0 15px;
-        }
-
-        .privacy-content {
-            background-color: var(--white);
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: var(--box-shadow);
-            margin-bottom: 40px;
-        }
-
-        .privacy-content p {
-            margin-bottom: 15px;
-        }
-
-        .privacy-content ul {
-            margin: 15px 0 25px;
-            padding-left: 20px;
-        }
-
-        .privacy-content li {
-            margin-bottom: 10px;
-        }
-
-        .highlight {
-            background-color: rgba(0, 150, 255, 0.1);
-            padding: 2px 5px;
-            border-radius: 3px;
-            font-weight: 600;
-        }
-
-        .last-updated {
-            text-align: right;
-            font-style: italic;
-            color: var(--light-text);
-            margin-top: 30px;
-        }
-
-        /* Footer Styles */
-        footer {
-            padding: 50px 0 20px;
-        }
-
-        .footer-content {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-
-        .footer-logo img {
-            height: 30px;
-            margin-bottom: 20px;
-        }
-
-        .footer-links h3, .footer-social h3 {
-            margin-bottom: 20px;
-            font-size: 1.2rem;
-        }
-
-        .footer-links ul {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 10px;
-        }
-
-        .footer-links a {
-            text-decoration: none;
-            color: var(--light-text);
-            transition: color 0.3s;
-        }
-
-        .footer-links a:hover {
-            color: var(--accent-color);
-        }
-
-        .social-icons {
-            display: flex;
-            gap: 15px;
-        }
-
-        .social-icons a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: #f5f5f5;
-            border-radius: 50%;
-            color: var(--text-color);
-            transition: all 0.3s;
-        }
-
-        .social-icons a:hover {
-            background-color: var(--accent-color);
-            color: var(--white);
-            transform: translateY(-3px);
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 20px;
-            border-top: 1px solid #eee;
-            color: var(--light-text);
-            font-size: 0.9rem;
-        }
-
-        /* Responsive Styles */
-        @media (max-width: 768px) {
-            .nav-links {
-                position: fixed;
-                top: 80px;
-                left: -100%;
-                width: 100%;
-                height: calc(100vh - 80px);
-                background-color: var(--white);
-                flex-direction: column;
-                align-items: center;
-                padding: 40px 0;
-                transition: left 0.3s;
-            }
-            
-            .nav-links.active {
-                left: 0;
-            }
-            
-            .nav-links li {
-                margin: 15px 0;
-                margin-left: 0;
-            }
-            
-            .nav-links a {
-                padding: 12px 20px;
-            }
-            
-            .hamburger {
-                display: block;
-            }
-            
-            .hamburger.active span:nth-child(1) {
-                transform: rotate(45deg) translate(5px, 5px);
-            }
-            
-            .hamburger.active span:nth-child(2) {
-                opacity: 0;
-            }
-            
-            .hamburger.active span:nth-child(3) {
-                transform: rotate(-45deg) translate(7px, -6px);
-            }
-            
-            .privacy-content {
-                padding: 30px;
-            }
-            
-            .footer-content {
-                flex-direction: column;
-            }
-        }
-
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 2rem;
-            }
-            
-            h2 {
-                font-size: 1.5rem;
-            }
-            
-            main {
-                padding: 40px 0;
-            }
-            
-            .nav-links {
-                top: 70px;
-                height: calc(100vh - 70px);
-            }
-            
-            .privacy-content {
-                padding: 20px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy | Zahan Store®</title>
+  <link rel="icon" href="favicon.png" type="image/png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <div class="container">
-            <div class="nav-container">
-                <a href="index.html" class="logo">
-                    <img src="logo.png" alt="Zahan Store">
-                </a>
-                <div class="menu-container">
-                    <nav>
-                        <ul class="nav-links">
-                            <li><a href="index.html">Home</a></li>
-                            <li><a href="index.html#about">About Us</a></li>
-                            <li><a href="index.html#contact">Contact</a></li>
-                        </ul>
-                    </nav>
-                    <button class="hamburger" aria-label="Menu">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </button>
-                </div>
-            </div>
+
+  <header>
+    <div class="container">
+      <div class="nav-container">
+        <a href="index.html" class="logo"><img src="logo.png" alt="Zahan Store"></a>
+        <div class="nav-tools">
+          <button class="mode-toggle" aria-label="Toggle theme"><i class="fas fa-sun"></i></button>
         </div>
-    </header>
-
-    <main>
-        <div class="container">
-            <h1>Privacy Policy</h1>
-            <div class="privacy-content">
-                <p>At Zahan Store, we are committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or make a purchase from us.</p>
-
-                <h2>1. Information We Collect</h2>
-                <p>We may collect the following types of information:</p>
-                <ul>
-                    <li><strong>Personal Information:</strong> Name, email address, phone number, shipping/billing address, payment information</li>
-                    <li><strong>Device Information:</strong> IP address, browser type, operating system</li>
-                    <li><strong>Usage Data:</strong> Pages visited, time spent on site, referring website</li>
-                    <li><strong>Cookies:</strong> We use cookies to enhance your browsing experience</li>
-                </ul>
-
-                <h2>2. How We Use Your Information</h2>
-                <p>We use the information we collect for the following purposes:</p>
-                <ul>
-                    <li>To process and fulfill your orders</li>
-                    <li>To communicate with you about your orders and account</li>
-                    <li>To improve our website and services</li>
-                    <li>To send marketing communications (if you've opted in)</li>
-                    <li>To prevent fraud and enhance security</li>
-                </ul>
-
-                <h2>3. Sharing Your Information</h2>
-                <p>We do not sell your personal information. We may share information with:</p>
-                <ul>
-                    <li>Payment processors to complete transactions</li>
-                    <li>Shipping carriers to deliver your orders</li>
-                    <li>Service providers who assist with our business operations</li>
-                    <li>When required by law or to protect our rights</li>
-                </ul>
-
-                <h2>4. Data Security</h2>
-                <p>We implement appropriate security measures to protect your personal information, including:</p>
-                <ul>
-                    <li>SSL encryption for all data transmissions</li>
-                    <li>Secure storage of sensitive information</li>
-                    <li>Regular security assessments</li>
-                </ul>
-                <p>However, no method of transmission over the Internet is 100% secure, and we cannot guarantee absolute security.</p>
-
-                <h2>5. Your Rights</h2>
-                <p>Depending on your location, you may have the following rights regarding your personal data:</p>
-                <ul>
-                    <li>Right to access the personal data we hold about you</li>
-                    <li>Right to request correction of inaccurate data</li>
-                    <li>Right to request deletion of your data</li>
-                    <li>Right to opt-out of marketing communications</li>
-                    <li>Right to restrict or object to processing</li>
-                </ul>
-                <p>To exercise these rights, please contact us at support@zahan.store</p>
-
-                <h2>6. Cookies and Tracking Technologies</h2>
-                <p>We use cookies and similar tracking technologies to:</p>
-                <ul>
-                    <li>Remember your preferences</li>
-                    <li>Analyze site traffic and usage patterns</li>
-                    <li>Deliver targeted advertisements (if you've consented)</li>
-                </ul>
-                <p>You can control cookies through your browser settings.</p>
-
-                <h2>7. Children's Privacy</h2>
-                <p>Our website is not intended for children under 13. We do not knowingly collect personal information from children under 13.</p>
-
-                <h2>8. Changes to This Policy</h2>
-                <p>We may update this Privacy Policy periodically. The updated version will be posted on our website with the effective date.</p>
-
-                <h2>9. Contact Us</h2>
-                <p>If you have any questions about this Privacy Policy, please contact us:</p>
-                <ul>
-                    <li>📧 Email: support@zahan.store</li>
-                </ul>
-
-                <div class="last-updated">
-                    <p>Last Updated: Jan 15, 2026</p>
-                </div>
-            </div>
+        <div class="menu-container">
+          <nav>
+            <ul class="nav-links">
+              <li><a href="index.html">Home</a></li>
+              <li><a href="index.html#about">About Us</a></li>
+              <li><a href="index.html#contact">Contact</a></li>
+              <li class="mobile-tools">
+                <button class="mode-toggle" aria-label="Toggle theme"><i class="fas fa-sun"></i></button>
+              </li>
+            </ul>
+          </nav>
+          <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
         </div>
-    </main>
+      </div>
+    </div>
+  </header>
 
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">
-                    <img src="logo.png" alt="Zahan Store">
-                </div>
-                <div class="footer-links">
-                    <h3>Quick Links</h3>
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="index.html#about">About Us</a></li>
-                        <li><a href="index.html#features">Features</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
-                        <li><a href="terms-and-conditions.html">Terms of Service</a></li>
-                        <li><a href="return-and-refund.html">Return and Refund</a></li>
-                        <li><a href="shipping-and-delivery.html">Shipping and Delivery</a></li>
-                    </ul>
-                </div>
-                <div class="footer-social">
-                    <h3>Connect With Us</h3>
-                    <div class="social-icons">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-pinterest-p"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>&copy; 2026 Zahan Store®. All rights reserved.</p>
-            </div>
+  <main>
+    <div class="page-hero">
+      <div class="container">
+        <span class="eyebrow">Legal</span>
+        <h1>Privacy <span class="grad-text">Policy</span></h1>
+        <p>How we collect, use, and protect your information</p>
+      </div>
+    </div>
+
+    <div class="policy-content container">
+      <span class="policy-meta"><i class="fas fa-calendar-alt"></i> Last Updated: January 15, 2026</span>
+
+      <p>At Zahan Store, we are committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or make a purchase from us.</p>
+
+      <h2>1. Information We Collect</h2>
+      <p>We may collect the following types of information:</p>
+      <ul>
+        <li><strong>Personal Information:</strong> Name, email address, phone number, shipping/billing address, payment information</li>
+        <li><strong>Device Information:</strong> IP address, browser type, operating system</li>
+        <li><strong>Usage Data:</strong> Pages visited, time spent on site, referring website</li>
+        <li><strong>Cookies:</strong> We use cookies to enhance your browsing experience</li>
+      </ul>
+
+      <h2>2. How We Use Your Information</h2>
+      <p>We use the information we collect for the following purposes:</p>
+      <ul>
+        <li>To process and fulfill your orders</li>
+        <li>To communicate with you about your orders and account</li>
+        <li>To improve our website and services</li>
+        <li>To send marketing communications (if you've opted in)</li>
+        <li>To prevent fraud and enhance security</li>
+      </ul>
+
+      <h2>3. Sharing Your Information</h2>
+      <p>We do not sell your personal information. We may share information with:</p>
+      <ul>
+        <li>Payment processors to complete transactions</li>
+        <li>Shipping carriers to deliver your orders</li>
+        <li>Service providers who assist with our business operations</li>
+        <li>When required by law or to protect our rights</li>
+      </ul>
+
+      <h2>4. Data Security</h2>
+      <p>We implement appropriate security measures to protect your personal information, including SSL encryption for all data transmissions, secure storage of sensitive information, and regular security assessments.</p>
+      <p>However, no method of transmission over the Internet is 100% secure, and we cannot guarantee absolute security.</p>
+
+      <h2>5. Your Rights</h2>
+      <p>Depending on your location, you may have the following rights regarding your personal data:</p>
+      <ul>
+        <li>Right to access the personal data we hold about you</li>
+        <li>Right to request correction of inaccurate data</li>
+        <li>Right to request deletion of your data</li>
+        <li>Right to opt-out of marketing communications</li>
+        <li>Right to restrict or object to processing</li>
+      </ul>
+      <p>To exercise these rights, please <a href="index.html#contact">contact us</a>.</p>
+
+      <h2>6. Cookies and Tracking Technologies</h2>
+      <p>We use cookies and similar tracking technologies to remember your preferences, analyze site traffic and usage patterns, and deliver targeted advertisements (if you've consented). You can control cookies through your browser settings.</p>
+
+      <h2>7. Children's Privacy</h2>
+      <p>Our website is not intended for children under 13. We do not knowingly collect personal information from children under 13.</p>
+
+      <h2>8. Changes to This Policy</h2>
+      <p>We may update this Privacy Policy periodically. The updated version will be posted on our website with the effective date.</p>
+
+      <h2>9. Contact Us</h2>
+      <p>If you have any questions about this Privacy Policy, please <a href="index.html#contact">contact us via our contact form</a>.</p>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid" style="grid-template-columns: repeat(3, 1fr);">
+        <div class="footer-col">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#about">About Us</a></li>
+            <li><a href="index.html#features">Features</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+          </ul>
         </div>
-    </footer>
+        <div class="footer-col">
+          <h3>Legal</h3>
+          <ul>
+            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="terms-and-conditions.html">Terms of Service</a></li>
+            <li><a href="return-and-refund.html">Return &amp; Refund</a></li>
+            <li><a href="shipping-and-delivery.html">Shipping &amp; Delivery</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Follow Us</h3>
+          <div class="social-list">
+            <a href="https://youtube.com/@ZahanStore" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            <a href="https://www.instagram.com/storezahan" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 ZahanStore®. All Rights Reserved.</p>
+        <p>Made with <span class="heart">♥</span> in Abu Dhabi, UAE</p>
+      </div>
+    </div>
+  </footer>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Mobile menu toggle
-            const hamburger = document.querySelector('.hamburger');
-            const navLinks = document.querySelector('.nav-links');
-            
-            hamburger.addEventListener('click', function() {
-                this.classList.toggle('active');
-                navLinks.classList.toggle('active');
-            });
-            
-            // Close mobile menu when clicking a link
-            const navItems = document.querySelectorAll('.nav-links a');
-            navItems.forEach(item => {
-                item.addEventListener('click', function() {
-                    if (navLinks.classList.contains('active')) {
-                        hamburger.classList.remove('active');
-                        navLinks.classList.remove('active');
-                    }
-                });
-            });
-            
-            // Smooth scrolling for anchor links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    
-                    const targetId = this.getAttribute('href');
-                    if (targetId === '#') return;
-                    
-                    const targetElement = document.querySelector(targetId);
-                    if (targetElement) {
-                        const headerHeight = document.querySelector('header').offsetHeight;
-                        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
-                        
-                        window.scrollTo({
-                            top: targetPosition,
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-            });
-        });
-    </script>
+  <script src="script.js"></script>
 </body>
 </html>
