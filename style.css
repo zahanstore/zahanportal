@@ -398,15 +398,31 @@ body.light-mode .gateway-section {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5));
+  /* No filter — drop-shadow blacks out background-clip text in many browsers */
 }
 
-/* Badge on hero */
-.gateway-section .platform-badge {
-  background: rgba(255,255,255,0.15);
-  border-color: rgba(255,255,255,0.35);
+/* Badge on hero — only the top "Est. 1996" badge, NOT card badges */
+.gateway-section > .container > .hero-text-block .platform-badge {
+  background: rgba(255,255,255,0.18);
+  border-color: rgba(255,255,255,0.40);
   color: #fff;
   backdrop-filter: blur(8px);
+}
+
+/* Card badges in hero: always readable — solid accent style */
+.gateway-card .platform-badge {
+  background: rgba(91,141,238,0.18);
+  border-color: rgba(91,141,238,0.45);
+  color: #a8c8ff;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+/* Light mode card badges: dark text on tinted bg */
+body.light-mode .gateway-card .platform-badge {
+  background: rgba(91,141,238,0.14);
+  border-color: rgba(91,141,238,0.40);
+  color: #2255bb;
 }
 
 .gateway-options {
