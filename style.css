@@ -23,7 +23,7 @@
 
   --text:         #eef0f8;
   --text-muted:   #7c859e;
-  --text-dim:     #4a5068;
+  --text-dim:     #6b7699;
 
   --nav-bg:       rgba(11,13,23,0.85);
   --shadow-sm:    0 2px 12px rgba(0,0,0,0.4);
@@ -1035,20 +1035,24 @@ footer {
   .nav-tools { display: none; }
 
   .nav-links {
+    display: flex;
     position: fixed;
     top: 72px;
     left: -100%;
     width: 100%;
-    height: calc(100svh - 72px);
+    height: calc(100vh - 72px);
+    height: calc(100dvh - 72px);
     background: var(--bg);
-    border-right: 1px solid var(--border);
+    border-top: 1px solid var(--border);
     flex-direction: column;
     align-items: flex-start;
     padding: 24px 20px;
     transition: left 0.3s ease;
-    z-index: 999;
+    z-index: 1100;
     overflow-y: auto;
+    overflow-x: hidden;
     gap: 4px;
+    box-shadow: 4px 0 24px rgba(0,0,0,0.3);
   }
 
   .nav-links.active { left: 0; }
@@ -1122,3 +1126,15 @@ footer {
 .fade-up-delay-2 { animation-delay: 0.2s; }
 .fade-up-delay-3 { animation-delay: 0.3s; }
 .fade-up-delay-4 { animation-delay: 0.4s; }
+
+/* ── LIGHT MODE — additional overrides for hardcoded dark backgrounds ── */
+body.light-mode .col-chapter-text          { background: #0f1120; }
+body.light-mode .col-chapter-visual        { filter: brightness(1.15); }
+body.light-mode footer                     { background: var(--surface); }
+body.light-mode .footer-col a              { color: var(--text-muted); }
+body.light-mode .footer-bottom p           { color: var(--text-muted); }
+body.light-mode .payment-icons             { color: var(--text-muted); }
+body.light-mode .dropdown-content         { background: var(--card); border-color: var(--border-light); }
+body.light-mode .dropdown-content a:hover { background: var(--card-hover); }
+body.light-mode .mode-toggle               { background: var(--card); border-color: var(--border-light); color: var(--text-muted); }
+

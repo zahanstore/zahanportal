@@ -11,16 +11,23 @@
 
 ## Pages
 
-| File | Route | Description |
-|------|-------|-------------|
-| `index.html` | `/` | Homepage — hero, about, manifesto, features, testimonials, contact overview |
-| `universe.html` | `/universe` | Zahan® Universe™ + all 3 Collections (GenX™, Signature™, Heritage™) — combined |
-| `faqs.html` | `/faqs` | Master FAQ — accordion, 5 categories, sticky tab nav |
-| `contact.html` | `/contact` | Contact page — 4 routed email channels + Supabase form |
-| `legal.html` | `/legal` | Legal Centre — Privacy, Terms, Returns & Shipping in one sticky-sidebar page |
+5 active pages. That's it. Easy to maintain. ✅
 
-> **Retired pages** (replaced by consolidated pages above):
-> `zahan-universe.html`, `collections.html`, `privacy-policy.html`, `terms-and-conditions.html`, `return-and-refund.html`, `shipping-and-delivery.html`
+| File | Route | Purpose |
+|------|-------|---------|
+| `index.html` | `/` | Homepage — hero, about, manifesto, features, testimonials, newsletter, contact preview |
+| `universe.html` | `/universe` | Zahan® Universe™ story + all 3 collections (GenX™ · Signature™ · Heritage™) |
+| `legal.html` | `/legal` | Legal Centre — Privacy · Terms · Returns · Shipping, all with sticky sidebar nav |
+| `faqs.html` | `/faqs` | Master FAQ — 5 accordion sections, sticky tab nav |
+| `contact.html` | `/contact` | Contact — 4 routed email channels + Supabase-powered form |
+
+### Retired (deleted from repo)
+`zahan-universe.html` → `universe.html`  
+`collections.html` → `universe.html#collections`  
+`privacy-policy.html` → `legal.html#privacy`  
+`terms-and-conditions.html` → `legal.html#terms`  
+`return-and-refund.html` → `legal.html#refund`  
+`shipping-and-delivery.html` → `legal.html#shipping`
 
 ---
 
@@ -191,6 +198,26 @@ This repo auto-deploys to Vercel on every push to `main`.
 - **Hero text-shadow rule:** Never add `filter: drop-shadow()` or inherited `text-shadow` to `.grad-text` spans — it blackens gradient-clip text across browsers. Use a scrim/backdrop element instead.
 
 ---
+
+
+## Cloudflare Email Protection
+
+Cloudflare's "Email Address Obfuscation" feature automatically rewrites `mailto:` links in HTML with garbled `/cdn-cgi/l/email-protection#...` URLs. This breaks all email links.
+
+**Fix (one-time, 2 minutes):**
+1. Log in to [dash.cloudflare.com](https://dash.cloudflare.com)
+2. Select your `zahan.one` domain
+3. Go to **Scrape Shield** (left sidebar)
+4. Toggle **Email Address Obfuscation → OFF**
+5. Save
+
+**Code-side protection (already implemented):**  
+All emails in HTML are stored as `data-u` / `data-d` attributes instead of raw `mailto:` links. `script.js` assembles them at runtime so Cloudflare's HTML scraper never sees a recognisable email pattern.
+
+```html
+<!-- How emails are written in HTML — CF cannot detect this -->
+<a href="#" data-u="support" data-d="mail.zahan.one" data-email>support@mail.zahan.one</a>
+```
 
 ## Brand Details
 
