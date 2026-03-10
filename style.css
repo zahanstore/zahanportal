@@ -383,7 +383,7 @@ body.light-mode .gateway-section {
     0 2px 4px  rgba(0,0,0,0.90),
     0 4px 24px rgba(0,0,0,0.60),
     0 0  48px  rgba(0,0,0,0.35);
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.2rem;
 }
 
 .gateway-section .subtitle {
@@ -404,7 +404,7 @@ body.light-mode .gateway-section {
   display: block;
   width: 100%;
   box-sizing: border-box;
-  padding: 1.1rem 2rem 0.9rem;
+  padding: 0.6rem 2rem 0.6rem;
   border-radius: var(--radius-lg);
   background: rgba(10, 13, 28, 0.76);
   backdrop-filter: blur(18px);
@@ -498,7 +498,7 @@ body.light-mode .gateway-card .platform-badge {
   -webkit-backdrop-filter: blur(18px);
   border: 1px solid rgba(255,255,255,0.15);
   border-radius: var(--radius-lg);
-  padding: 1.1rem 1.5rem 1.25rem;
+  padding: 0.9rem 1.4rem 0.9rem;
   width: 100%;
   max-width: 420px;
   text-align: center;
@@ -541,14 +541,14 @@ body.light-mode .gateway-card {
 .gateway-card:hover::before { opacity: 1; }
 
 .gateway-card > * { position: relative; z-index: 1; }
-.gateway-card h2 { font-size: 1.6rem; margin-bottom: 0.25rem; color: #fff; }
+.gateway-card h2 { font-size: 1.3rem; margin-bottom: 0.15rem; color: #fff; }
 .gateway-card .region {
   font-size: 0.78rem;
   color: rgba(255,255,255,0.55);
   margin-bottom: 0.75rem;
   letter-spacing: 0.03em;
 }
-.gateway-card p { font-size: 0.9rem; margin-bottom: 1.5rem; color: rgba(255,255,255,0.72); }
+.gateway-card p { font-size: 0.82rem; margin-bottom: 0.6rem; color: rgba(255,255,255,0.72); }
 
 /* Light mode cards: white text — cards are dark glass on a photo */
 body.light-mode .gateway-card h2    { color: #ffffff; }
@@ -878,7 +878,7 @@ body.light-mode .about-image img {
   padding: 12px 18px;
   border-radius: var(--radius-md);
   font-size: 0.9rem;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.2rem;
 }
 .form-message.success { background: rgba(52,211,153,0.12); border: 1px solid rgba(52,211,153,0.3); color: #34d399; }
 .form-message.error { background: rgba(239,68,68,0.12); border: 1px solid rgba(239,68,68,0.3); color: #ef4444; }
@@ -1024,7 +1024,7 @@ footer {
 
 .policy-content ul, .policy-content ol {
   padding-left: 1.5rem;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.2rem;
 }
 
 .policy-content ul li { list-style: disc; }
