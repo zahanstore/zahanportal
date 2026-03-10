@@ -6,10 +6,205 @@
   <title>Contact Us | Zahan Store®</title>
   <link rel="icon" href="favicon.png" type="image/png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* ── CONTACT CHANNEL CARDS ── */
+    .channel-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 4rem;
+    }
+
+    .channel-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem 1.5rem;
+      transition: all 0.25s;
+      cursor: default;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .channel-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--ch-color);
+      border-radius: 3px 3px 0 0;
+      opacity: 0.8;
+    }
+
+    .channel-card:hover {
+      border-color: var(--ch-color);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 36px rgba(0,0,0,0.15);
+    }
+
+    .channel-icon {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+      margin-bottom: 1.1rem;
+      background: color-mix(in srgb, var(--ch-color) 15%, transparent);
+      color: var(--ch-color);
+    }
+
+    .channel-card h3 {
+      font-family: var(--font-head);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.4rem;
+    }
+
+    .channel-card .ch-desc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 1rem;
+    }
+
+    .channel-card .ch-email {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-family: var(--font-head);
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--ch-color);
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: 100px;
+      background: color-mix(in srgb, var(--ch-color) 10%, transparent);
+      border: 1px solid color-mix(in srgb, var(--ch-color) 30%, transparent);
+      transition: background 0.2s;
+      word-break: break-all;
+    }
+    .channel-card .ch-email:hover {
+      background: color-mix(in srgb, var(--ch-color) 18%, transparent);
+    }
+
+    /* Department select inside form */
+    .dept-select-wrap {
+      position: relative;
+    }
+    .dept-select-wrap select {
+      appearance: none;
+      width: 100%;
+      padding: 12px 44px 12px 16px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text);
+      font-family: var(--font-head);
+      font-size: 0.92rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+    .dept-select-wrap select:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+    .dept-select-wrap::after {
+      content: "\f078";
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
+      position: absolute;
+      right: 14px; top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      pointer-events: none;
+      font-size: 0.72rem;
+    }
+
+    /* Routing hint under select */
+    .dept-hint {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 8px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      min-height: 36px;
+      transition: all 0.2s;
+    }
+    .dept-hint .hint-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    /* Location cards */
+    .location-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      margin-top: 1.5rem;
+    }
+    .location-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+    }
+    .location-card h4 {
+      font-family: var(--font-head);
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+    .location-card p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* Status banner */
+    .status-banner {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 18px;
+      border-radius: 12px;
+      background: rgba(52,211,153,0.1);
+      border: 1px solid rgba(52,211,153,0.25);
+      margin-bottom: 2rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    .status-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: #34d399;
+      box-shadow: 0 0 0 3px rgba(52,211,153,0.25);
+      flex-shrink: 0;
+      animation: pulse-green 2s infinite;
+    }
+    @keyframes pulse-green {
+      0%, 100% { box-shadow: 0 0 0 3px rgba(52,211,153,0.25); }
+      50%       { box-shadow: 0 0 0 6px rgba(52,211,153,0.1); }
+    }
+
+    @media (max-width: 640px) {
+      .channel-grid   { grid-template-columns: 1fr; }
+      .location-grid  { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
-  <!-- HEADER — identical to index.html -->
+  <!-- ── HEADER ── -->
   <header>
     <div class="container">
       <div class="nav-container">
@@ -42,52 +237,105 @@
       </div>
     </div>
   </header>
+
   <main>
+    <!-- ── PAGE HERO ── -->
     <div class="page-hero">
       <div class="container">
         <span class="eyebrow">Get In Touch</span>
-        <h1>Contact <span class="grad-text">Details</span></h1>
-        <p>We&apos;re here to help &mdash; real humans, real replies within 2&ndash;3 business days &#128522;</p>
+        <h1>Contact <span class="grad-text">Us</span></h1>
+        <p>Real humans, real replies — within 2&ndash;3 business days 😊</p>
       </div>
     </div>
-    <section style="padding:60px 0;">
+
+    <section style="padding: 60px 0 80px;">
       <div class="container">
-        <div class="contact-grid">
+
+        <!-- ── STATUS ── -->
+        <div class="status-banner fade-up">
+          <span class="status-dot"></span>
+          <span><strong>All channels active</strong> &nbsp;·&nbsp; Our team is online and responding to messages. Response time: 2–3 business days.</span>
+        </div>
+
+        <!-- ── CHANNEL CARDS ── -->
+        <div class="section-title fade-up" style="margin-bottom:2rem;">
+          <span class="eyebrow">Contact Channels</span>
+          <h2>Reach the <span class="grad-text">Right Team</span></h2>
+          <p>Every message goes directly to the team that can help you best.</p>
+        </div>
+
+        <div class="channel-grid fade-up">
+
+          <div class="channel-card" style="--ch-color:#60c0ff;">
+            <div class="channel-icon"><i class="fas fa-truck"></i></div>
+            <h3>Support & Orders</h3>
+            <p class="ch-desc">Delivery issues, refunds, returns, and order tracking. Get help with physical orders and logistics.</p>
+            <a href="mailto:support@mail.zahan.one" class="ch-email">
+              <i class="fas fa-envelope"></i> support@mail.zahan.one
+            </a>
+          </div>
+
+          <div class="channel-card" style="--ch-color:#a78bfa;">
+            <div class="channel-icon"><i class="fas fa-heart"></i></div>
+            <h3>Brand &amp; Feedback</h3>
+            <p class="ch-desc">General suggestions, brand feedback, collaborations, and ideas for improving our collections.</p>
+            <a href="mailto:store@mail.zahan.one" class="ch-email">
+              <i class="fas fa-envelope"></i> store@mail.zahan.one
+            </a>
+          </div>
+
+          <div class="channel-card" style="--ch-color:#e879f9;">
+            <div class="channel-icon"><i class="fas fa-scale-balanced"></i></div>
+            <h3>Legal &amp; Policy</h3>
+            <p class="ch-desc">Policy questions, legal matters, data rights requests, and compliance inquiries.</p>
+            <a href="mailto:legal@mail.zahan.one" class="ch-email">
+              <i class="fas fa-envelope"></i> legal@mail.zahan.one
+            </a>
+          </div>
+
+          <div class="channel-card" style="--ch-color:#34d399;">
+            <div class="channel-icon"><i class="fas fa-users"></i></div>
+            <h3>HR &amp; Careers</h3>
+            <p class="ch-desc">Joining the team, career opportunities, internships, and everything about working with Zahan.</p>
+            <a href="mailto:hr@mail.zahan.one" class="ch-email">
+              <i class="fas fa-envelope"></i> hr@mail.zahan.one
+            </a>
+          </div>
+
+        </div>
+
+        <!-- ── CONTACT FORM + SIDEBAR ── -->
+        <div class="contact-grid" style="margin-top:1rem;">
+
+          <!-- Left: offices + socials -->
           <div class="contact-info fade-up">
             <div class="section-title" style="text-align:left;margin-bottom:2rem;">
-              <span class="eyebrow">Reach Us</span>
+              <span class="eyebrow">Find Us</span>
               <h2>Our <span class="grad-text">Offices</span></h2>
             </div>
-            <div class="contact-info-item">
-              <div class="contact-info-icon"><i class="fas fa-envelope"></i></div>
-              <div>
-                <h4>Email</h4>
-                <p>Send us a message anytime</p>
-                <p><a href="/cdn-cgi/l/email-protection#92faf7fefefdd2e8f3faf3fcbcfdfcf7" style="color:var(--accent);"><span class="__cf_email__" data-cfemail="e088858c8c8fa09a8188818ece8f8e85">[email&#160;protected]</span></a></p>
+
+            <div class="location-grid">
+              <div class="location-card">
+                <h4><i class="fas fa-building" style="color:var(--accent);margin-right:8px;"></i>Mumbai</h4>
+                <p>CozyHouse, Seven Bungalows,<br>Andheri West,<br>Mumbai 400061, India</p>
+              </div>
+              <div class="location-card">
+                <h4><i class="fas fa-city" style="color:var(--accent2);margin-right:8px;"></i>UAE</h4>
+                <p>Belhol Building,<br>Al Gharoud, Dubai,<br>UAE &mdash; 36050</p>
               </div>
             </div>
-            <div class="contact-info-item">
-              <div class="contact-info-icon"><i class="fas fa-building"></i></div>
-              <div>
-                <h4>Mumbai Office</h4>
-                <p>CozyHouse, Seven Bungalows,<br>Andheri West, Mumbai 400061</p>
-              </div>
-            </div>
-            <div class="contact-info-item">
-              <div class="contact-info-icon"><i class="fas fa-city"></i></div>
-              <div>
-                <h4>UAE Office</h4>
-                <p>Belhol Building, Al Gharoud,<br>Dubai, UAE &mdash; 36050</p>
-              </div>
-            </div>
-            <div class="contact-info-item">
-              <div class="contact-info-icon"><i class="fas fa-clock"></i></div>
-              <div>
-                <h4>Response Time</h4>
-                <p>We reply within 2&ndash;3 business days</p>
-              </div>
-            </div>
+
             <div style="margin-top:2rem;">
+              <div class="contact-info-item">
+                <div class="contact-info-icon"><i class="fas fa-clock"></i></div>
+                <div>
+                  <h4>Response Time</h4>
+                  <p>We reply within 2&ndash;3 business days across all channels</p>
+                </div>
+              </div>
+            </div>
+
+            <div style="margin-top:1.5rem;">
               <p style="font-size:0.82rem;margin-bottom:1rem;font-family:var(--font-head);font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);">Follow Us</p>
               <div class="social-list">
                 <a href="https://youtube.com/@ZahanStore" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
@@ -96,50 +344,78 @@
               </div>
             </div>
           </div>
+
+          <!-- Right: form -->
           <div class="fade-up fade-up-delay-2">
             <div class="contact-form-container" style="margin:0;">
               <div class="section-title" style="text-align:left;margin-bottom:1.75rem;">
                 <span class="eyebrow">Send a Message</span>
                 <h2>Write to <span class="grad-text">Us</span></h2>
               </div>
-              <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="contact-form">
-                <input type="hidden" name="form-name" value="contact">
-                <p style="display:none;"><label>Do not fill this out: <input name="bot-field"></label></p>
+
+              <!-- SUPABASE FORM -->
+              <form id="contact-form" autocomplete="off" novalidate>
                 <div id="form-message" class="form-message hidden"></div>
+
                 <div class="form-group">
-                  <label for="name">Name</label>
-                  <input type="text" id="name" name="name" placeholder="Your full name" required>
+                  <label for="c-name">Name</label>
+                  <input type="text" id="c-name" name="name" placeholder="Your full name" required>
                 </div>
+
                 <div class="form-group">
-                  <label for="email">Email</label>
-                  <input type="email" id="email" name="email" placeholder="you@example.com" required>
+                  <label for="c-email">Email</label>
+                  <input type="email" id="c-email" name="email" placeholder="you@example.com" required>
                 </div>
+
                 <div class="form-group">
-                  <label for="subject">Subject</label>
-                  <input type="text" id="subject" name="subject" placeholder="How can we help?" required>
+                  <label for="c-dept">Department</label>
+                  <div class="dept-select-wrap">
+                    <select id="c-dept" name="department" required>
+                      <option value="">— Select a topic —</option>
+                      <option value="support">Support &amp; Orders (delivery, refunds, returns)</option>
+                      <option value="store">Brand &amp; Feedback (suggestions, collaborations)</option>
+                      <option value="legal">Legal &amp; Policy (data rights, compliance)</option>
+                      <option value="hr">HR &amp; Careers (jobs, internships)</option>
+                    </select>
+                  </div>
+                  <div class="dept-hint" id="dept-hint">
+                    <span class="hint-dot"></span>
+                    <span id="hint-text">Select a department to see where your message goes</span>
+                  </div>
                 </div>
+
                 <div class="form-group">
-                  <label for="message">Message</label>
-                  <textarea id="message" name="message" rows="5" placeholder="Tell us more..." required></textarea>
+                  <label for="c-subject">Subject</label>
+                  <input type="text" id="c-subject" name="subject" placeholder="Brief subject line" required>
                 </div>
-                <div data-netlify-recaptcha="true"></div>
-                <button type="submit" class="cta-button" style="width:100%;padding:14px;font-size:1rem;justify-content:center;">
+
+                <div class="form-group">
+                  <label for="c-message">Message</label>
+                  <textarea id="c-message" name="message" rows="5" placeholder="Tell us more..." required></textarea>
+                </div>
+
+                <button type="submit" class="cta-button" style="width:100%;padding:14px;font-size:1rem;justify-content:center;" id="submit-btn">
                   Send Message <i class="fas fa-paper-plane"></i>
                 </button>
               </form>
+
               <div id="thank-you-message" class="hidden" style="text-align:center;padding:3rem 1rem;">
-                <div style="font-size:2.5rem;margin-bottom:1rem;">&#9993;&#65039;</div>
+                <div style="font-size:2.5rem;margin-bottom:1rem;">✉️</div>
                 <h3 style="margin-bottom:0.75rem;">Message Received!</h3>
-                <p>We&apos;ll get back to you within 2&ndash;3 business days.</p>
-                <button onclick="resetForm()" class="btn-secondary" style="margin-top:1.5rem;">Send Another</button>
+                <p style="margin-bottom:0.5rem;">We&apos;ll get back to you within 2&ndash;3 business days.</p>
+                <p id="ty-dept" style="font-size:0.85rem;color:var(--accent);"></p>
+                <button onclick="resetContactForm()" class="btn-secondary" style="margin-top:1.5rem;">Send Another</button>
               </div>
+
             </div>
           </div>
+
         </div>
       </div>
     </section>
   </main>
-  <!-- FOOTER — identical to index.html -->
+
+  <!-- ── FOOTER ── -->
   <footer>
     <div class="container">
       <div class="footer-grid">
@@ -167,7 +443,7 @@
             <li><a href="index.html#features">Features</a></li>
             <li><a href="faqs.html">FAQ&apos;s</a></li>
             <li><a href="index.html#about">About Us</a></li>
-            <li><a href="index.html#contact">Contact Us</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
             <li><a href="privacy-policy.html">Privacy Policy</a></li>
             <li><a href="terms-and-conditions.html">Terms of Service</a></li>
             <li><a href="return-and-refund.html">Return &amp; Refund</a></li>
@@ -190,11 +466,108 @@
       </div>
       <div class="footer-bottom">
         <div class="payment-icons">
-          <i class="fab fa-cc-visa"></i>
-          <i class="fab fa-cc-mastercard"></i>
-          <i class="fab fa-cc-amex"></i>
-          <i class="fab fa-cc-paypal"></i>
+          <i class="fab fa-cc-visa"></i><i class="fab fa-cc-mastercard"></i>
+          <i class="fab fa-cc-amex"></i><i class="fab fa-cc-paypal"></i>
           <i class="fab fa-cc-discover"></i>
         </div>
         <p>&copy; 2026 ZahanStore&reg;. All Rights Reserved.</p>
-        <p>Made with <span class="heart"
+        <p>Made with <span class="heart">&hearts;</span> in Abu Dhabi, UAE</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+
+  <!-- ── SUPABASE CDN ── -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script>
+    // ╔══════════════════════════════════════════════╗
+    // ║  SUPABASE CONFIG — fill in your credentials  ║
+    // ║  Go to: supabase.com → Project Settings      ║
+    // ║  → API → Project URL & anon key              ║
+    // ╚══════════════════════════════════════════════╝
+    const SUPABASE_URL  = 'YOUR_SUPABASE_PROJECT_URL';
+    const SUPABASE_ANON = 'YOUR_SUPABASE_ANON_KEY';
+    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
+
+    // Department routing map
+    const DEPT_MAP = {
+      support: { label: 'Support & Orders',   email: 'support@mail.zahan.one', color: '#60c0ff' },
+      store:   { label: 'Brand & Feedback',   email: 'store@mail.zahan.one',   color: '#a78bfa' },
+      legal:   { label: 'Legal & Policy',     email: 'legal@mail.zahan.one',   color: '#e879f9' },
+      hr:      { label: 'HR & Careers',       email: 'hr@mail.zahan.one',      color: '#34d399' },
+    };
+
+    // Live dept hint
+    document.getElementById('c-dept').addEventListener('change', function () {
+      const dept = DEPT_MAP[this.value];
+      const hintText = document.getElementById('hint-text');
+      const hintDot  = document.querySelector('.hint-dot');
+      if (dept) {
+        hintText.textContent = 'Your message will go to ' + dept.email;
+        hintDot.style.background = dept.color;
+      } else {
+        hintText.textContent = 'Select a department to see where your message goes';
+        hintDot.style.background = 'var(--accent)';
+      }
+    });
+
+    // Form submit → Supabase
+    document.getElementById('contact-form').addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const btn = document.getElementById('submit-btn');
+      btn.disabled = true;
+      btn.innerHTML = 'Sending... <i class="fas fa-spinner fa-spin"></i>';
+
+      const deptKey  = document.getElementById('c-dept').value;
+      const deptInfo = DEPT_MAP[deptKey] || {};
+
+      const payload = {
+        name:        document.getElementById('c-name').value.trim(),
+        email:       document.getElementById('c-email').value.trim(),
+        department:  deptKey,
+        routed_to:   deptInfo.email || null,
+        subject:     document.getElementById('c-subject').value.trim(),
+        message:     document.getElementById('c-message').value.trim(),
+        created_at:  new Date().toISOString(),
+      };
+
+      try {
+        const { error } = await supabase
+          .from('contact_messages')
+          .insert([payload]);
+
+        if (error) throw error;
+
+        // Show thank-you
+        document.getElementById('contact-form').classList.add('hidden');
+        document.getElementById('thank-you-message').classList.remove('hidden');
+        if (deptInfo.label) {
+          document.getElementById('ty-dept').textContent =
+            'Your message has been routed to our ' + deptInfo.label + ' team.';
+        }
+      } catch (err) {
+        btn.disabled = false;
+        btn.innerHTML = 'Send Message <i class="fas fa-paper-plane"></i>';
+        const msg = document.getElementById('form-message');
+        msg.textContent = 'Something went wrong. Please email us directly at support@mail.zahan.one';
+        msg.classList.remove('hidden');
+        msg.style.color = '#f87171';
+        console.error('Supabase error:', err);
+      }
+    });
+
+    function resetContactForm() {
+      document.getElementById('contact-form').reset();
+      document.getElementById('contact-form').classList.remove('hidden');
+      document.getElementById('thank-you-message').classList.add('hidden');
+      document.getElementById('hint-text').textContent = 'Select a department to see where your message goes';
+      document.querySelector('.hint-dot').style.background = 'var(--accent)';
+      document.getElementById('submit-btn').disabled = false;
+      document.getElementById('submit-btn').innerHTML = 'Send Message <i class="fas fa-paper-plane"></i>';
+      document.getElementById('form-message').classList.add('hidden');
+    }
+  </script>
+</body>
+</html>

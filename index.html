@@ -326,44 +326,52 @@
     <!-- ── CONTACT ── -->
     <section id="contact" class="contact-section">
       <div class="container">
-        <div class="section-title">
+        <div class="section-title fade-up">
           <span class="eyebrow">Get In Touch</span>
           <h2>Contact <span class="grad-text">Us</span></h2>
-          <p>We know you're a real human with questions. We'll reply within 2–3 business days. 😊</p>
+          <p>We have dedicated teams for every type of query. Every message reaches exactly the right person. 😊</p>
         </div>
-        <div class="contact-form-container fade-up">
-          <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="contact-form">
-            <input type="hidden" name="form-name" value="contact">
-            <p style="display:none;"><label>Don't fill this out: <input name="bot-field"></label></p>
-            <div id="form-message" class="form-message hidden"></div>
-            <div class="form-group">
-              <label for="name">Name</label>
-              <input type="text" id="name" name="name" placeholder="Your full name" required>
-            </div>
-            <div class="form-group">
-              <label for="email">Email</label>
-              <input type="email" id="email" name="email" placeholder="you@example.com" required>
-            </div>
-            <div class="form-group">
-              <label for="subject">Subject</label>
-              <input type="text" id="subject" name="subject" placeholder="How can we help?" required>
-            </div>
-            <div class="form-group">
-              <label for="message">Message</label>
-              <textarea id="message" name="message" rows="5" placeholder="Tell us more..." required></textarea>
-            </div>
-            <div data-netlify-recaptcha="true"></div>
-            <button type="submit" class="cta-button" style="width:100%;padding:14px;font-size:1rem;justify-content:center;">
-              Send Message <i class="fas fa-paper-plane"></i>
-            </button>
-          </form>
-          <div id="thank-you-message" class="hidden" style="text-align:center;padding:3rem 1rem;">
-            <div style="font-size:2.5rem;margin-bottom:1rem;">✉️</div>
-            <h3 style="margin-bottom:0.75rem;">Message Received!</h3>
-            <p>We'll get back to you within 2–3 business days.</p>
-            <button onclick="resetForm()" class="btn-secondary" style="margin-top:1.5rem;">Send Another</button>
-          </div>
+
+        <!-- 4 channel cards -->
+        <div class="fade-up" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.25rem;margin-bottom:2.5rem;">
+
+          <a href="contact.html" class="card" style="text-decoration:none;padding:1.5rem;display:block;border-left:3px solid #60c0ff;">
+            <div style="font-size:1.4rem;margin-bottom:0.75rem;">📦</div>
+            <h4 style="font-family:var(--font-head);font-size:0.9rem;font-weight:700;color:var(--text);margin-bottom:0.35rem;">Support &amp; Orders</h4>
+            <p style="font-size:0.78rem;color:var(--text-muted);margin-bottom:0.75rem;">Delivery, refunds &amp; returns</p>
+            <span style="font-size:0.75rem;color:#60c0ff;font-weight:600;">support@mail.zahan.one</span>
+          </a>
+
+          <a href="contact.html" class="card" style="text-decoration:none;padding:1.5rem;display:block;border-left:3px solid #a78bfa;">
+            <div style="font-size:1.4rem;margin-bottom:0.75rem;">💜</div>
+            <h4 style="font-family:var(--font-head);font-size:0.9rem;font-weight:700;color:var(--text);margin-bottom:0.35rem;">Brand &amp; Feedback</h4>
+            <p style="font-size:0.78rem;color:var(--text-muted);margin-bottom:0.75rem;">Suggestions &amp; collaborations</p>
+            <span style="font-size:0.75rem;color:#a78bfa;font-weight:600;">store@mail.zahan.one</span>
+          </a>
+
+          <a href="contact.html" class="card" style="text-decoration:none;padding:1.5rem;display:block;border-left:3px solid #e879f9;">
+            <div style="font-size:1.4rem;margin-bottom:0.75rem;">⚖️</div>
+            <h4 style="font-family:var(--font-head);font-size:0.9rem;font-weight:700;color:var(--text);margin-bottom:0.35rem;">Legal &amp; Policy</h4>
+            <p style="font-size:0.78rem;color:var(--text-muted);margin-bottom:0.75rem;">Data rights &amp; compliance</p>
+            <span style="font-size:0.75rem;color:#e879f9;font-weight:600;">legal@mail.zahan.one</span>
+          </a>
+
+          <a href="contact.html" class="card" style="text-decoration:none;padding:1.5rem;display:block;border-left:3px solid #34d399;">
+            <div style="font-size:1.4rem;margin-bottom:0.75rem;">🌿</div>
+            <h4 style="font-family:var(--font-head);font-size:0.9rem;font-weight:700;color:var(--text);margin-bottom:0.35rem;">HR &amp; Careers</h4>
+            <p style="font-size:0.78rem;color:var(--text-muted);margin-bottom:0.75rem;">Jobs &amp; joining the team</p>
+            <span style="font-size:0.75rem;color:#34d399;font-weight:600;">hr@mail.zahan.one</span>
+          </a>
+
         </div>
+
+        <div style="text-align:center;" class="fade-up">
+          <a href="contact.html" class="btn-primary" style="display:inline-flex;align-items:center;gap:10px;font-size:1rem;padding:16px 36px;">
+            Open Full Contact Page <i class="fas fa-arrow-right"></i>
+          </a>
+          <p style="margin-top:1rem;font-size:0.82rem;color:var(--text-muted);">We reply within 2–3 business days across all channels</p>
+        </div>
+
       </div>
     </section>
 
