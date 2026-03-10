@@ -369,7 +369,11 @@ body.light-mode .gateway-section {
 .gateway-section::before { display: none; }
 .gateway-section::after  { display: none; }
 
-.gateway-section .container { position: relative; z-index: 1; }
+.gateway-section .container {
+  position: relative;
+  z-index: 1;
+  max-width: 780px;   /* narrower than global 1200px — lets photo breathe on both sides */
+}
 
 /* Text always readable on photo — both modes */
 .gateway-section h1 {
