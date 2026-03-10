@@ -170,4 +170,67 @@
   });
 
 
+  /* ── ACTIVE NAV INDICATOR ── */
+  (function () {
+    var page    = window.location.pathname.split('/').pop() || 'index.html';
+    var hash    = window.location.hash;
+
+    // Map filenames → which nav link href to activate
+    var pageMap = {
+      'index.html':    null,          // handled by scroll below
+      '':              null,
+      'universe.html': 'universe.html',
+      'faqs.html':     'faqs.html',
+      'contact.html':  'contact.html',
+      'legal.html':    'legal.html',
+    };
+
+    function setActive(href) {
+      document.querySelectorAll('.nav-links a').forEach(function (a) {
+        a.classList.remove('active');
+        // Match by href ending or exact
+        if (a.getAttribute('href') === href ||
+            a.getAttribute('href') && a.getAttribute('href').endsWith(href)) {
+          a.classList.add('active');
+        }
+      });
+    }
+
+    // Non-homepage: highlight matching nav link
+    if (page !== 'index.html' && page !== '') {
+      var target = pageMap[page] || page;
+      setActive(target);
+    }
+
+    // Homepage: highlight by scroll position
+    if (page === 'index.html' || page === '') {
+      var sections = ['gateway','about','manifesto','features','contact'];
+      var navMap   = {
+        'gateway':   '#gateway',
+        'about':     '#about',
+        'manifesto': '#manifesto',
+        'features':  '#features',
+        'contact':   '#contact',
+      };
+
+      // Set initial from hash
+      if (hash) setActive(hash);
+      else setActive('#gateway');
+
+      var scrollTimer;
+      window.addEventListener('scroll', function () {
+        clearTimeout(scrollTimer);
+        scrollTimer = setTimeout(function () {
+          var current = 'gateway';
+          sections.forEach(function (id) {
+            var el = document.getElementById(id);
+            if (el && el.getBoundingClientRect().top <= 120) current = id;
+          });
+          setActive(navMap[current] || ('#' + current));
+        }, 60);
+      }, { passive: true });
+    }
+  })();
+
+
 })();
