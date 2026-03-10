@@ -398,7 +398,8 @@ body.light-mode .gateway-section {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  /* No filter — drop-shadow blacks out background-clip text in many browsers */
+  /* Must override parent h1 text-shadow — shadow bleeds through transparent fill */
+  text-shadow: none;
 }
 
 /* Badge on hero — only the top "Est. 1996" badge, NOT card badges */
