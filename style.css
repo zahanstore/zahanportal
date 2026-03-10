@@ -383,47 +383,51 @@ body.light-mode .gateway-section {
 }
 
 .gateway-section .subtitle {
-  font-size: 1.1rem;
-  color: #ffffff;
+  font-size: 1.2rem;
+  font-family: var(--font-head);
+  font-weight: 600;
+  color: rgba(255,255,255,0.92);
+  letter-spacing: 0.03em;
   text-shadow:
     0 1px 3px  rgba(0,0,0,0.95),
-    0 3px 16px rgba(0,0,0,0.65);
-  max-width: 540px;
+    0 3px 20px rgba(0,0,0,0.70);
+  max-width: 480px;
   margin: 0 auto 2.5rem;
 }
 
 /* Scrim pill sitting behind the headline block for extra safety */
 .gateway-section .hero-text-block {
   display: inline-block;
-  padding: 1.5rem 2.5rem 0.5rem;
+  padding: 1.75rem 2.75rem 1rem;
   border-radius: var(--radius-xl);
-  background: rgba(0,0,0,0.28);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  background: rgba(0,0,0,0.52);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255,255,255,0.08);
 }
 
-/* Grad text on hero: brighter so it pops on any photo tone */
+/* Grad text on hero: vivid + readable on any photo */
 .gateway-section .grad-text {
-  /* Vivid electric blue → hot violet — rich & punchy on any background */
   background: linear-gradient(135deg,
-    #60c0ff 0%,
-    #a78bfa 55%,
-    #e879f9 100%
+    #93d4ff 0%,
+    #c4a8ff 45%,
+    #f0a0ff 100%
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  text-shadow: none; /* never inherit parent shadow — kills clip */
+  text-shadow: none; /* never inherit — kills clip */
   position: relative;
   display: inline-block;
+  filter: drop-shadow(0 0 18px rgba(160,130,255,0.55));
 }
 
-/* Luminous glow behind the gradient text — no filter needed */
+/* Deeper glow bloom behind gradient text */
 .gateway-section .grad-text::after {
   content: '';
   position: absolute;
-  inset: -8px -16px;
-  background: radial-gradient(ellipse, rgba(120,160,255,0.22) 0%, transparent 70%);
+  inset: -12px -20px;
+  background: radial-gradient(ellipse, rgba(140,100,255,0.30) 0%, transparent 68%);
   border-radius: 50%;
   pointer-events: none;
   z-index: -1;
