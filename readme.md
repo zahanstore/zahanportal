@@ -1,2 +1,0 @@
-# zahanportal
-zahan Portal gateway 
