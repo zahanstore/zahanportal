@@ -779,56 +779,43 @@
 
   <script src="script.js"></script>
   <script>
-    // ── FAQ Accordion ──
-    document.querySelectorAll('.faq-question').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const item   = btn.closest('.faq-item');
-        const answer = item.querySelector('.faq-answer');
-        const isOpen = item.classList.contains('open');
-        item.closest('.faq-list').querySelectorAll('.faq-item.open').forEach(o => {
-          o.classList.remove('open');
-          o.querySelector('.faq-answer').style.maxHeight = '0';
+    document.addEventListener('DOMContentLoaded', function() {
+
+      // ── FAQ Accordion ──
+      document.querySelectorAll('.faq-question').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          const item   = btn.closest('.faq-item');
+          const answer = item.querySelector('.faq-answer');
+          const isOpen = item.classList.contains('open');
+          // Close all in same list
+          item.closest('.faq-list').querySelectorAll('.faq-item.open').forEach(function(o) {
+            o.classList.remove('open');
+            o.querySelector('.faq-answer').style.maxHeight = '0';
+          });
+          // Open clicked if it was closed
+          if (!isOpen) {
+            item.classList.add('open');
+            answer.style.maxHeight = answer.scrollHeight + 'px';
+          }
         });
-        if (!isOpen) { item.classList.add('open'); answer.style.maxHeight = answer.scrollHeight + 'px'; }
       });
-    });
-    document.querySelectorAll('.faq-item.open .faq-answer').forEach(a => { a.style.maxHeight = a.scrollHeight + 'px'; });
 
-    // ── FAQ category tab scroll ──
-    document.querySelectorAll('.faq-tab').forEach(tab => {
-      tab.addEventListener('click', () => {
-        document.querySelectorAll('.faq-tab').forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
-        const target = document.getElementById(tab.dataset.target);
-        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // Init: open any .faq-item.open on load
+      document.querySelectorAll('.faq-item.open .faq-answer').forEach(function(a) {
+        a.style.maxHeight = a.scrollHeight + 'px';
       });
-    });
-  <script>
-    // ── Accordion ──
-    document.querySelectorAll('.faq-question').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const item   = btn.closest('.faq-item');
-        const answer = item.querySelector('.faq-answer');
-        const isOpen = item.classList.contains('open');
 
-        // Close all in the same section
-        const section = item.closest('.faq-list');
-        section.querySelectorAll('.faq-item.open').forEach(openItem => {
-          openItem.classList.remove('open');
-          openItem.querySelector('.faq-answer').style.maxHeight = '0';
+      // ── FAQ category tab scroll ──
+      document.querySelectorAll('.faq-tab').forEach(function(tab) {
+        tab.addEventListener('click', function() {
+          document.querySelectorAll('.faq-tab').forEach(function(t) { t.classList.remove('active'); });
+          tab.classList.add('active');
+          const target = document.getElementById(tab.dataset.target);
+          if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
-
-        // Open clicked (if it was closed)
-        if (!isOpen) {
-          item.classList.add('open');
-          answer.style.maxHeight = answer.scrollHeight + 'px';
-        }
       });
-    });
 
-    // Open first item on load
-    const firstItem = document.querySelector('.faq-item.open .faq-answer');
-    if (firstItem) firstItem.style.maxHeight = firstItem.scrollHeight + 'px';
+    }); // end DOMContentLoaded
 
     // ── FAQ Accordion ──
     document.querySelectorAll('.faq-question').forEach(btn => {
