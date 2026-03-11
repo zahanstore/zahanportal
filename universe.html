@@ -288,27 +288,25 @@
     }
 
     .chapter-header-img {
-      background: var(--card);
-      display: block;
       min-height: 320px;
-      height: 100%;
-      position: relative;
-      overflow: hidden;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
     }
 
-    /* Gradient accent per chapter */
+    /* Per-chapter: real photo + accent colours */
     .chapter--genx      .chapter-header { border: 1px solid rgba(96,192,255,0.2); }
-    .chapter--genx      .chapter-header-img { background: linear-gradient(135deg, #0f1a2e 0%, #1a2a4a 100%); }
+    .chapter--genx      .chapter-header-img { background-image: url('images/collections/genx.jpeg'); }
     .chapter--genx      .chapter-accent { color: #60c0ff; }
     .chapter--genx      .chapter-line  { background: #60c0ff; }
 
     .chapter--signature .chapter-header { border: 1px solid rgba(167,139,250,0.2); }
-    .chapter--signature .chapter-header-img { background: linear-gradient(135deg, #12101e 0%, #1e1535 100%); }
+    .chapter--signature .chapter-header-img { background-image: url('images/collections/signature.jpeg'); }
     .chapter--signature .chapter-accent { color: #a78bfa; }
     .chapter--signature .chapter-line  { background: #a78bfa; }
 
     .chapter--heritage  .chapter-header { border: 1px solid rgba(232,121,249,0.2); }
-    .chapter--heritage  .chapter-header-img { background: linear-gradient(135deg, #1a0f1e 0%, #2d1535 100%); }
+    .chapter--heritage  .chapter-header-img { background-image: url('images/collections/heritage.jpeg'); }
     .chapter--heritage  .chapter-accent { color: #e879f9; }
     .chapter--heritage  .chapter-line  { background: #e879f9; }
 
@@ -713,9 +711,7 @@
             <p class="chapter-tagline">Bold has a new feeling, style without limits.</p>
             <p class="chapter-vibe">Vibe : Conscious, energetic &amp; Accessible.</p>
           </div>
-          <div class="chapter-header-img">
-            <img src="images/collections/genx.jpeg" alt="GenX Collection" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;">
-          </div>
+          <div class="chapter-header-img"></div>
         </div>
 
         <div class="chapter-body fade-up">
@@ -754,9 +750,7 @@
             <p class="chapter-tagline">Calm Cut, Sharp Presence.</p>
             <p class="chapter-vibe">Vibe : Refined, balanced &amp; Intentional.</p>
           </div>
-          <div class="chapter-header-img">
-            <img src="images/collections/signature.jpeg" alt="Signature Collection" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;">
-          </div>
+          <div class="chapter-header-img"></div>
         </div>
 
         <div class="chapter-body fade-up">
@@ -795,9 +789,7 @@
             <p class="chapter-tagline">A Heritage in Every Thread — where excellence isn't just a design, it's an emotional feeling.</p>
             <p class="chapter-vibe">Vibe : Timeless, Artisanal &amp; Craftsmanship.</p>
           </div>
-          <div class="chapter-header-img">
-            <img src="images/collections/heritage.jpeg" alt="Heritage Collection" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;">
-          </div>
+          <div class="chapter-header-img"></div>
         </div>
 
         <div class="chapter-body fade-up">
