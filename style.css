@@ -417,36 +417,22 @@ body.light-mode .gateway-section {
 }
 .gateway-section .hero-text-block::before { display: none; }
 
-/* Grad text on hero: vivid + crisp dark shadow */
+/* Zahan Store® — solid logo blue, tight shadow, no blob */
 .gateway-section .grad-text {
-  background: linear-gradient(135deg,
-    #93d4ff 0%,
-    #c4a8ff 45%,
-    #f0a0ff 100%
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  text-shadow: none; /* never inherit — kills clip */
+  background: none;
+  -webkit-background-clip: unset;
+  -webkit-text-fill-color: #5b8dee;
+  background-clip: unset;
+  color: #5b8dee;
+  filter: none;
   position: relative;
   display: inline-block;
-  /* Dark anchors first → crisp edge, then colour glow on top */
-  filter:
-    drop-shadow(0 2px 3px rgba(0,0,0,1))
-    drop-shadow(0 3px 6px rgba(0,0,0,0.90))
-    drop-shadow(0 0  10px rgba(160,130,255,0.40));
+  text-shadow:
+    0 1px 2px  rgba(0,0,0,1),
+    0 2px 8px  rgba(0,0,0,0.90),
+    0 4px 16px rgba(0,0,0,0.70);
 }
-
-/* Glow bloom behind gradient text — tight, not engulfing */
-.gateway-section .grad-text::after {
-  content: '';
-  position: absolute;
-  inset: -4px -10px;
-  background: radial-gradient(ellipse, rgba(20,10,40,0.45) 0%, transparent 70%);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: -1;
-}
+.gateway-section .grad-text::after { display: none; }
 
 /* Badge on hero — only the top "Est. 1996" badge, NOT card badges */
 .gateway-section > .container > .hero-text-block .platform-badge {
