@@ -378,11 +378,10 @@ body.light-mode .gateway-section {
 /* Text always readable on photo — both modes */
 .gateway-section h1 {
   color: #ffffff;
-  /* Multi-layer shadow: soft spread + tight dark anchor */
   text-shadow:
-    0 2px 4px  rgba(0,0,0,0.90),
-    0 4px 24px rgba(0,0,0,0.60),
-    0 0  48px  rgba(0,0,0,0.35);
+    0 2px 6px  rgba(0,0,0,1),
+    0 4px 24px rgba(0,0,0,0.80),
+    0 0  48px  rgba(0,0,0,0.50);
   margin-bottom: 0.2rem;
 }
 
@@ -390,11 +389,11 @@ body.light-mode .gateway-section {
   font-size: 1rem;
   font-family: var(--font-head);
   font-weight: 600;
-  color: rgba(255,255,255,0.88);
+  color: #ffffff;
   letter-spacing: 0.03em;
   text-shadow:
-    0 1px 3px  rgba(0,0,0,0.95),
-    0 3px 20px rgba(0,0,0,0.70);
+    0 2px 6px  rgba(0,0,0,1),
+    0 4px 20px rgba(0,0,0,0.85);
   max-width: 560px;
   margin: 0 auto 0;
 }
@@ -535,25 +534,45 @@ body.light-mode .gateway-card {
 
 .gateway-card:hover {
   transform: translateY(-8px);
-  border-color: var(--accent);
+  border-color: rgba(255,255,255,0.35);
   box-shadow: var(--shadow-lg), var(--shadow-glow);
+}
+
+/* Crispy outline buttons inside hero cards */
+.gateway-card .btn-primary {
+  margin-top: 0.75rem;
+  background: transparent;
+  border: 2px solid rgba(255,255,255,0.95);
+  color: #ffffff;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.5), 0 0 12px rgba(255,255,255,0.10), inset 0 1px 0 rgba(255,255,255,0.20);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  text-shadow: 0 1px 6px rgba(0,0,0,0.9);
+  letter-spacing: 0.03em;
+}
+.gateway-card .btn-primary:hover {
+  background: rgba(255,255,255,0.15);
+  border-color: #ffffff;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.50), 0 0 20px rgba(255,255,255,0.12);
+  transform: translateY(-2px);
 }
 .gateway-card:hover::before { opacity: 1; }
 
 .gateway-card > * { position: relative; z-index: 1; }
-.gateway-card h2 { font-size: 1.3rem; margin-bottom: 0.15rem; color: #fff; }
+.gateway-card h2 { font-size: 1.3rem; margin-bottom: 0.15rem; color: #ffffff; text-shadow: 0 2px 12px rgba(0,0,0,1), 0 4px 24px rgba(0,0,0,0.7); }
 .gateway-card .region {
   font-size: 0.78rem;
-  color: rgba(255,255,255,0.55);
-  margin-bottom: 0.75rem;
+  color: rgba(255,255,255,0.90);
+  margin-bottom: 0.6rem;
   letter-spacing: 0.03em;
+  text-shadow: 0 1px 8px rgba(0,0,0,1), 0 2px 16px rgba(0,0,0,0.8);
 }
-.gateway-card p { font-size: 0.82rem; margin-bottom: 0.6rem; color: rgba(255,255,255,0.72); }
+.gateway-card p { font-size: 0.82rem; margin-bottom: 0.6rem; color: #ffffff; text-shadow: 0 1px 8px rgba(0,0,0,1), 0 3px 16px rgba(0,0,0,0.8); }
 
 /* Light mode cards: white text — cards are dark glass on a photo */
-body.light-mode .gateway-card h2    { color: #ffffff; }
+body.light-mode .gateway-card h2    { color: #ffffff; text-shadow: 0 2px 12px rgba(0,0,0,0.7); }
 body.light-mode .gateway-card .region { color: rgba(255,255,255,0.55); }
-body.light-mode .gateway-card p     { color: rgba(255,255,255,0.75); }
+body.light-mode .gateway-card p     { color: #ffffff; text-shadow: 0 1px 8px rgba(0,0,0,0.65); }
 .platform-badge {
   display: inline-block;
   padding: 4px 12px;
