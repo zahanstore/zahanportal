@@ -380,9 +380,11 @@ body.light-mode .gateway-section {
 .gateway-section h1 {
   color: #ffffff;
   text-shadow:
+    0 1px 2px  rgba(0,0,0,1),
     0 2px 6px  rgba(0,0,0,1),
-    0 4px 24px rgba(0,0,0,0.80),
-    0 0  48px  rgba(0,0,0,0.50);
+    0 4px 16px rgba(0,0,0,0.95),
+    0 8px 32px rgba(0,0,0,0.80),
+    0 0  60px  rgba(0,0,0,0.50);
   margin-bottom: 0.2rem;
 }
 
@@ -393,8 +395,10 @@ body.light-mode .gateway-section {
   color: #ffffff;
   letter-spacing: 0.03em;
   text-shadow:
-    0 2px 6px  rgba(0,0,0,1),
-    0 4px 20px rgba(0,0,0,0.85);
+    0 1px 2px  rgba(0,0,0,1),
+    0 2px 8px  rgba(0,0,0,1),
+    0 4px 20px rgba(0,0,0,0.90),
+    0 8px 32px rgba(0,0,0,0.75);
   max-width: 560px;
   margin: 0 auto 0;
 }
@@ -413,7 +417,7 @@ body.light-mode .gateway-section {
 }
 .gateway-section .hero-text-block::before { display: none; }
 
-/* Grad text on hero: vivid + readable on any photo */
+/* Grad text on hero: vivid + crisp dark shadow */
 .gateway-section .grad-text {
   background: linear-gradient(135deg,
     #93d4ff 0%,
@@ -426,15 +430,20 @@ body.light-mode .gateway-section {
   text-shadow: none; /* never inherit — kills clip */
   position: relative;
   display: inline-block;
-  filter: drop-shadow(0 0 18px rgba(160,130,255,0.55));
+  /* Dark anchors first → crisp edge, then colour glow on top */
+  filter:
+    drop-shadow(0 2px 2px rgba(0,0,0,1))
+    drop-shadow(0 4px 8px rgba(0,0,0,0.95))
+    drop-shadow(0 8px 24px rgba(0,0,0,0.80))
+    drop-shadow(0 0  20px rgba(160,130,255,0.50));
 }
 
-/* Deeper glow bloom behind gradient text */
+/* Glow bloom behind gradient text */
 .gateway-section .grad-text::after {
   content: '';
   position: absolute;
-  inset: -12px -20px;
-  background: radial-gradient(ellipse, rgba(140,100,255,0.30) 0%, transparent 68%);
+  inset: -14px -22px;
+  background: radial-gradient(ellipse, rgba(80,50,120,0.55) 0%, transparent 65%);
   border-radius: 50%;
   pointer-events: none;
   z-index: -1;
