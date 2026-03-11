@@ -350,9 +350,10 @@ header {
   /* Full-bleed hero image — no overlay */
   background:
     linear-gradient(to bottom,
-      rgba(0,0,0,0.18) 0%,
-      rgba(0,0,0,0.05) 40%,
-      rgba(0,0,0,0.30) 100%),
+      rgba(0,0,0,0.35) 0%,
+      rgba(0,0,0,0.10) 35%,
+      rgba(0,0,0,0.10) 55%,
+      rgba(0,0,0,0.50) 100%),
     url('hero.jpg') center/cover no-repeat;
 }
 
@@ -398,32 +399,19 @@ body.light-mode .gateway-section {
   margin: 0 auto 0;
 }
 
-/* Hero text block — full width, same glass system as gateway cards */
+/* Hero text — no card, just floating text on the photo */
 .gateway-section .hero-text-block {
   display: block;
   width: 100%;
-  box-sizing: border-box;
-  padding: 0.6rem 2rem 0.6rem;
-  border-radius: var(--radius-lg);
-  background: rgba(10, 13, 28, 0.52);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  border: 1px solid rgba(255,255,255,0.15);
-  box-shadow: 0 8px 40px rgba(0,0,0,0.4);
-  margin-bottom: 0;        /* flush with cards below — gap handled by gateway-options */
-  position: relative;
-  overflow: hidden;
+  padding: 0 1rem 1.5rem;
+  background: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border: none;
+  box-shadow: none;
+  margin-bottom: 0;
 }
-
-/* Subtle top accent line matching card hover — always-on on hero block */
-.gateway-section .hero-text-block::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 2px;
-  background: var(--grad);
-  opacity: 0.6;
-}
+.gateway-section .hero-text-block::before { display: none; }
 
 /* Grad text on hero: vivid + readable on any photo */
 .gateway-section .grad-text {
@@ -508,10 +496,11 @@ body.light-mode .gateway-card .platform-badge {
 }
 
 /* Light mode: hero-text-block matches light gateway-card */
-/* Light mode hero block: stays dark glass — hero is always photo-first */
+/* Light mode hero text: no card in either mode */
 body.light-mode .gateway-section .hero-text-block {
-  background: rgba(6, 8, 20, 0.42);
-  border-color: rgba(255,255,255,0.22);
+  background: none;
+  border: none;
+  box-shadow: none;
 }
 
 /* Light mode gateway cards: stay dark — they live on a photo, not a page */
@@ -541,19 +530,20 @@ body.light-mode .gateway-card {
 /* Crispy outline buttons inside hero cards */
 .gateway-card .btn-primary {
   margin-top: 0.75rem;
-  background: transparent;
-  border: 2px solid rgba(255,255,255,0.95);
+  background: linear-gradient(var(--bg-dark, #0b0d17), var(--bg-dark, #0b0d17)) padding-box,
+              linear-gradient(135deg, #93d4ff 0%, #c4a8ff 50%, #f0a0ff 100%) border-box;
+  border: 2px solid transparent;
   color: #ffffff;
-  box-shadow: 0 2px 16px rgba(0,0,0,0.5), 0 0 12px rgba(255,255,255,0.10), inset 0 1px 0 rgba(255,255,255,0.20);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  box-shadow: 0 2px 20px rgba(0,0,0,0.5), 0 0 16px rgba(160,130,255,0.20);
   text-shadow: 0 1px 6px rgba(0,0,0,0.9);
   letter-spacing: 0.03em;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
 }
 .gateway-card .btn-primary:hover {
-  background: rgba(255,255,255,0.15);
-  border-color: #ffffff;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.50), 0 0 20px rgba(255,255,255,0.12);
+  background: linear-gradient(rgba(255,255,255,0.08), rgba(255,255,255,0.08)) padding-box,
+              linear-gradient(135deg, #93d4ff 0%, #c4a8ff 50%, #f0a0ff 100%) border-box;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.5), 0 0 28px rgba(160,130,255,0.35);
   transform: translateY(-2px);
 }
 .gateway-card:hover::before { opacity: 1; }
