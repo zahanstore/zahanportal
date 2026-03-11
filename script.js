@@ -177,6 +177,22 @@
   });
 
 
+
+
+  /* ── FAQ ACCORDION ── */
+  document.querySelectorAll('.faq-question').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var item = this.closest('.faq-item');
+      var isOpen = item.classList.contains('open');
+      // Close all
+      document.querySelectorAll('.faq-item.open').forEach(function(openItem) {
+        openItem.classList.remove('open');
+      });
+      // Open clicked if it was closed
+      if (!isOpen) { item.classList.add('open'); }
+    });
+  });
+
   /* ── ACTIVE NAV INDICATOR ── */
   (function () {
     var page    = window.location.pathname.split('/').pop() || 'index.html';

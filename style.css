@@ -355,7 +355,7 @@ header {
       rgba(0,0,0,0.10) 35%,
       rgba(0,0,0,0.10) 55%,
       rgba(0,0,0,0.50) 100%),
-    url('hero.jpg') center/cover no-repeat;
+    url('images/brand/hero.jpg') center/cover no-repeat;
 }
 
 /* Light mode: gentler vignette so image stays bright */
@@ -365,7 +365,7 @@ body.light-mode .gateway-section {
       rgba(255,255,255,0.12) 0%,
       rgba(255,255,255,0.00) 40%,
       rgba(255,255,255,0.18) 100%),
-    url('hero.jpg') center/cover no-repeat;
+    url('images/brand/hero.jpg') center/cover no-repeat;
 }
 
 .gateway-section::before { display: none; }
@@ -994,6 +994,11 @@ footer {
 
 .page-hero h1 { font-size: clamp(1.8rem, 4vw, 2.75rem); }
 .page-hero p { color: var(--text-muted); margin-top: 0.5rem; font-size: 0.95rem; }
+/* Page-specific hero backgrounds */
+.contact-page  .page-hero { background-image: url('images/brand/contact.jpeg');  background-size: cover; background-position: center; }
+.legal-page    .page-hero { background-image: url('images/brand/legal.jpeg');    background-size: cover; background-position: center; }
+.faq-page      .page-hero { background-image: url('images/brand/faq.jpeg');      background-size: cover; background-position: center; }
+
 
 .policy-content {
   max-width: 800px;
