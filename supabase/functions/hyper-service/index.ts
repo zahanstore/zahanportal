@@ -5,10 +5,10 @@ const FROM_EMAIL = 'Zahan Store® <store@zahan.one>';
 
 // Department routing
 const DEPT_MAP: Record<string, { label: string; email: string; color: string }> = {
-  support: { label: 'Support & Orders', email: 'support@zahan.one', color: '#60c0ff' },
-  store:   { label: 'Brand & Feedback', email: 'store@zahan.one',   color: '#a78bfa' },
-  legal:   { label: 'Legal & Policy',   email: 'legal@zahan.one',   color: '#e879f9' },
-  hr:      { label: 'HR & Careers',     email: 'hr@zahan.one',      color: '#34d399' },
+  support: { label: 'Support & Orders', email: 'support@mail.zahan.one', color: '#60c0ff' },
+  store:   { label: 'Brand & Feedback', email: 'store@mail.zahan.one',   color: '#a78bfa' },
+  legal:   { label: 'Legal & Policy',   email: 'legal@mail.zahan.one',   color: '#e879f9' },
+  hr:      { label: 'HR & Careers',     email: 'hr@mail.zahan.one',      color: '#34d399' },
 };
 
 serve(async (req) => {
@@ -19,7 +19,7 @@ serve(async (req) => {
 
     const dept = DEPT_MAP[department] ?? {
       label: department,
-      email: 'store@zahan.one',
+      email: 'store@mail.zahan.one',
       color: '#5b8dee',
     };
 
