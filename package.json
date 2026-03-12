@@ -1,8 +1,8 @@
 {
-  "name": "zahan-portal",
+  "name": "zahanportal",
   "version": "1.0.0",
-  "type": "module",
-  "dependencies": {
- "razorpay": "^2.9.2"
+  "description": "Zahan Store® portal — static site with Supabase contact form",
+  "scripts": {
+    "build": "node build.js"
   }
 }
