@@ -9,9 +9,16 @@ if (!SUPABASE_URL || !SUPABASE_ANON) {
   process.exit(1);
 }
 
+// Inject into contact.html
 let html = fs.readFileSync('contact.html', 'utf8');
 html = html.replace('%%SUPABASE_URL%%',  SUPABASE_URL);
 html = html.replace('%%SUPABASE_ANON%%', SUPABASE_ANON);
 fs.writeFileSync('contact.html', html);
+console.log('✅ Injected into contact.html');
 
-console.log('✅ Supabase credentials injected into contact.html');
+// Inject into test.html
+let test = fs.readFileSync('test.html', 'utf8');
+test = test.replace('%%SUPABASE_URL%%',  SUPABASE_URL);
+test = test.replace('%%SUPABASE_ANON%%', SUPABASE_ANON);
+fs.writeFileSync('test.html', test);
+console.log('✅ Injected into test.html');
