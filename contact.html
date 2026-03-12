@@ -364,7 +364,7 @@
               </div>
 
               <!-- SUPABASE FORM -->
-              <form id="contact-form" autocomplete="off" novalidate>
+              <form id="zs-contact-form" autocomplete="off" novalidate>
                 <div id="form-message" class="form-message hidden"></div>
 
                 <div class="form-group">
@@ -514,9 +514,13 @@
     });
 
     // Form submit → Supabase
-    document.getElementById('contact-form').addEventListener('submit', async function (e) {
+    document.getElementById('zs-contact-form').addEventListener('submit', async function (e) {
       e.preventDefault();
       e.stopImmediatePropagation();
+      e.stopPropagation();
+      if (window._supabaseHandling) return;
+      window._supabaseHandling = true;
+      setTimeout(() => window._supabaseHandling = false, 3000);
       const btn = document.getElementById('submit-btn');
       btn.disabled = true;
       btn.innerHTML = 'Sending... <i class="fas fa-spinner fa-spin"></i>';
@@ -557,7 +561,7 @@
         alert('✅ Saved to Supabase! Row: ' + JSON.stringify(data));
 
         // Show thank-you
-        document.getElementById('contact-form').classList.add('hidden');
+        document.getElementById('zs-contact-form').classList.add('hidden');
         document.getElementById('thank-you-message').classList.remove('hidden');
         if (deptInfo.label) {
           document.getElementById('ty-dept').textContent =
