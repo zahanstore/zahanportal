@@ -404,7 +404,7 @@
                   <textarea id="c-message" name="message" rows="5" placeholder="Tell us more..." required></textarea>
                 </div>
 
-                <button type="submit" class="cta-button" style="width:100%;padding:14px;font-size:1rem;justify-content:center;" id="submit-btn">
+                <button type="button" onclick="zsSubmitForm()" class="cta-button" style="width:100%;padding:14px;font-size:1rem;justify-content:center;" id="submit-btn">
                   Send Message <i class="fas fa-paper-plane"></i>
                 </button>
               </form>
@@ -513,14 +513,8 @@
       }
     });
 
-    // Form submit → Supabase
-    document.getElementById('zs-contact-form').addEventListener('submit', async function (e) {
-      e.preventDefault();
-      e.stopImmediatePropagation();
-      e.stopPropagation();
-      if (window._supabaseHandling) return;
-      window._supabaseHandling = true;
-      setTimeout(() => window._supabaseHandling = false, 3000);
+    // Form submit → Supabase (onclick approach — avoids all event conflicts)
+    window.zsSubmitForm = async function () {
       const btn = document.getElementById('submit-btn');
       btn.disabled = true;
       btn.innerHTML = 'Sending... <i class="fas fa-spinner fa-spin"></i>';
