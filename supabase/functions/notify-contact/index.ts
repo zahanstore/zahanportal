@@ -14,8 +14,13 @@ const DEPT_MAP: Record<string, { label: string; email: string; color: string }> 
 serve(async (req) => {
   try {
     const payload = await req.json();
+    console.log('📦 Payload received:', JSON.stringify(payload));
+
     const record = payload.record ?? payload;
     const { name, email, department, subject, message, created_at } = record;
+    console.log('📋 Record fields:', { name, email, department, subject, message, created_at });
+
+    console.log('🔑 RESEND_API_KEY present:', !!RESEND_API_KEY);
 
     const dept = DEPT_MAP[department] ?? {
       label: department,
@@ -118,6 +123,8 @@ serve(async (req) => {
 </body>
 </html>`;
 
+    console.log('📤 Sending to Resend — from:', FROM_EMAIL, 'to:', dept.email);
+
     const res = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: {
@@ -134,11 +141,14 @@ serve(async (req) => {
     });
 
     const data = await res.json();
+    console.log('📬 Resend status:', res.status, 'response:', JSON.stringify(data));
+
     if (!res.ok) return new Response(JSON.stringify({ error: data }), { status: 500 });
 
     return new Response(JSON.stringify({ success: true, id: data.id }), { status: 200 });
 
   } catch (err) {
+    console.error('💥 Caught error:', err.message);
     return new Response(JSON.stringify({ error: err.message }), { status: 500 });
   }
 });
