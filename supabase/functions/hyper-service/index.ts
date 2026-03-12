@@ -1,30 +1,25 @@
 import { serve } from 'https://deno.land/std@0.168.0/http/server.ts';
 
 const RESEND_API_KEY = Deno.env.get('RESEND_API_KEY')!;
-const FROM_EMAIL = 'Zahan Store® <store@mail.zahan.one>';
+const FROM_EMAIL = 'Zahan Store® <store@zahan.one>';
 
 // Department routing
 const DEPT_MAP: Record<string, { label: string; email: string; color: string }> = {
-  support: { label: 'Support & Orders', email: 'support@mail.zahan.one', color: '#60c0ff' },
-  store:   { label: 'Brand & Feedback', email: 'store@mail.zahan.one',   color: '#a78bfa' },
-  legal:   { label: 'Legal & Policy',   email: 'legal@mail.zahan.one',   color: '#e879f9' },
-  hr:      { label: 'HR & Careers',     email: 'hr@mail.zahan.one',      color: '#34d399' },
+  support: { label: 'Support & Orders', email: 'support@zahan.one', color: '#60c0ff' },
+  store:   { label: 'Brand & Feedback', email: 'store@zahan.one',   color: '#a78bfa' },
+  legal:   { label: 'Legal & Policy',   email: 'legal@zahan.one',   color: '#e879f9' },
+  hr:      { label: 'HR & Careers',     email: 'hr@zahan.one',      color: '#34d399' },
 };
 
 serve(async (req) => {
   try {
     const payload = await req.json();
-    console.log('📦 Payload received:', JSON.stringify(payload));
-
     const record = payload.record ?? payload;
     const { name, email, department, subject, message, created_at } = record;
-    console.log('📋 Record fields:', { name, email, department, subject, message, created_at });
-
-    console.log('🔑 RESEND_API_KEY present:', !!RESEND_API_KEY);
 
     const dept = DEPT_MAP[department] ?? {
       label: department,
-      email: 'store@mail.zahan.one',
+      email: 'store@zahan.one',
       color: '#5b8dee',
     };
 
@@ -123,8 +118,6 @@ serve(async (req) => {
 </body>
 </html>`;
 
-    console.log('📤 Sending to Resend — from:', FROM_EMAIL, 'to:', dept.email);
-
     const res = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: {
@@ -141,14 +134,11 @@ serve(async (req) => {
     });
 
     const data = await res.json();
-    console.log('📬 Resend status:', res.status, 'response:', JSON.stringify(data));
-
     if (!res.ok) return new Response(JSON.stringify({ error: data }), { status: 500 });
 
     return new Response(JSON.stringify({ success: true, id: data.id }), { status: 200 });
 
   } catch (err) {
-    console.error('💥 Caught error:', err.message);
     return new Response(JSON.stringify({ error: err.message }), { status: 500 });
   }
 });
