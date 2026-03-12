@@ -11,14 +11,13 @@
 
 ## Pages
 
-5 active pages. That's it. Easy to maintain. ✅
+4 active pages. That's it. Easy to maintain. ✅
 
 | File | Route | Purpose |
 |------|-------|---------|
 | `index.html` | `/` | Homepage — hero, about, manifesto, features, testimonials, newsletter, contact preview |
 | `universe.html` | `/universe` | Zahan® Universe™ story + all 3 collections (GenX™ · Signature™ · Heritage™) |
-| `legal.html` | `/legal` | Legal Centre — Privacy · Terms · Returns · Shipping, all with sticky sidebar nav |
-| `faqs.html` | `/faqs` | Master FAQ — 5 accordion sections, sticky tab nav |
+| `legal.html` | `/legal` | Legal Centre — Privacy · Terms · Returns · Shipping · FAQs, all with sticky sidebar nav |
 | `contact.html` | `/contact` | Contact — 4 routed email channels + Supabase-powered form |
 
 ### Retired (deleted from repo)
@@ -27,7 +26,8 @@
 `privacy-policy.html` → `legal.html#privacy`  
 `terms-and-conditions.html` → `legal.html#terms`  
 `return-and-refund.html` → `legal.html#refund`  
-`shipping-and-delivery.html` → `legal.html#shipping`
+`shipping-and-delivery.html` → `legal.html#shipping`  
+`faqs.html` → `legal.html#faqs`
 
 ---
 
@@ -92,8 +92,7 @@ zahanstore/zahan-vercel/
 │
 ├── index.html             ← Homepage
 ├── universe.html          ← Zahan® Universe™ + all 3 Collections
-├── legal.html             ← Legal Centre (Privacy · Terms · Returns · Shipping)
-├── faqs.html              ← Master FAQ
+├── legal.html             ← Legal Centre (Privacy · Terms · Returns · Shipping · FAQs)
 ├── contact.html           ← Contact + Supabase form
 │
 ├── style.css              ← single shared stylesheet
@@ -101,15 +100,18 @@ zahanstore/zahan-vercel/
 │
 ├── images/
 │   ├── brand/
-│   │   ├── logo.png       ← nav logo
-│   │   └── favicon.png    ← browser tab icon
-│   ├── hero/
-│   │   └── hero.jpg       ← homepage hero background
-│   ├── about/
-│   │   └── about.jpg      ← about section image
-│   └── og/
-│       ├── og-cover.jpg   ← default OG share image
-│       └── og-universe.jpg← Universe page OG image
+│   │   ├── logo.png            ← nav logo (all pages)
+│   │   ├── favicon.png         ← browser tab icon
+│   │   ├── hero.jpg            ← homepage hero (used in style.css)
+│   │   ├── contact.jpeg        ← contact page hero background
+│   │   ├── legal.jpeg          ← legal page hero background
+│   │   └── faq.jpeg            ← faq section hero background
+│   └── collections/
+│       ├── universe-hero.jpeg  ← universe.html hero (real <img> tag)
+│       ├── ethos.jpeg          ← universe.html ethos section
+│       ├── genx.jpeg           ← GenX™ chapter header + bridge card
+│       ├── signature.jpeg      ← Signature™ chapter header + bridge card
+│       └── heritage.jpeg       ← Heritage™ chapter header + bridge card
 │
 ├── supabase/
 │   └── functions/
@@ -121,7 +123,7 @@ zahanstore/zahan-vercel/
 └── README.md
 ```
 
-> **Images note:** All image references in `style.css` and HTML files use paths relative to root (e.g. `images/hero/hero.jpg`). See `IMAGES_STRUCTURE.md` for full naming conventions.
+> **Images note:** All image references in `style.css` and HTML files use paths relative to root (e.g. `images/brand/hero.jpg`, `images/collections/genx.jpeg`). Brand assets live in `images/brand/`, collection visuals in `images/collections/`.
 
 ---
 
@@ -163,11 +165,21 @@ The contact form (`contact.html`) writes to Supabase table `contact_messages`.
 | `hr` | hr@mail.zahan.one — careers, joining the team |
 
 ### Setup
-See `SUPABASE_SETUP.md` for full SQL and credential setup.  
-Replace these two placeholders in `contact.html`:
-```js
-const SUPABASE_URL  = 'YOUR_SUPABASE_PROJECT_URL';
-const SUPABASE_ANON = 'YOUR_SUPABASE_ANON_KEY';
+See `SUPABASE_SETUP.md` for full SQL setup.
+
+Credentials are injected at **build time** via Vercel environment variables — never hardcoded in source.
+
+Set these in **Vercel → Project Settings → Environment Variables:**
+```
+SUPABASE_URL   = https://your-project.supabase.co
+SUPABASE_ANON  = your-anon-key
+```
+`build.js` runs on every deploy and injects them into `contact.html` automatically.
+
+### RLS Policy
+```sql
+CREATE POLICY "anon_can_insert" ON contact_messages
+AS PERMISSIVE FOR INSERT TO anon WITH CHECK (true);
 ```
 
 ---
@@ -188,7 +200,7 @@ Three sub-brands, all housed under `universe.html`:
 
 This repo auto-deploys to Vercel on every push to `main`.
 
-- No build step — static files served directly
+- Build step: `node build.js` injects Supabase credentials into `contact.html`
 - Custom domain: `zahan.one` pointed to Vercel
 - Sub-domains (`shop.`, `store.`) are external (Payhip & Fourthwall) — not in this repo
 
