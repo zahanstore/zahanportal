@@ -486,14 +486,7 @@
     </div>
   </footer>
 
-  <script src="script.js"></script>
-
   <script>
-    // ╔══════════════════════════════════════════════╗
-    // ║  SUPABASE CONFIG — fill in your credentials  ║
-    // ║  Go to: supabase.com → Project Settings      ║
-    // ║  → API → Project URL & anon key              ║
-    // ╚══════════════════════════════════════════════╝
     const SUPABASE_URL  = '%%SUPABASE_URL%%';
     const SUPABASE_ANON = '%%SUPABASE_ANON%%';
     const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
@@ -523,6 +516,7 @@
     // Form submit → Supabase
     document.getElementById('contact-form').addEventListener('submit', async function (e) {
       e.preventDefault();
+      e.stopImmediatePropagation();
       const btn = document.getElementById('submit-btn');
       btn.disabled = true;
       btn.innerHTML = 'Sending... <i class="fas fa-spinner fa-spin"></i>';
@@ -578,5 +572,6 @@
     });
 
   </script>
+  <script src="script.js"></script>
 </body>
 </html>
