@@ -79,29 +79,7 @@
     }, { passive: true });
   }
 
-  /* ── CONTACT FORM ── */
-  var contactForm = document.getElementById('contact-form');
-  if (contactForm) {
-    contactForm.addEventListener('submit', function (e) {
-      var msgEl = document.getElementById('form-message');
-      var thankYou = document.getElementById('thank-you-message');
-      // Let Netlify handle the POST, show thank-you on success
-      if (thankYou && msgEl) {
-        e.preventDefault();
-        var data = new FormData(contactForm);
-        fetch('/', { method: 'POST', body: data })
-          .then(function () {
-            contactForm.style.display = 'none';
-            thankYou.classList.remove('hidden');
-          })
-          .catch(function () {
-            msgEl.textContent = 'Something went wrong. Please try again.';
-            msgEl.className = 'form-message error';
-            msgEl.classList.remove('hidden');
-          });
-      }
-    });
-  }
+  /* ── CONTACT FORM — handled by inline Supabase script in contact.html ── */
 
   /* Reset contact form */
   window.resetForm = function () {
