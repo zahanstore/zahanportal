@@ -487,88 +487,65 @@
   </footer>
 
   <script>
-    const SUPABASE_URL  = '%%SUPABASE_URL%%';
-    const SUPABASE_ANON = '%%SUPABASE_ANON%%';
-    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
+  // ── ZAHAN CONTACT FORM ──
+  var ZS_URL  = '%%SUPABASE_URL%%';
+  var ZS_ANON = '%%SUPABASE_ANON%%';
 
-    // Department routing map
-    const DEPT_MAP = {
-      support: { label: 'Support & Orders',   email: 'support@mail.zahan.one', color: '#60c0ff' },
-      store:   { label: 'Brand & Feedback',   email: 'store@mail.zahan.one',   color: '#a78bfa' },
-      legal:   { label: 'Legal & Policy',     email: 'legal@mail.zahan.one',   color: '#e879f9' },
-      hr:      { label: 'HR & Careers',       email: 'hr@mail.zahan.one',      color: '#34d399' },
+  var ZS_DEPTS = {
+    support: { label: 'Support & Orders', email: 'support@mail.zahan.one', color: '#60c0ff' },
+    store:   { label: 'Brand & Feedback', email: 'store@mail.zahan.one',   color: '#a78bfa' },
+    legal:   { label: 'Legal & Policy',   email: 'legal@mail.zahan.one',   color: '#e879f9' },
+    hr:      { label: 'HR & Careers',     email: 'hr@mail.zahan.one',      color: '#34d399' }
+  };
+
+  // Dept hint
+  var deptEl = document.getElementById('c-dept');
+  if (deptEl) {
+    deptEl.addEventListener('change', function() {
+      var d = ZS_DEPTS[this.value];
+      var ht = document.getElementById('hint-text');
+      var hd = document.querySelector('.hint-dot');
+      if (d && ht) { ht.textContent = 'Your message will go to ' + d.email; }
+      if (d && hd) { hd.style.background = d.color; }
+    });
+  }
+
+  // Submit function called by button onclick
+  window.zsSubmitForm = function() {
+    var btn = document.getElementById('submit-btn');
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+
+    var deptKey  = document.getElementById('c-dept').value;
+    var deptInfo = ZS_DEPTS[deptKey] || {};
+
+    var payload = {
+      name:       document.getElementById('c-name').value.trim(),
+      email:      document.getElementById('c-email').value.trim(),
+      department: deptKey,
+      routed_to:  deptInfo.email || null,
+      subject:    document.getElementById('c-subject').value.trim(),
+      message:    document.getElementById('c-message').value.trim(),
+      created_at: new Date().toISOString()
     };
 
-    // Live dept hint
-    document.getElementById('c-dept').addEventListener('change', function () {
-      const dept = DEPT_MAP[this.value];
-      const hintText = document.getElementById('hint-text');
-      const hintDot  = document.querySelector('.hint-dot');
-      if (dept) {
-        hintText.textContent = 'Your message will go to ' + dept.email;
-        hintDot.style.background = dept.color;
-      } else {
-        hintText.textContent = 'Select a department to see where your message goes';
-        hintDot.style.background = 'var(--accent)';
-      }
-    });
+    var client = window.supabase.createClient(ZS_URL, ZS_ANON);
 
-    // Form submit → Supabase (onclick approach — avoids all event conflicts)
-    window.zsSubmitForm = async function () {
-      const btn = document.getElementById('submit-btn');
-      btn.disabled = true;
-      btn.innerHTML = 'Sending... <i class="fas fa-spinner fa-spin"></i>';
-
-      // DEBUG — confirm SDK is loaded
-      if (typeof window.supabase === 'undefined') {
-        alert('❌ Supabase SDK not loaded! Check your internet connection.');
+    client.from('contact_messages').insert([payload]).then(function(res) {
+      if (res.error) {
+        alert('Error: ' + res.error.message);
         btn.disabled = false;
-        btn.innerHTML = 'Send Message <i class="fas fa-paper-plane"></i>';
-        return;
-      }
-
-      const deptKey  = document.getElementById('c-dept').value;
-      const deptInfo = DEPT_MAP[deptKey] || {};
-
-      const payload = {
-        name:        document.getElementById('c-name').value.trim(),
-        email:       document.getElementById('c-email').value.trim(),
-        department:  deptKey,
-        routed_to:   deptInfo.email || null,
-        subject:     document.getElementById('c-subject').value.trim(),
-        message:     document.getElementById('c-message').value.trim(),
-        created_at:  new Date().toISOString(),
-      };
-
-      try {
-        const { data, error } = await supabase
-          .from('contact_messages')
-          .insert([payload])
-          .select();
-
-        if (error) {
-          // Show exact Supabase error
-          alert('❌ Supabase error: ' + error.message + '\nCode: ' + error.code);
-          throw error;
-        }
-
-        alert('✅ Saved to Supabase! Row: ' + JSON.stringify(data));
-
-        // Show thank-you
-        document.getElementById('zs-contact-form').classList.add('hidden');
+        btn.textContent = 'Send Message';
+      } else {
+        document.getElementById('zs-contact-form').style.display = 'none';
         document.getElementById('thank-you-message').classList.remove('hidden');
         if (deptInfo.label) {
-          document.getElementById('ty-dept').textContent =
-            'Your message has been routed to our ' + deptInfo.label + ' team.';
+          var ty = document.getElementById('ty-dept');
+          if (ty) ty.textContent = 'Your message has been routed to our ' + deptInfo.label + ' team.';
         }
-
-      } catch (err) {
-        console.error('Supabase error:', err);
-        btn.disabled = false;
-        btn.innerHTML = 'Send Message <i class="fas fa-paper-plane"></i>';
       }
-    };
-
+    });
+  };
   </script>
   <script src="script.js"></script>
 </body>
