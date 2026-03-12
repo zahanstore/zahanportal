@@ -527,6 +527,14 @@
       btn.disabled = true;
       btn.innerHTML = 'Sending... <i class="fas fa-spinner fa-spin"></i>';
 
+      // DEBUG — confirm SDK is loaded
+      if (typeof window.supabase === 'undefined') {
+        alert('❌ Supabase SDK not loaded! Check your internet connection.');
+        btn.disabled = false;
+        btn.innerHTML = 'Send Message <i class="fas fa-paper-plane"></i>';
+        return;
+      }
+
       const deptKey  = document.getElementById('c-dept').value;
       const deptInfo = DEPT_MAP[deptKey] || {};
 
@@ -541,11 +549,18 @@
       };
 
       try {
-        const { error } = await supabase
+        const { data, error } = await supabase
           .from('contact_messages')
-          .insert([payload]);
+          .insert([payload])
+          .select();
 
-        if (error) throw error;
+        if (error) {
+          // Show exact Supabase error
+          alert('❌ Supabase error: ' + error.message + '\nCode: ' + error.code);
+          throw error;
+        }
+
+        alert('✅ Saved to Supabase! Row: ' + JSON.stringify(data));
 
         // Show thank-you
         document.getElementById('contact-form').classList.add('hidden');
@@ -559,7 +574,6 @@
         console.error('Supabase error:', err);
         btn.disabled = false;
         btn.innerHTML = 'Send Message <i class="fas fa-paper-plane"></i>';
-        alert('Something went wrong. Please try again or email us directly.');
       }
     });
 
